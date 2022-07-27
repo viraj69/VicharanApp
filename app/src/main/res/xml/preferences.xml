@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory>
+        <Preference
+            android:background="#ffffff"
+            app:icon="@drawable/account"
+            app:key="profile"
+            app:summary="Name, Email, Phone"
+            app:title="Profile">
+
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <Preference
+            app:icon="@drawable/security"
+            app:key="security"
+            app:summary="Password reset"
+            app:title="Security" />
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <Preference
+            app:icon="@drawable/addpost"
+            app:key="newpost"
+            app:summary="Post new apartment details"
+            app:title="Add a new post" />
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <Preference
+            app:icon="@drawable/managepost"
+            app:key="manage"
+            app:summary="Update, Delete your old posts"
+            app:title="Manage Posts" />
+    </PreferenceCategory>
+    <PreferenceCategory>
+        <Preference
+            android:icon="@drawable/logout"
+            app:key="logout"
+            app:summary="Logout from the application"
+            app:title="Logout" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

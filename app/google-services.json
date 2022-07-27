@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "721292076411",
+    "project_id": "vicharan-app",
+    "storage_bucket": "vicharan-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721292076411:android:db964395824570647509de",
+        "android_client_info": {
+          "package_name": "com.example.vicharan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "721292076411-t91nm2rldi1msmrct3cdphfof6alucfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKYWkSD8UpcyeU3e-CFq-V988ZV4mEMpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "721292076411-t91nm2rldi1msmrct3cdphfof6alucfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

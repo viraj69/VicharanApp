@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Local Logic - Local Content Example</title>
+</head>
+<body>
+<!-- Local Logic Widget DOM element -->
+<div id="local-content"></div>
+<script type="text/javascript">
+      // Callback that is called when the SDK is ready to be used
+      const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+// get the required parameter
+const lat = urlParams.get('lat');
+const lng = urlParams.get('lng');
+
+      function initLocallogic() {
+        var contentWidget = new locallogic.LocalContent('local-content', {
+            lat: lat,
+            lng: lng,
+            basemap: 'osm',
+            designId: 'll-2019'
+        });
+      }
+    </script>
+<!-- Load the Local Logic SDK with your Local Logic token -->
+<!--<script async defer-->
+<!--        src="https://cdn.locallogic.co/sdk/?token=b60d600bb4d71cc46a0537cb332efcb1a5c63d4318278a765d00c28f9e79f584601049ee21df0a5f&callback=initLocallogic">-->
+<!--</script>-->
+</body>
+</html>
+
+

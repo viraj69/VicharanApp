@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Vicharan</string>
+    <string name="title_home">Map</string>
+    <string name="title_dashboard">Wishlist</string>
+    <string name="title_notifications">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="confirm_new_password">Confirm New Password*</string>
+    <string name="new_password">New Password*</string>
+    <string name="current_password">Current Password*</string>
+    <string name="rentals">Rentals</string>
+    <string name="discard_changes">Discard Changes</string>
+    <string name="update_password">Update Password</string>
+    <string name="security">Security</string>
+
+    <string name="update_profile">Update Profile</string>
+    <string name="_1234567890">1234567890</string>
+
+</resources>

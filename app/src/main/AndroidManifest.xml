@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.vicharan">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.example.vicharan.PostList"></activity>
+        <activity android:name="com.example.vicharan.Activity.UpdateAd" />
+        <activity android:name="com.example.vicharan.Filter" />
+        <activity android:name="com.example.vicharan.Activity.ApartmentDialog" />
+        <activity android:name="com.example.vicharan.Activity.ApartmentDetails" />
+        <activity android:name="com.example.vicharan.Activity.MainActivity" />
+        <activity android:name="com.example.vicharan.Activity.ProfileDetails" />
+        <activity android:name="com.example.vicharan.Activity.wishlistactivity" />
+        <activity android:name="com.example.vicharan.Activity.CreateAccount" />
+        <activity android:name="com.example.vicharan.Activity.Postadd" />
+        <activity android:name="com.example.vicharan.Activity.Contact" />
+        <activity android:name="com.example.vicharan.Activity.ForgotPassword" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDzkhBJZpa16X7NMsbveeggrcSGfT-IsH0" />
+
+        <activity
+            android:name="com.example.vicharan.Activity.SplashScreen"
+            android:grantUriPermissions="true"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

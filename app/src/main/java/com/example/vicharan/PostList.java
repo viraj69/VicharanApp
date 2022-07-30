@@ -25,7 +25,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class PostList extends AppCompatActivity {
+public class  PostList extends AppCompatActivity {
     RecyclerView PostListRecycler;
 
     PostListAdapter postlistAdapter;

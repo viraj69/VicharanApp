@@ -229,14 +229,9 @@ public class UpdateAd extends AppCompatActivity {
 
         calender.setTimeInMillis(today);
 
-        final CalendarConstraints.Builder constraint = new CalendarConstraints.Builder();
-        constraint.setValidator(DateValidatorPointForward.now());
-
-
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
 
         builder.setTitleText("SELECT A DATE");
-        builder.setCalendarConstraints(constraint.build());
         final MaterialDatePicker materialDatePicker = builder.build();
         builder.setSelection(today);
 
@@ -483,6 +478,7 @@ public class UpdateAd extends AppCompatActivity {
                     pd = new ProgressDialog(UpdateAd.this);
                     pd.setMessage("Loading...");
                     pd.show();
+                    // TODO: remove below code from L487 to L620
                     int selectedId1 = rbfurnished.getCheckedRadioButtonId();
                     btn_furnished = findViewById(selectedId1);
                     String Furnished = btn_furnished.getText().toString().trim();

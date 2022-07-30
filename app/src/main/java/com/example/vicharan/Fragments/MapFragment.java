@@ -85,6 +85,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     float minb = 0, maxb = 5;
 
     String city = "Montreal";
+
     LocationCallback mLocationCallback = new LocationCallback() {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
@@ -127,7 +128,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mapFrag = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
-        Places.initialize(getActivity().getApplicationContext(), "AIzaSyDzkhBJZpa16X7NMsbveeggrcSGfT-IsH0");
+        Places.initialize(getActivity().getApplicationContext(), "AIzaSyDeFuuo_ueSXMlCCQQLUIFgFAs4Xo3ULNg1");
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());
@@ -136,6 +137,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
         // Specify the types of place data to return.
+        assert autocompleteFragment != null;
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.VIEWPORT, Place.Field.ADDRESS_COMPONENTS));
         autocompleteFragment.setTypeFilter(TypeFilter.CITIES);
 
@@ -209,7 +211,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         IconGenerator iconFactory = new IconGenerator(getActivity());
         iconFactory.setBackground(getResources().getDrawable(R.drawable.marker1));
         iconFactory.setTextAppearance(R.style.myStyleText);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(price + "$")));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(price + "$$$$$$$$$$")));
 
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 
@@ -240,8 +242,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap = googleMap;
         mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        mGoogleMap.setMaxZoomPreference(22);
-        mGoogleMap.setMinZoomPreference(10);
+        mGoogleMap.setMaxZoomPreference(50);
+        mGoogleMap.setMinZoomPreference(3);
 
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,8 +24,7 @@ import java.util.Map;
 public class overviewFragment extends Fragment {
 
     private static String Id;
-    TextView apartment, sizebedroom, bathrm, hydro, heat, water, cabletv, internet, parking, agreementtype, moveindate;
-    ImageView hydrotick, heattick, watertick, cabletick, internettick;
+    TextView date;
     FirebaseFirestore fstore;
 
 
@@ -46,25 +44,8 @@ public class overviewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.row_overview, container, false);
-
-        apartment = view.findViewById(R.id.overviewFragmentApartment);
-        sizebedroom = view.findViewById(R.id.sizebedroom);
-        bathrm = view.findViewById(R.id.bathrm);
-        hydro = view.findViewById(R.id.hydro);
-        hydrotick = view.findViewById(R.id.hydrotick);
-        heattick = view.findViewById(R.id.heattick);
-        heat = view.findViewById(R.id.heat);
-        water = view.findViewById(R.id.water);
-        watertick = view.findViewById(R.id.watertick);
-        cabletv = view.findViewById(R.id.cabletv);
-        cabletick = view.findViewById(R.id.cabletick);
-        internet = view.findViewById(R.id.internet);
-        internettick = view.findViewById(R.id.internettick);
-        parking = view.findViewById(R.id.parking);
-        moveindate = view.findViewById(R.id.moveindate);
-
+        date = view.findViewById(R.id.date);
         getdata();
-
         return view;
     }
 
@@ -77,50 +58,9 @@ public class overviewFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-
                         Map<String, Object> data1 = document.getData();
-
-                        String ofapt = data1.get("Unit").toString();
-                        String szbr = data1.get("Bedroom").toString();
-                        String btrm = data1.get("Bathroom").toString();
-                        String hdro = data1.get("Hydro").toString();
-                        String ht = data1.get("Heat").toString();
-                        String wt = data1.get("Water").toString();
-                        String ct = data1.get("Tv").toString();
-                        String itnt = data1.get("Internet").toString();
-                        String pk = data1.get("ParkingIncluded").toString();
-                        String mid = data1.get("MoveInDate").toString();
-
-                        apartment.setText(ofapt);
-                        sizebedroom.setText(szbr);
-                        bathrm.setText(btrm);
-                        parking.setText(pk);
-                        moveindate.setText(mid);
-                        if (hdro.equals("Yes")) {
-                            hydrotick.setImageResource(R.drawable.rightmark);
-                        } else {
-                            hydrotick.setImageResource(R.drawable.wrongmark);
-                        }
-                        if (ht.equals("Yes")) {
-                            heattick.setImageResource(R.drawable.rightmark);
-                        } else {
-                            heattick.setImageResource(R.drawable.wrongmark);
-                        }
-                        if (wt.equals("Yes")) {
-                            watertick.setImageResource(R.drawable.rightmark);
-                        } else {
-                            watertick.setImageResource(R.drawable.wrongmark);
-                        }
-                        if (ct.equals("Yes")) {
-                            cabletick.setImageResource(R.drawable.rightmark);
-                        } else {
-                            cabletick.setImageResource(R.drawable.wrongmark);
-                        }
-                        if (itnt.equals("Yes")) {
-                            internettick.setImageResource(R.drawable.rightmark);
-                        } else {
-                            internettick.setImageResource(R.drawable.wrongmark);
-                        }
+                        String dateValue = data1.get("Date").toString();
+                        date.setText(dateValue);
                     } else {
                         Log.d("tagvv", "No such document");
                     }

@@ -18,7 +18,7 @@
     </style>
 
     <style name="Divider">
-        <item name="android:background">#29a4d1</item>
+        <item name="android:background">#FFA726</item>
         //you can give your color here. that will change all divider color in your app.
     </style>
 

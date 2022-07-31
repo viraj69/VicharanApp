@@ -34,11 +34,11 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/wishlistPrice"
+                    android:id="@+id/placeWishlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="$999 - $1900"
+                    android:text="Place"
                     android:textColor="#3cb6d3"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -46,70 +46,25 @@
 
             </LinearLayout>
 
-
             <TextView
-                android:id="@+id/apartmentwishlist"
+                android:id="@+id/titleWishlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apartment"
+                android:text="Title"
                 android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/bednumberwishlist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/bedwishlist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="BEDS"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="."
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/bathnumberwishlist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="1"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/bathwishlist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="BATH"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
             <TextView
-                android:id="@+id/addresswishlist"
+                android:id="@+id/sutraWishlist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Montreal"
+                android:text="Sutra"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/addressWishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
                 android:textSize="20sp" />
 
         </LinearLayout>

@@ -60,10 +60,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.Wishli
     public void onBindViewHolder(@NonNull final WishlistAdapter.WishlistViewHolder holder, final int position) {
         Picasso.get().load(wishlist.get(position).getImage()).fit().into(holder.aptimage);
 
-        holder.price.setText(wishlist.get(position).getPrice() + "$");
-        holder.type.setText(wishlist.get(position).getType());
-        holder.bedroom.setText(wishlist.get(position).getBedroom());
-        holder.bathroom.setText(wishlist.get(position).getBathroom());
+        holder.place.setText(wishlist.get(position).getPlace());
+        holder.sutra.setText(wishlist.get(position).getSutra());
         holder.location.setText(wishlist.get(position).getLocation());
 
         holder.wishlistIcon.setOnClickListener(new View.OnClickListener() {
@@ -113,17 +111,15 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.Wishli
     public static final class WishlistViewHolder extends RecyclerView.ViewHolder {
 
         ImageView aptimage, wishlistIcon;
-        TextView price, bedroom, bathroom, location, type;
+        TextView place, location, sutra;
         View item;
 
         public WishlistViewHolder(@NonNull View itemView) {
             super(itemView);
             aptimage = itemView.findViewById(R.id.wishlistimage);
-            price = itemView.findViewById(R.id.wishlistPrice);
-            bedroom = itemView.findViewById(R.id.bednumberwishlist);
-            bathroom = itemView.findViewById(R.id.bathnumberwishlist);
-            location = itemView.findViewById(R.id.addresswishlist);
-            type = itemView.findViewById(R.id.apartmentwishlist);
+            place = itemView.findViewById(R.id.placeWishlist);
+            location = itemView.findViewById(R.id.addressWishlist);
+            sutra = itemView.findViewById(R.id.sutraWishlist);
             wishlistIcon = itemView.findViewById(R.id.wishlisticon);
             item = itemView;
         }

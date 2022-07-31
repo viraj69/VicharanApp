@@ -24,50 +24,31 @@
         android:layout_marginTop="10dp"
 
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="3 and half apartment"
+        android:text="title"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/type"
+        android:id="@+id/sutra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginLeft="6dp"
-        android:layout_marginTop="3dp"
-
-
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="Condo"
+        android:text="Sutra"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/bedroom"
+        android:id="@+id/place1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/type"
+        android:layout_below="@+id/sutra"
         android:layout_marginLeft="6dp"
-        android:layout_marginTop="3dp"
-
-
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="3 Bedrrom"
-        android:textColor="#ff000000"
-
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bedroom"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="3dp"
-
-
-        android:layout_toRightOf="@+id/dialogimage"
-        android:text="Price 300$"
+        android:text="Place"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
@@ -76,12 +57,10 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_below="@+id/title"
-
         android:layout_alignParentEnd="true"
         android:layout_marginTop="7dp"
-
         android:layout_marginBottom="20dp"
-        android:layout_toRightOf="@id/bedroom"
+        android:layout_toRightOf="@id/sutra"
         android:src="@drawable/next"
         android:text="More Details"
 

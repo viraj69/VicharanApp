@@ -70,10 +70,9 @@ public class  PostList extends AppCompatActivity {
                                 Log.d("PostList", document.getId() + " => " + document.getData());
                                 String id = document.getId();
                                 String title = (String) document.getData().get("Title");
-                                String price = (String) document.getData().get("Amount");
-                                String type = (String) document.getData().get("Unit");
-                                String bedroom = (String) document.getData().get("Bedroom");
-                                getImage(id, title, price, type, bedroom);
+                                String place = (String) document.getData().get("Place");
+                                String sutra = (String) document.getData().get("Sutra");
+                                getImage(id, title, place, sutra);
                             }
                             setPostListRecycler();
                         } else {
@@ -84,13 +83,13 @@ public class  PostList extends AppCompatActivity {
     }
 
 
-    private void getImage(final String id, final String title, final String price, final String type, final String bedroom) {
+    private void getImage(final String id, final String title, final String place, final String sutra) {
         storageReference = FirebaseStorage.getInstance().getReference();
         storageReference.child("images/" + id + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
-                postlist.add(new PostListModel(id, title, price, bedroom, type, uri));
+                postlist.add(new PostListModel(id, title, place, sutra, uri));
                 postlistAdapter.notifyDataSetChanged();
 
             }

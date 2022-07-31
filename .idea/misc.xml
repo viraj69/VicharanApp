@@ -6,6 +6,7 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.19844124700239807" />
         <entry key="app/src/main/res/layout/activity_apartment_details.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_apartment_dialog.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/activity_contact.xml" value="0.4180253623188406" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_filter.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.2598958333333333" />
@@ -15,9 +16,17 @@
         <entry key="app/src/main/res/layout/activity_postadd.xml" value="0.24389051808406648" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/activity_update_ad.xml" value="0.2190982776089159" />
+        <entry key="app/src/main/res/layout/activity_wishlistactivity.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/custom_layout.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.4180253623188406" />
+        <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.4180253623188406" />
         <entry key="app/src/main/res/layout/postlist_item.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/row_accessibility.xml" value="0.4180253623188406" />
+        <entry key="app/src/main/res/layout/row_overview.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/row_thebuilding.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/row_theunit.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/xml/preferences.xml" value="0.2598958333333333" />
       </map>

@@ -30,12 +30,11 @@
         <activity android:name="com.example.vicharan.Activity.wishlistactivity" />
         <activity android:name="com.example.vicharan.Activity.CreateAccount" />
         <activity android:name="com.example.vicharan.Activity.Postadd" />
-        <activity android:name="com.example.vicharan.Activity.Contact" />
         <activity android:name="com.example.vicharan.Activity.ForgotPassword" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDzkhBJZpa16X7NMsbveeggrcSGfT-IsH0" />
+            android:value="AIzaSyDeFuuo_ueSXMlCCQQLUIFgFAs4Xo3ULNg" />
 
         <activity
             android:name="com.example.vicharan.Activity.SplashScreen"

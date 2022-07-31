@@ -146,15 +146,13 @@ public class WishlistFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
-                        String price, location, type, bedroom, bathroom,Status;
-                        price = (String) document.getData().get("Amount");
+                        String place, location, sutra, Status;
+                        place = (String) document.getData().get("Place");
                         location = (String) document.getData().get("Address");
-                        type = (String) document.getData().get("Unit");
-                        bedroom = (String) document.getData().get("Bedroom");
-                        bathroom = (String) document.getData().get("Bathroom");
+                        sutra = (String) document.getData().get("Sutra");
                         Status = (String) document.getData().get("Status");
                         if(Status.equals("Active")) {
-                            getImage(apartmentId, price, type, location, bedroom, bathroom, wishlist);
+                            getImage(apartmentId, place, sutra, location, wishlist);
                         }
                     } else {
                         Log.d("TAG", "No such document");
@@ -166,14 +164,14 @@ public class WishlistFragment extends Fragment {
         });
     }
 
-    private void getImage(final String apartmentId, final String price, final String type, final String location, final String bedroom, final String bathroom, final ArrayList<WishlistModel> wishlist) {
+    private void getImage(final String apartmentId, final String place, final String sutra, final String location, final ArrayList<WishlistModel> wishlist) {
         storageReference = FirebaseStorage.getInstance().getReference();
         storageReference.child("images/" + apartmentId + "/0").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 // Got the download URL for 'users/me/profile.png'
                 Log.d("TAG", "image got");
-                wishlist.add(new WishlistModel(apartmentId, price, bedroom, bathroom, location, type, uri));
+                wishlist.add(new WishlistModel(apartmentId, place, location, sutra, uri));
                 wishAdapter.notifyDataSetChanged();
             }
         }).addOnFailureListener(new OnFailureListener() {

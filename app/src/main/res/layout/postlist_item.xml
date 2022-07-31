@@ -23,59 +23,43 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="10dp"
-
         android:layout_toRightOf="@+id/postlist_image"
-        android:text="3 and half apartment"
+        android:text="Title"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/postlist_type"
+        android:id="@+id/postlist_sutra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/postlist_title"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="3dp"
 
-
         android:layout_toRightOf="@+id/postlist_image"
-        android:text="Condo"
+        android:text="Sutra"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
+
     <TextView
-        android:id="@+id/postlist_bedroom"
+        android:id="@+id/postlist_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/postlist_type"
+        android:layout_below="@+id/postlist_sutra"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="3dp"
 
 
         android:layout_toRightOf="@+id/postlist_image"
-        android:text="3 Bedrrom"
-        android:textColor="#ff000000"
-
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/postlist_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/postlist_bedroom"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="3dp"
-
-
-        android:layout_toRightOf="@+id/postlist_image"
-        android:text="Price 300$"
+        android:text="place"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/postlist_price"
+        android:layout_below="@+id/postlist_place"
         android:layout_marginTop="20dp"
         android:background="#3cb6d3" />
 

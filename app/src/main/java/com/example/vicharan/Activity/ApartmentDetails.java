@@ -49,7 +49,6 @@ public class ApartmentDetails extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    TextView water;
     TextView apartmentName, price, address, description, overviewFragmentApartment;
     Button btnbuyApartment;
     ImageView like;
@@ -59,7 +58,6 @@ public class ApartmentDetails extends AppCompatActivity {
     FirebaseFirestore fstore;
 
     ProgressDialog pd;
-    FirebaseStorage storage;
     StorageReference storageReference;
     String UserId;
     String WishlistedId, Uid;
@@ -107,22 +105,6 @@ public class ApartmentDetails extends AppCompatActivity {
         checkWishlist(AptId, like);
         pd.dismiss();
 
-        btnbuyApartment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth = FirebaseAuth.getInstance();
-                fstore = FirebaseFirestore.getInstance();
-                curUser = auth.getCurrentUser();
-                if (curUser != null) {
-                    Intent i = new Intent(getApplicationContext(), Contact.class);
-                    i.putExtra("Uid", Uid);
-                    startActivity(i);
-                } else {
-                    ApartmentDialog alert = new ApartmentDialog();
-                    alert.showLoginDialog(ApartmentDetails.this);
-                }
-            }
-        });
         like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -277,7 +259,7 @@ public class ApartmentDetails extends AppCompatActivity {
                         Map<String, Object> data1 = document.getData();
 
                         String aptname = data1.get("Title").toString();
-                        String pr = data1.get("Amount").toString();
+                        String pr = data1.get("Place").toString();
                         String des = data1.get("Description").toString();
                         String Address = data1.get("Address").toString();
                         Uid = data1.get("UserID").toString();

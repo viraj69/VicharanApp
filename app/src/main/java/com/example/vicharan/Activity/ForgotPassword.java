@@ -1,5 +1,7 @@
 package com.example.vicharan.Activity;
 
+import static com.example.vicharan.Activity.CreateAccount.isEmailValid;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-
-import static com.example.vicharan.Activity.CreateAccount.isEmailValid;
 
 public class ForgotPassword extends AppCompatActivity {
     TextInputLayout email;

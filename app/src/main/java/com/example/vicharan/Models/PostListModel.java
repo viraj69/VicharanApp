@@ -5,22 +5,18 @@ import android.net.Uri;
 public class PostListModel {
     String apartmentId;
     String place;
-    String bedroom;
     String title;
-
     String sutra;
     private Uri image;
 
 
-
-    public PostListModel(String apartmentId,String title, String place, String sutra, Uri image){
-        this.apartmentId=apartmentId;
-        this.place=place;
-        this.image=image;
-        this.sutra=sutra;
-        this.title=title;
+    public PostListModel(String apartmentId, String title, String place, String sutra, Uri image) {
+        this.apartmentId = apartmentId;
+        this.place = place;
+        this.image = image;
+        this.sutra = sutra;
+        this.title = title;
     }
-
 
 
     public String getApartmentId() {

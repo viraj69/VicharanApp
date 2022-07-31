@@ -151,7 +151,7 @@ public class WishlistFragment extends Fragment {
                         location = (String) document.getData().get("address");
                         sutra = (String) document.getData().get("sutra");
 
-                            getImage(apartmentId, place, sutra, location, wishlist);
+                        getImage(apartmentId, place, sutra, location, wishlist);
 
                     } else {
                         Log.d("TAG", "No such document");

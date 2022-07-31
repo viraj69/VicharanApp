@@ -1,14 +1,12 @@
 package com.example.vicharan.Activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,10 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.vicharan.Adapters.ViewImagePagerAdapter;
 import com.example.vicharan.Adapters.ViewPagerAdapter;
-import com.example.vicharan.Fragments.accessibilityfragment;
 import com.example.vicharan.Fragments.overviewFragment;
-import com.example.vicharan.Fragments.thebuildingFragment;
-import com.example.vicharan.Fragments.theunitFragment;
 import com.example.vicharan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,8 +44,7 @@ public class ApartmentDetails extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    TextView apartmentName, price, address, description, overviewFragmentApartment;
-    Button btnbuyApartment;
+    TextView title, place, overviewFragmentApartment;
     ImageView like;
     LinearLayout mainLayout;
     ViewPager imageViewPager;
@@ -72,11 +66,8 @@ public class ApartmentDetails extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewPager);
-        apartmentName = (TextView) findViewById(R.id.apartmentName);
-        price = (TextView) findViewById(R.id.price);
-        address = (TextView) findViewById(R.id.address);
-        description = (TextView) findViewById(R.id.description);
-        btnbuyApartment = (Button) findViewById(R.id.buyapartment);
+        title = (TextView) findViewById(R.id.title);
+        place = (TextView) findViewById(R.id.place);
         like = (ImageView) findViewById(R.id.like);
         imageViewPager = findViewById(R.id.imageslider);
         browser = (WebView) findViewById(R.id.browser2);
@@ -258,15 +249,13 @@ public class ApartmentDetails extends AppCompatActivity {
 
                         Map<String, Object> data1 = document.getData();
 
-                        String aptname = data1.get("Title").toString();
-                        String pr = data1.get("Place").toString();
+                        String title = data1.get("Title").toString();
+                        String place = data1.get("Place").toString();
                         String des = data1.get("Description").toString();
                         String Address = data1.get("Address").toString();
                         Uid = data1.get("UserID").toString();
-                        apartmentName.setText(aptname);
-                        price.setText(pr + "$");
-                        description.setText(des);
-                        address.setText(Address);
+                        ApartmentDetails.this.title.setText(title);
+                        ApartmentDetails.this.place.setText(place);
                         String lat = data1.get("Latitude").toString();
                         String lng = data1.get("Longitude").toString();
                         browser.loadUrl("file:///android_asset/local.html?lat=" + lat + "&lng=" + lng);
@@ -291,9 +280,6 @@ public class ApartmentDetails extends AppCompatActivity {
             public void run() {
 
                 viewPagerAdapter.addFragment(overviewFragment.getInstance(aptId), "OVERVIEW");
-                viewPagerAdapter.addFragment(theunitFragment.getInstance(aptId), "THE UNIT");
-                viewPagerAdapter.addFragment(thebuildingFragment.getInstance(aptId), "THE BUILDING");
-                viewPagerAdapter.addFragment(accessibilityfragment.getInstance(aptId), "ACCESSIBILITY");
                 viewPager.setAdapter(viewPagerAdapter);
                 tabLayout.setupWithViewPager(viewPager);
             }

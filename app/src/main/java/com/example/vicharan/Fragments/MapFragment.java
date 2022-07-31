@@ -196,7 +196,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         IconGenerator iconFactory = new IconGenerator(getActivity());
         iconFactory.setBackground(getResources().getDrawable(R.drawable.marker1));
         iconFactory.setTextAppearance(R.style.myStyleText);
-       markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("")));
+      // markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("")));
 
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 

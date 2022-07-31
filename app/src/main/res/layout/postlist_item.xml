@@ -61,7 +61,7 @@
         android:layout_height="1dp"
         android:layout_below="@+id/postlist_place"
         android:layout_marginTop="20dp"
-        android:background="#3cb6d3" />
+        android:background="#FB8C00" />
 
 
 </RelativeLayout>

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
-        android:background="#3cb6d3 ">
+        android:background="#FB8C00 ">
 
         <ImageView
             android:layout_width="50dp"

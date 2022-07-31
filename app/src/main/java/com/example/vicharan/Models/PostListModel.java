@@ -4,23 +4,23 @@ import android.net.Uri;
 
 public class PostListModel {
     String apartmentId;
-    String price;
+    String place;
     String bedroom;
-String title;
+    String title;
 
-    String type;
+    String sutra;
     private Uri image;
 
 
 
-    public PostListModel(String apartmentId,String title, String price, String bedroom, String type, Uri image){
+    public PostListModel(String apartmentId,String title, String place, String sutra, Uri image){
         this.apartmentId=apartmentId;
-        this.price=price;
-        this.bedroom=bedroom;
+        this.place=place;
         this.image=image;
-        this.type=type;
+        this.sutra=sutra;
         this.title=title;
     }
+
 
 
     public String getApartmentId() {
@@ -31,20 +31,12 @@ String title;
         this.apartmentId = apartmentId;
     }
 
-    public String getPrice() {
-        return price;
+    public String getPlace() {
+        return place;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getBedroom() {
-        return bedroom;
-    }
-
-    public void setBedroom(String bedroom) {
-        this.bedroom = bedroom;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public Uri getImage() {
@@ -55,12 +47,12 @@ String title;
         this.image = image;
     }
 
-    public String getType() {
-        return type;
+    public String getSutra() {
+        return sutra;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSutra(String type) {
+        this.sutra = sutra;
     }
 
     public String getTitle() {

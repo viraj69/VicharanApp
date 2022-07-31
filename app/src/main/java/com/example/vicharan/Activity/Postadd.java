@@ -69,12 +69,14 @@ public class Postadd extends AppCompatActivity {
     FirebaseFirestore fstore;
     FirebaseAuth auth;
     AutocompleteSupportFragment autocompleteFragment, city;
-    ImageView selectedImage, selectedImage1, selectedImage2, selectedImage3, upload;
+    ImageView selectedImage1;
+    ImageView selectedImage2;
+    ImageView selectedImage3;
+    ImageView upload;
     ImageView[] image;
-    FirebaseStorage storage;
     StorageReference storageReference;
     ArrayList<Uri> contenturi = new ArrayList<Uri>();
-    private TextInputLayout et_title, et_des, et_amt, et_date, et_size;
+    private TextInputLayout et_title, et_des, et_place, et_date, et_sutra,et_country;
     int photos = 0;
 
     @Override
@@ -84,9 +86,10 @@ public class Postadd extends AppCompatActivity {
 
         et_title = findViewById(R.id.title);
         et_des = findViewById(R.id.des);
-        et_amt = findViewById(R.id.amount);
+        et_place = findViewById(R.id.place);
         et_date = findViewById(R.id.date);
-        et_size = findViewById(R.id.size);
+        et_sutra = findViewById(R.id.sutra);
+        et_country = findViewById(R.id.country);
         Button btn_calender = findViewById(R.id.calender);
 
 
@@ -131,7 +134,7 @@ public class Postadd extends AppCompatActivity {
             }
         });
         setSearchUI();
-        Places.initialize(getApplicationContext(), "AIzaSyDzkhBJZpa16X7NMsbveeggrcSGfT-IsH0");
+        Places.initialize(getApplicationContext(), "AIzaSyDeFuuo_ueSXMlCCQQLUIFgFAs4Xo3ULNg");
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(this);
@@ -198,11 +201,10 @@ public class Postadd extends AppCompatActivity {
                 fstore = FirebaseFirestore.getInstance();
                 final String Title = et_title.getEditText().getText().toString().trim();
                 final String Description = et_des.getEditText().getText().toString().trim();
-                final String Amount = et_amt.getEditText().getText().toString().trim();
-                String Size = et_size.getEditText().getText().toString().trim();
-                String MoveInDate = et_date.getEditText().getText().toString().trim();
-
-
+                final String Place = et_place.getEditText().getText().toString().trim();
+                String Sutra = et_sutra.getEditText().getText().toString().trim();
+                String Country = et_country.getEditText().getText().toString().trim();
+                String Date = et_date.getEditText().getText().toString().trim();
 
                 if (Title.isEmpty()) {
                     Toast.makeText(Postadd.this, "Please Enter Title", Toast.LENGTH_LONG).show();
@@ -210,25 +212,16 @@ public class Postadd extends AppCompatActivity {
                 } else if (Title.length() > 65) {
                     Toast.makeText(Postadd.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
                     return;
-                } else if (Description.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please Enter Description", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (Description.length() > 10000) {
                     Toast.makeText(Postadd.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
                     return;
-                } else if (Amount.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please enter Amount ", Toast.LENGTH_LONG).show();
-                    return;
-                }  else if (address == null) {
+                } else if (address == null) {
                     Toast.makeText(Postadd.this, "Please enter Address ", Toast.LENGTH_LONG).show();
                     return;
                 } else if (cityName == null) {
                     Toast.makeText(Postadd.this, "Please select City", Toast.LENGTH_LONG).show();
                     return;
-                }  else if (MoveInDate.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please enter MoveInDate ", Toast.LENGTH_LONG).show();
-                    return;
-                }  else if (Size.isEmpty()) {
+                } else if (Country.isEmpty()) {
                     Toast.makeText(Postadd.this, "Please enter Size ", Toast.LENGTH_LONG).show();
                     return;
                 }  else if (photos < 1) {
@@ -248,9 +241,10 @@ public class Postadd extends AppCompatActivity {
                     userMap.put("UserID", uid);
                     userMap.put("Title", Title);
                     userMap.put("Description", Description);
-                    userMap.put("Amount", Amount);
-                    userMap.put("MoveInDate", MoveInDate);
-                    userMap.put("Size", Size);
+                    userMap.put("Place", Place);
+                    userMap.put("Date", Date);
+                    userMap.put("Sutra", Sutra);
+                    userMap.put("Country", Country);
                     userMap.put("CityName", cityName);
                     userMap.put("Latitude", latLng.latitude);
                     userMap.put("Longitude", latLng.longitude);

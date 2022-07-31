@@ -41,7 +41,6 @@ import com.squareup.picasso.Picasso;
 
 public class ApartmentDialog extends AppCompatActivity {
     FirebaseFirestore db;
-    FirebaseStorage storage;
     StorageReference storageReference;
     SharedPreferences sp;
     public TextInputLayout Email, Password;
@@ -193,13 +192,11 @@ public class ApartmentDialog extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         TextView title = (TextView) dialog.findViewById(R.id.title);
-                        TextView type = (TextView) dialog.findViewById(R.id.type);
-                        TextView bedroom = (TextView) dialog.findViewById(R.id.bedroom);
-                        TextView price = (TextView) dialog.findViewById(R.id.price);
+                        TextView sutra = (TextView) dialog.findViewById(R.id.sutra);
+                        TextView place = (TextView) dialog.findViewById(R.id.place1);
                         title.setText("" + document.getData().get("Title"));
-                        type.setText("" + document.getData().get("Unit"));
-                        bedroom.setText("Bedroom:- " + document.getData().get("Bedroom"));
-                        price.setText(document.getData().get("Amount") + "$");
+                        place.setText("" + document.getData().get("Place"));
+                        sutra.setText("" + document.getData().get("Sutra"));
 
                         getImage(dialog, apartmentId);
                     } else {

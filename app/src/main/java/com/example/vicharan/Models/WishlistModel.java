@@ -4,23 +4,19 @@ import android.net.Uri;
 
 public class WishlistModel {
     String apartmentId;
-    String price;
-    String bedroom;
-    String bathroom;
+    String place;
     String location;
-    String type;
+    String sutra;
     private Uri image;
 
 
 
-    public WishlistModel(String apartmentId, String price, String bedroom, String bathroom, String location, String type, Uri image){
+    public WishlistModel(String apartmentId, String place, String location, String sutra, Uri image){
         this.apartmentId=apartmentId;
-        this.price=price;
-        this.bedroom=bedroom;
-        this.bathroom=bathroom;
+        this.place=place;
         this.location=location;
         this.image=image;
-        this.type=type;
+        this.sutra=sutra;
     }
 
 
@@ -32,28 +28,12 @@ public class WishlistModel {
         this.apartmentId = apartmentId;
     }
 
-    public String getPrice() {
-        return price;
+    public String getPlace() {
+        return place;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getBedroom() {
-        return bedroom;
-    }
-
-    public void setBedroom(String bedroom) {
-        this.bedroom = bedroom;
-    }
-
-    public String getBathroom() {
-        return bathroom;
-    }
-
-    public void setBathroom(String bathroom) {
-        this.bathroom = bathroom;
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public String getLocation() {
@@ -72,11 +52,11 @@ public class WishlistModel {
         this.image = image;
     }
 
-    public String getType() {
-        return type;
+    public String getSutra() {
+        return sutra;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSutra(String sutra) {
+        this.sutra = sutra;
     }
 }

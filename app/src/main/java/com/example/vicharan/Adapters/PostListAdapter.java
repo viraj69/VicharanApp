@@ -53,9 +53,8 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
     @Override
     public void onBindViewHolder(@NonNull final PostListAdapter.PostListViewHolder holder, final int position) {
         Picasso.get().load(postlist.get(position).getImage()).fit().into(holder.aptimage);
-        holder.price.setText("Price:- " + postlist.get(position).getPrice() + "$");
-        holder.type.setText("Type:- " + postlist.get(position).getType());
-        holder.bedroom.setText("Bedroom:- " + postlist.get(position).getBedroom());
+        holder.place.setText("Place:- " + postlist.get(position).getPlace());
+        holder.sutra.setText("Sutra:- " + postlist.get(position).getSutra());
         holder.title.setText(postlist.get(position).getTitle());
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,18 +75,16 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
     public static final class PostListViewHolder extends RecyclerView.ViewHolder {
 
         ImageView aptimage;
-        TextView price, bedroom, type, title;
+        TextView place, sutra, title;
         View item;
 
         public PostListViewHolder(@NonNull View itemView) {
             super(itemView);
             aptimage = itemView.findViewById(R.id.postlist_image);
-            price = itemView.findViewById(R.id.postlist_price);
-            bedroom = itemView.findViewById(R.id.postlist_bedroom);
-            type = itemView.findViewById(R.id.postlist_type);
+            place = itemView.findViewById(R.id.postlist_place);
+            sutra = itemView.findViewById(R.id.postlist_sutra);
             title = itemView.findViewById(R.id.postlist_title);
             item = itemView;
-
 
         }
     }

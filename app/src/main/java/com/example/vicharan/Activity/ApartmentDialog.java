@@ -194,9 +194,9 @@ public class ApartmentDialog extends AppCompatActivity {
                         TextView title = (TextView) dialog.findViewById(R.id.title);
                         TextView sutra = (TextView) dialog.findViewById(R.id.sutra);
                         TextView place = (TextView) dialog.findViewById(R.id.place1);
-                        title.setText("" + document.getData().get("Title"));
-                        place.setText("" + document.getData().get("Place"));
-                        sutra.setText("" + document.getData().get("Sutra"));
+                        title.setText("" + document.getData().get("title"));
+                        place.setText("" + document.getData().get("place"));
+                        sutra.setText("" + document.getData().get("sutra"));
 
                         getImage(dialog, apartmentId);
                     } else {

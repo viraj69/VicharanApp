@@ -116,7 +116,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        filter = view.findViewById(R.id.filter);
+
 
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -170,16 +170,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap.clear();
         db = FirebaseFirestore.getInstance();
         db.collection("Apartment")
-                .whereEqualTo("Country", country).whereEqualTo("Status","Active")
+                .whereEqualTo("country", country)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                LatLng latLng1 = new LatLng((Double) document.getData().get("Latitude"), (Double) document.getData().get("Longitude"));
-                                String place = (String) document.getData().get("Place");
+                                LatLng latLng1 = new LatLng((Double) document.getData().get("latitude"), (Double) document.getData().get("longitude"));
+                                String place = (String) document.getData().get("place");
                                     putApartmentMarker(latLng1, (String) document.getData().get("place"), (String) document.getId());
+                                System.out.println("Latitude: " + latLng1.toString());
+
                             }
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());
@@ -189,14 +191,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void putApartmentMarker(LatLng latlng, String place, String ApartmentId) {
-
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latlng);
         markerOptions.alpha(1.0f);
         IconGenerator iconFactory = new IconGenerator(getActivity());
         iconFactory.setBackground(getResources().getDrawable(R.drawable.marker1));
         iconFactory.setTextAppearance(R.style.myStyleText);
-      // markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("")));
+        //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(place)));
 
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 

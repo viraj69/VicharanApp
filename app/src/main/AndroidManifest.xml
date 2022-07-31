@@ -22,7 +22,6 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.example.vicharan.PostList"></activity>
         <activity android:name="com.example.vicharan.Activity.UpdateAd" />
-        <activity android:name="com.example.vicharan.Filter" />
         <activity android:name="com.example.vicharan.Activity.ApartmentDialog" />
         <activity android:name="com.example.vicharan.Activity.ApartmentDetails" />
         <activity android:name="com.example.vicharan.Activity.MainActivity" />

@@ -116,7 +116,7 @@ public class WishlistFragment extends Fragment {
             userId = curUser.getUid(); //Do what you need to do with the id
         }
         db.collection("Wishlist")
-                .whereEqualTo("UserId", userId)
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -146,14 +146,13 @@ public class WishlistFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
-                        String place, location, sutra, Status;
-                        place = (String) document.getData().get("Place");
-                        location = (String) document.getData().get("Address");
-                        sutra = (String) document.getData().get("Sutra");
-                        Status = (String) document.getData().get("Status");
-                        if(Status.equals("Active")) {
+                        String place, location, sutra;
+                        place = (String) document.getData().get("place");
+                        location = (String) document.getData().get("address");
+                        sutra = (String) document.getData().get("sutra");
+
                             getImage(apartmentId, place, sutra, location, wishlist);
-                        }
+
                     } else {
                         Log.d("TAG", "No such document");
                     }

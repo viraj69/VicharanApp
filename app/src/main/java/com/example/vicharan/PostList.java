@@ -60,7 +60,7 @@ public class  PostList extends AppCompatActivity {
     private void getApartmetList() {
         db = FirebaseFirestore.getInstance();
         db.collection("Apartment")
-                .whereEqualTo("UserID", userId)
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -69,9 +69,9 @@ public class  PostList extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("PostList", document.getId() + " => " + document.getData());
                                 String id = document.getId();
-                                String title = (String) document.getData().get("Title");
-                                String place = (String) document.getData().get("Place");
-                                String sutra = (String) document.getData().get("Sutra");
+                                String title = (String) document.getData().get("title");
+                                String place = (String) document.getData().get("place");
+                                String sutra = (String) document.getData().get("sutra");
                                 getImage(id, title, place, sutra);
                             }
                             setPostListRecycler();

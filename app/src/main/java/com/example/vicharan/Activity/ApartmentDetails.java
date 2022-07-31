@@ -128,7 +128,7 @@ public class ApartmentDetails extends AppCompatActivity {
                     } else {
                         String filter = UserId + "_" + AptId;
                         final Map<String, Object> wishlist = new HashMap<>();
-                        wishlist.put("UserId", UserId);
+                        wishlist.put("userId", UserId);
                         wishlist.put("ApartmentId", AptId);
                         wishlist.put("Filter", filter);
 
@@ -172,13 +172,11 @@ public class ApartmentDetails extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.exists()) {
-                                    Log.d("saumik", document.getId() + " => " + document.getData());
                                     like.setImageResource(R.drawable.wishlisticon);
                                     wishlisted = true;
                                     WishlistedId = document.getId();
                                     return;
                                 } else {
-                                    Log.d("saumik", "Error getting documents: ", task.getException());
                                     like.setImageResource(R.drawable.wishlisticon);
                                 }
                             }
@@ -249,15 +247,15 @@ public class ApartmentDetails extends AppCompatActivity {
 
                         Map<String, Object> data1 = document.getData();
 
-                        String title = data1.get("Title").toString();
-                        String place = data1.get("Place").toString();
-                        String des = data1.get("Description").toString();
-                        String Address = data1.get("Address").toString();
-                        Uid = data1.get("UserID").toString();
+                        String title = data1.get("title").toString();
+                        String place = data1.get("place").toString();
+                        String des = data1.get("description").toString();
+                        String Address = data1.get("address").toString();
+                        Uid = data1.get("userId").toString();
                         ApartmentDetails.this.title.setText(title);
                         ApartmentDetails.this.place.setText(place);
-                        String lat = data1.get("Latitude").toString();
-                        String lng = data1.get("Longitude").toString();
+                        String lat = data1.get("latitude").toString();
+                        String lng = data1.get("longitude").toString();
                         browser.loadUrl("file:///android_asset/local.html?lat=" + lat + "&lng=" + lng);
 
                         Log.d("tagvv", "DocumentSnapshot data: " + document.getData());

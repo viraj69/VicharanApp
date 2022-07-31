@@ -10,13 +10,12 @@ public class WishlistModel {
     private Uri image;
 
 
-
-    public WishlistModel(String apartmentId, String place, String location, String sutra, Uri image){
-        this.apartmentId=apartmentId;
-        this.place=place;
-        this.location=location;
-        this.image=image;
-        this.sutra=sutra;
+    public WishlistModel(String apartmentId, String place, String location, String sutra, Uri image) {
+        this.apartmentId = apartmentId;
+        this.place = place;
+        this.location = location;
+        this.image = image;
+        this.sutra = sutra;
     }
 
 

@@ -13,14 +13,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,8 +34,6 @@ import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-import com.google.android.material.datepicker.CalendarConstraints;
-import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
@@ -64,19 +58,16 @@ import java.util.TimeZone;
 public class Postadd extends AppCompatActivity {
 
     public static final int GALLERY_REQUEST_CODE = 105;
-    String cityName, address,googlePlaceId;
+    String cityName, address, googlePlaceId;
     LatLng latLng;
     FirebaseFirestore fstore;
     FirebaseAuth auth;
     AutocompleteSupportFragment autocompleteFragment, city;
-    ImageView selectedImage1;
-    ImageView selectedImage2;
-    ImageView selectedImage3;
-    ImageView upload;
+    ImageView selectedImage1, selectedImage2, selectedImage3, upload;
     ImageView[] image;
     StorageReference storageReference;
     ArrayList<Uri> contenturi = new ArrayList<Uri>();
-    private TextInputLayout et_title, et_des, et_place, et_date, et_sutra,et_country;
+    private TextInputLayout et_title, et_des, et_place, et_date, et_sutra, et_country;
     int photos = 0;
 
     @Override
@@ -92,10 +83,8 @@ public class Postadd extends AppCompatActivity {
         et_country = findViewById(R.id.country);
         Button btn_calender = findViewById(R.id.calender);
 
-
         upload = findViewById(R.id.uploadImage);
         image = new ImageView[]{upload, selectedImage1, selectedImage2, selectedImage3};
-
 
         Button btn_postad = findViewById(R.id.post_ad);
 
@@ -103,7 +92,6 @@ public class Postadd extends AppCompatActivity {
                 getSupportFragmentManager().findFragmentById(R.id.location_fragment);
         city = (AutocompleteSupportFragment)
                 getSupportFragmentManager().findFragmentById(R.id.city);
-
 
         Calendar calender = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         calender.clear();
@@ -200,20 +188,20 @@ public class Postadd extends AppCompatActivity {
             public void onClick(View view) {
 
                 fstore = FirebaseFirestore.getInstance();
-                final String Title = et_title.getEditText().getText().toString().trim();
-                final String Description = et_des.getEditText().getText().toString().trim();
-                final String Place = et_place.getEditText().getText().toString().trim();
-                String Sutra = et_sutra.getEditText().getText().toString().trim();
-                String Country = et_country.getEditText().getText().toString().trim();
-                String Date = et_date.getEditText().getText().toString().trim();
+                final String title = et_title.getEditText().getText().toString().trim();
+                final String description = et_des.getEditText().getText().toString().trim();
+                final String place = et_place.getEditText().getText().toString().trim();
+                String sutra = et_sutra.getEditText().getText().toString().trim();
+                String country = et_country.getEditText().getText().toString().trim();
+                String date = et_date.getEditText().getText().toString().trim();
 
-                if (Title.isEmpty()) {
+                if (title.isEmpty()) {
                     Toast.makeText(Postadd.this, "Please Enter Title", Toast.LENGTH_LONG).show();
                     return;
-                } else if (Title.length() > 65) {
+                } else if (title.length() > 65) {
                     Toast.makeText(Postadd.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
                     return;
-                } else if (Description.length() > 10000) {
+                } else if (description.length() > 10000) {
                     Toast.makeText(Postadd.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
                     return;
                 } else if (address == null) {
@@ -222,14 +210,13 @@ public class Postadd extends AppCompatActivity {
                 } else if (cityName == null) {
                     Toast.makeText(Postadd.this, "Please select City", Toast.LENGTH_LONG).show();
                     return;
-                } else if (Country.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please enter Size ", Toast.LENGTH_LONG).show();
+                } else if (country.isEmpty()) {
+                    Toast.makeText(Postadd.this, "Please enter Country name", Toast.LENGTH_LONG).show();
                     return;
-                }  else if (photos < 1) {
+                } else if (photos < 1) {
                     Toast.makeText(Postadd.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
                 } else {
-                    final ProgressDialog pd;
-                    pd = new ProgressDialog(Postadd.this);
+                    final ProgressDialog pd = new ProgressDialog(Postadd.this);
                     pd.setMessage("Loading...");
                     pd.show();
 
@@ -240,19 +227,17 @@ public class Postadd extends AppCompatActivity {
 
                     Map<String, Object> userMap = new HashMap<>();
                     userMap.put("userId", uid);
-                    userMap.put("title", Title);
-                    userMap.put("description", Description);
-                    userMap.put("place", Place);
-                    userMap.put("date", Date);
-                    userMap.put("sutra", Sutra);
-                    userMap.put("country", Country);
+                    userMap.put("title", title);
+                    userMap.put("description", description);
+                    userMap.put("place", place);
+                    userMap.put("date", date);
+                    userMap.put("sutra", sutra);
+                    userMap.put("country", country);
                     userMap.put("cityName", cityName);
                     userMap.put("latitude", latLng.latitude);
                     userMap.put("longitude", latLng.longitude);
                     userMap.put("address", address);
                     userMap.put("googlePlaceId", googlePlaceId);
-
-
 
 
                     fstore.collection("Apartment").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

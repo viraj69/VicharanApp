@@ -1,5 +1,7 @@
 package com.example.vicharan.Activity;
 
+import static com.example.vicharan.Activity.CreateAccount.isEmailValid;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -39,8 +41,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.example.vicharan.Activity.CreateAccount.isEmailValid;
 
 public class ProfileDetails extends AppCompatActivity {
     private FirebaseAuth auth;

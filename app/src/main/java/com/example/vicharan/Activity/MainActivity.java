@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.vicharan.Fragments.MyAccountFragment;
 import com.example.vicharan.Fragments.ProfileFragment;
 import com.example.vicharan.Fragments.WishlistFragment;
-import com.example.vicharan.Fragments.MapFragment;
+import com.example.vicharan.Fragments.map.MapFragment;
 import com.example.vicharan.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;

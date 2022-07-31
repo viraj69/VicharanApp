@@ -146,14 +146,13 @@ public class WishlistFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
-                        String place, location, sutra, Status;
+                        String place, location, sutra;
                         place = (String) document.getData().get("Place");
                         location = (String) document.getData().get("Address");
                         sutra = (String) document.getData().get("Sutra");
-                        Status = (String) document.getData().get("Status");
-                        if(Status.equals("Active")) {
+
                             getImage(apartmentId, place, sutra, location, wishlist);
-                        }
+
                     } else {
                         Log.d("TAG", "No such document");
                     }

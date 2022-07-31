@@ -116,7 +116,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        filter = view.findViewById(R.id.filter);
+
 
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -170,7 +170,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mGoogleMap.clear();
         db = FirebaseFirestore.getInstance();
         db.collection("Apartment")
-                .whereEqualTo("Country", country).whereEqualTo("Status","Active")
+                .whereEqualTo("Country", country)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -179,7 +179,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 LatLng latLng1 = new LatLng((Double) document.getData().get("Latitude"), (Double) document.getData().get("Longitude"));
                                 String place = (String) document.getData().get("Place");
-                                    putApartmentMarker(latLng1, (String) document.getData().get("place"), (String) document.getId());
+                                    putApartmentMarker(latLng1, (String) document.getData().get("Place"), (String) document.getId());
                             }
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());
@@ -196,7 +196,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         IconGenerator iconFactory = new IconGenerator(getActivity());
         iconFactory.setBackground(getResources().getDrawable(R.drawable.marker1));
         iconFactory.setTextAppearance(R.style.myStyleText);
-      // markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("")));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(place)));
 
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 

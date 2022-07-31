@@ -172,13 +172,11 @@ public class ApartmentDetails extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.exists()) {
-                                    Log.d("saumik", document.getId() + " => " + document.getData());
                                     like.setImageResource(R.drawable.wishlisticon);
                                     wishlisted = true;
                                     WishlistedId = document.getId();
                                     return;
                                 } else {
-                                    Log.d("saumik", "Error getting documents: ", task.getException());
                                     like.setImageResource(R.drawable.wishlisticon);
                                 }
                             }

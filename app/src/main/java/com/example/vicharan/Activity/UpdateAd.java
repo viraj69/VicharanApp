@@ -71,7 +71,7 @@ import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 public class UpdateAd extends AppCompatActivity {
 
     public static final int GALLERY_REQUEST_CODE = 105;
-    String cityName, address, aptid;
+    String cityName, address, googlePlaceId, aptid;
     LatLng latLng;
     FirebaseFirestore fstore;
     FirebaseAuth auth;
@@ -166,7 +166,7 @@ public class UpdateAd extends AppCompatActivity {
                 setSearchUI();
                 latLng = place.getLatLng();
                 address = place.getName();
-
+                googlePlaceId = place.getId();
             }
 
             @Override
@@ -229,39 +229,6 @@ public class UpdateAd extends AppCompatActivity {
             }
         });
 
-        rent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fstore = FirebaseFirestore.getInstance();
-                DocumentReference docRef = fstore.collection("Apartment").document(aptid);
-                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                Map<String, Object> data1 = document.getData();
-                                String Status = data1.get("Status").toString();
-                                if (Status.equals("Active")) {
-                                    sold();
-                                } else {
-                                    rentagain();
-                                }
-
-                                Log.d("tagvv", "DocumentSnapshot data: " + document.getData());
-                            } else {
-                                Log.d("tagvv", "No such document");
-                            }
-                        } else {
-                            Log.d("tagvv", "get failed with ", task.getException());
-                        }
-                    }
-                });
-
-            }
-        });
-
-
         btn_postad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -308,19 +275,18 @@ public class UpdateAd extends AppCompatActivity {
                     Log.v("tagvv", " " + uid);
 
                     Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("UserID", uid);
-                    userMap.put("Title", Title);
-                    userMap.put("Description", Description);
-                    userMap.put("Place", Place);
-                    userMap.put("Date", Date);
-                    userMap.put("Sutra", Sutra);
-                    userMap.put("Country", Country);
-                    userMap.put("CityName", cityName);
-                    userMap.put("Latitude", latLng.latitude);
-                    userMap.put("Longitude", latLng.longitude);
-                    userMap.put("Address", address);
-                    userMap.put("Status", "Active");
-
+                    userMap.put("userId", uid);
+                    userMap.put("title", Title);
+                    userMap.put("description", Description);
+                    userMap.put("place", Place);
+                    userMap.put("date", Date);
+                    userMap.put("sutra", Sutra);
+                    userMap.put("country", Country);
+                    userMap.put("cityName", cityName);
+                    userMap.put("latitude", latLng.latitude);
+                    userMap.put("longitude", latLng.longitude);
+                    userMap.put("address", address);
+                    userMap.put("googlePlaceId", googlePlaceId);
 
                     fstore.collection("Apartment").document(aptid)
                             .set(userMap)
@@ -433,20 +399,19 @@ public class UpdateAd extends AppCompatActivity {
 
                         Map<String, Object> data1 = document.getData();
 
-                        String Title1 = data1.get("Title").toString();
-                        String Description1 = data1.get("Description").toString();
-                        String Place1 = data1.get("Place").toString();
-                        String Address1 = data1.get("Address").toString();
-                        String CityName1 = data1.get("CityName").toString();
-                        String Date1 = data1.get("Date").toString();
-                        String Sutra1 = data1.get("Sutra").toString();
-                        String Status = data1.get("Status").toString();
-                        double latitude = (Double) data1.get("Latitude");
-                        double longitude = (Double) data1.get("Longitude");
+                        String Title1 = data1.get("title").toString();
+                        String Description1 = data1.get("description").toString();
+                        String Place1 = data1.get("place").toString();
+                        String Address1 = data1.get("address").toString();
+                        String CityName1 = data1.get("cityName").toString();
+                        String Date1 = data1.get("date").toString();
+                        String Sutra1 = data1.get("sutra").toString();
+                        googlePlaceId = data1.get("googlePlaceId").toString();
+                        double latitude = (Double) data1.get("latitude");
+                        double longitude = (Double) data1.get("longitude");
                         latLng = new LatLng(latitude, longitude);
                         cityName = CityName1;
                         address = Address1;
-
 
                         et_title.getEditText().setText(Title1);
                         et_des.getEditText().setText(Description1);
@@ -455,31 +420,6 @@ public class UpdateAd extends AppCompatActivity {
                         city.setText(CityName1);
                         et_date.getEditText().setText(Date1);
                         et_sutra.getEditText().setText(Sutra1);
-
-
-                        if (Status.equals("Active")) {
-                            rent.setImageResource(R.drawable.rented);
-
-                            new SimpleTooltip.Builder(UpdateAd.this)
-                                    .anchorView(rent)
-                                    .text("Click to mark it as Rented")
-                                    .gravity(Gravity.BOTTOM)
-                                    .dismissOnOutsideTouch(true)
-                                    .dismissOnInsideTouch(false)
-                                    .build()
-                                    .show();
-                        } else {
-                            rent.setImageResource(R.drawable.rent);
-
-                            new SimpleTooltip.Builder(UpdateAd.this)
-                                    .anchorView(rent)
-                                    .text("Click to Rent it Again")
-                                    .gravity(Gravity.BOTTOM)
-                                    .dismissOnOutsideTouch(true)
-                                    .dismissOnInsideTouch(false)
-                                    .build()
-                                    .show();
-                        }
 
                         Log.d("tagvv", "DocumentSnapshot data: " + document.getData());
                     } else {
@@ -513,80 +453,6 @@ public class UpdateAd extends AppCompatActivity {
         etTextInput.setHint("Address");
         ImageButton close = fView.findViewById(R.id.places_autocomplete_clear_button);
         close.setVisibility(View.GONE);
-
-    }
-
-    private void sold() {
-        final CharSequence[] options = {"Yes", "No"};
-        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(UpdateAd.this);
-        builder1.setTitle("Is the house Rented ?");
-        builder1.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Yes")) {
-                    fstore = FirebaseFirestore.getInstance();
-                    Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("Status", "Inactive");
-                    fstore.collection("Apartment").document(aptid)
-                            .update(userMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d("TAG", "DocumentSnapshot successfully written!");
-                                    Toast.makeText(UpdateAd.this, "Rented", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("TAG", "Error writing document", e);
-                                }
-                            });
-
-                } else if (options[item].equals("NO")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder1.show();
-
-    }
-
-    private void rentagain() {
-        final CharSequence[] options = {"Yes", "No"};
-        androidx.appcompat.app.AlertDialog.Builder builder1 = new androidx.appcompat.app.AlertDialog.Builder(UpdateAd.this);
-        builder1.setTitle("Do you want to Rent it again?");
-        builder1.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Yes")) {
-                    fstore = FirebaseFirestore.getInstance();
-                    Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("Status", "Active");
-                    fstore.collection("Apartment").document(aptid)
-                            .update(userMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d("TAG", "DocumentSnapshot successfully written!");
-                                    Toast.makeText(UpdateAd.this, "Rented Again Successfully", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("TAG", "Error writing document", e);
-                                }
-                            });
-
-                } else if (options[item].equals("NO")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder1.show();
 
     }
 

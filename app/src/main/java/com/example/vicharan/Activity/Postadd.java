@@ -64,7 +64,7 @@ import java.util.TimeZone;
 public class Postadd extends AppCompatActivity {
 
     public static final int GALLERY_REQUEST_CODE = 105;
-    String cityName, address;
+    String cityName, address,googlePlaceId;
     LatLng latLng;
     FirebaseFirestore fstore;
     FirebaseAuth auth;
@@ -155,6 +155,7 @@ public class Postadd extends AppCompatActivity {
                 setSearchUI();
                 latLng = place.getLatLng();
                 address = place.getName();
+                googlePlaceId = place.getId();
             }
 
             @Override
@@ -238,18 +239,20 @@ public class Postadd extends AppCompatActivity {
                     Log.v("tagvv", " " + uid);
 
                     Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("UserID", uid);
-                    userMap.put("Title", Title);
-                    userMap.put("Description", Description);
-                    userMap.put("Place", Place);
-                    userMap.put("Date", Date);
-                    userMap.put("Sutra", Sutra);
-                    userMap.put("Country", Country);
-                    userMap.put("CityName", cityName);
-                    userMap.put("Latitude", latLng.latitude);
-                    userMap.put("Longitude", latLng.longitude);
-                    userMap.put("Address", address);
-                    userMap.put("Status", "Active");
+                    userMap.put("userId", uid);
+                    userMap.put("title", Title);
+                    userMap.put("description", Description);
+                    userMap.put("place", Place);
+                    userMap.put("date", Date);
+                    userMap.put("sutra", Sutra);
+                    userMap.put("country", Country);
+                    userMap.put("cityName", cityName);
+                    userMap.put("latitude", latLng.latitude);
+                    userMap.put("longitude", latLng.longitude);
+                    userMap.put("address", address);
+                    userMap.put("googlePlaceId", googlePlaceId);
+
+
 
 
                     fstore.collection("Apartment").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

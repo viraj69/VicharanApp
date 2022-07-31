@@ -116,7 +116,7 @@ public class WishlistFragment extends Fragment {
             userId = curUser.getUid(); //Do what you need to do with the id
         }
         db.collection("Wishlist")
-                .whereEqualTo("UserId", userId)
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -128,7 +128,7 @@ public class ApartmentDetails extends AppCompatActivity {
                     } else {
                         String filter = UserId + "_" + AptId;
                         final Map<String, Object> wishlist = new HashMap<>();
-                        wishlist.put("UserId", UserId);
+                        wishlist.put("userId", UserId);
                         wishlist.put("ApartmentId", AptId);
                         wishlist.put("Filter", filter);
 

@@ -60,7 +60,7 @@ public class  PostList extends AppCompatActivity {
     private void getApartmetList() {
         db = FirebaseFirestore.getInstance();
         db.collection("Apartment")
-                .whereEqualTo("UserID", userId)
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

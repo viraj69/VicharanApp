@@ -59,7 +59,7 @@ public class overviewFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Map<String, Object> data1 = document.getData();
-                        String dateValue = data1.get("Date").toString();
+                        String dateValue = data1.get("date").toString();
                         date.setText(dateValue);
                     } else {
                         Log.d("tagvv", "No such document");

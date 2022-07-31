@@ -147,9 +147,9 @@ public class WishlistFragment extends Fragment {
                     if (document.exists()) {
                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
                         String place, location, sutra;
-                        place = (String) document.getData().get("Place");
-                        location = (String) document.getData().get("Address");
-                        sutra = (String) document.getData().get("Sutra");
+                        place = (String) document.getData().get("place");
+                        location = (String) document.getData().get("address");
+                        sutra = (String) document.getData().get("sutra");
 
                             getImage(apartmentId, place, sutra, location, wishlist);
 

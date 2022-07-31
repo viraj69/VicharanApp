@@ -177,9 +177,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                LatLng latLng1 = new LatLng((Double) document.getData().get("Latitude"), (Double) document.getData().get("Longitude"));
-                                String place = (String) document.getData().get("Place");
-                                    putApartmentMarker(latLng1, (String) document.getData().get("Place"), (String) document.getId());
+                                LatLng latLng1 = new LatLng((Double) document.getData().get("latitude"), (Double) document.getData().get("longitude"));
+                                String place = (String) document.getData().get("place");
+                                    putApartmentMarker(latLng1, (String) document.getData().get("place"), (String) document.getId());
                             }
                         } else {
                             Log.d("TAG", "Error getting documents: ", task.getException());

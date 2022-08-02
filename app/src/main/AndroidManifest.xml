@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.vicharan.PostList"></activity>
+        <activity android:name="com.example.vicharan.PostList" />
         <activity android:name="com.example.vicharan.Activity.UpdateAd" />
         <activity android:name="com.example.vicharan.Activity.ApartmentDialog" />
         <activity android:name="com.example.vicharan.Activity.ApartmentDetails" />
@@ -38,7 +38,8 @@
         <activity
             android:name="com.example.vicharan.Activity.SplashScreen"
             android:grantUriPermissions="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>

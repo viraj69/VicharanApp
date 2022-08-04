@@ -17,8 +17,6 @@ import com.example.vicharan.firebase.Apartment.DbApartment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 
@@ -64,16 +62,7 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
     }
 
     @Override
-    public void onGoogleMapReady(GoogleMap googleMap) {
-        if (hasLocationPermission()) {
-            createFusedLocationClient();
-        }
-    }
-
-    @Override
     public void onLocationAvailable(Location location) {
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        ui.focusOnMap(latLng);
         fetchDbApartments(null);
     }
 

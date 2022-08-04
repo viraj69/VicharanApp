@@ -11,11 +11,6 @@
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
-        android:id="@+id/wishlistFragment"
-        android:name="com.example.vicharan.Fragments.WishlistFragment"
-        android:label="fragment_wishlist"
-        tools:layout="@layout/fragment_wishlist" />
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.vicharan.Fragments.ProfileFragment"
         android:label="fragment_profile"

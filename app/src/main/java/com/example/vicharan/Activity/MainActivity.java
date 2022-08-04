@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.vicharan.Fragments.MyAccountFragment;
 import com.example.vicharan.Fragments.ProfileFragment;
-import com.example.vicharan.Fragments.WishlistFragment;
 import com.example.vicharan.Fragments.map.MapFragment;
 import com.example.vicharan.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    final Fragment wishlist = new WishlistFragment();
     final Fragment profile = new ProfileFragment();
     final Fragment map = new MapFragment();
     final Fragment account = new MyAccountFragment();
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         final FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().add(R.id.frame, profile, "3").hide(profile).commit();
-        fm.beginTransaction().add(R.id.frame, wishlist, "2").hide(wishlist).commit();
         fm.beginTransaction().add(R.id.frame, account, "4").hide(account).commit();
         fm.beginTransaction().add(R.id.frame, map, "1").commit();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,16 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
-                if (item.getItemId() == R.id.navigation_wishlist) {
-                    curUser = auth.getCurrentUser();
-                    if (curUser != null) {
-                        fm.beginTransaction().hide(active).show(wishlist).commit();
-                        active = wishlist;
-                    } else {
-                        fm.beginTransaction().hide(active).show(profile).commit();
-                        active = profile;
-                    }
-                } else if (item.getItemId() == R.id.navigation_map) {
+                if (item.getItemId() == R.id.navigation_map) {
 
                     fm.beginTransaction().hide(active).show(map).commit();
                     active = map;

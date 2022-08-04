@@ -82,16 +82,6 @@
                     android:textColor="@color/quantum_black_100"
                     android:textSize="25sp"
                     android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/like"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="200dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:src="@drawable/like" />
             </LinearLayout>
 
 

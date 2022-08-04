@@ -26,7 +26,6 @@
         <activity android:name="com.example.vicharan.Activity.ApartmentDetails" />
         <activity android:name="com.example.vicharan.Activity.MainActivity" />
         <activity android:name="com.example.vicharan.Activity.ProfileDetails" />
-        <activity android:name="com.example.vicharan.Activity.wishlistactivity" />
         <activity android:name="com.example.vicharan.Activity.CreateAccount" />
         <activity android:name="com.example.vicharan.Activity.Postadd" />
         <activity android:name="com.example.vicharan.Activity.ForgotPassword" />

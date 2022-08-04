@@ -19,6 +19,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.model.Place;
@@ -26,7 +27,6 @@ import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.maps.android.ui.IconGenerator;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,7 +45,7 @@ class Ui implements OnMapReadyCallback, PlaceSelectionListener, GoogleMap.OnMark
 
     private void initGoogleMapMarkerIconFactory() {
         iconFactory = new IconGenerator(fragment.getActivity());
-        iconFactory.setBackground(fragment.getActivity().getResources().getDrawable(R.drawable.marker1));
+        iconFactory.setBackground(fragment.getActivity().getResources().getDrawable(R.drawable.locationpin));
         iconFactory.setTextAppearance(R.style.myStyleText);
     }
 
@@ -98,6 +98,17 @@ class Ui implements OnMapReadyCallback, PlaceSelectionListener, GoogleMap.OnMark
         this.googleMap.setMaxZoomPreference(50);
         this.googleMap.setMinZoomPreference(3);
 
+        double bottomCordinate = 41.232345;
+        double leftCordinate = -129.216371;
+        double topCordinate = 62.341938;
+        double rightCordinate = -55.564033;
+
+        LatLngBounds canadaBounds = new LatLngBounds(
+                new LatLng(bottomCordinate, leftCordinate), // SW bounds
+                new LatLng(topCordinate, rightCordinate)  // NE bounds
+        );
+
+        googleMap.setLatLngBoundsForCameraTarget(canadaBounds);
         googleMap.setOnMarkerClickListener(this);
 
         UiSettings mapsetting = googleMap.getUiSettings();
@@ -105,12 +116,6 @@ class Ui implements OnMapReadyCallback, PlaceSelectionListener, GoogleMap.OnMark
         mapsetting.setZoomGesturesEnabled(true);
         mapsetting.setAllGesturesEnabled(true);
         mapsetting.setScrollGesturesEnabled(true);
-
-        if (uiListener.hasLocationPermission()) {
-            onLocationEnabled();
-        }
-
-        uiListener.onGoogleMapReady(googleMap);
     }
 
     @SuppressLint("MissingPermission")
@@ -149,9 +154,5 @@ class Ui implements OnMapReadyCallback, PlaceSelectionListener, GoogleMap.OnMark
 
     interface UiListener {
         void onPlaceSelectedWithGoogleAutoComplete(@NonNull Place place);
-
-        void onGoogleMapReady(GoogleMap googleMap);
-
-        boolean hasLocationPermission();
     }
 }

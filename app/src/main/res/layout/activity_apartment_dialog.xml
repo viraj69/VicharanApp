@@ -29,26 +29,26 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/sutra"
+        android:id="@+id/place1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="Sutra"
+        android:text="Place"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/place1"
+        android:id="@+id/sutra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sutra"
+        android:layout_below="@+id/place1"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="Place"
+        android:text="Sutra"
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
@@ -60,7 +60,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="20dp"
-        android:layout_toRightOf="@id/sutra"
+        android:layout_toRightOf="@id/place1"
         android:src="@drawable/next"
         android:text="More Details"
 

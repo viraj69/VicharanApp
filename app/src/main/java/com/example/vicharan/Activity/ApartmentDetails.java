@@ -37,7 +37,7 @@ public class ApartmentDetails extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    TextView title, place;
+    TextView title, place, address, sutra, des, date;
     LinearLayout mainLayout;
     ViewPager imageViewPager;
     FirebaseFirestore fstore;
@@ -58,6 +58,10 @@ public class ApartmentDetails extends AppCompatActivity {
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewPager);
         title = (TextView) findViewById(R.id.title);
+        address = (TextView) findViewById(R.id.address);
+        sutra = (TextView) findViewById(R.id.sutra);
+        date = (TextView) findViewById(R.id.date);
+        des = (TextView) findViewById(R.id.des);
         place = (TextView) findViewById(R.id.place);
         imageViewPager = findViewById(R.id.imageslider);
         browser = (WebView) findViewById(R.id.browser2);
@@ -149,10 +153,17 @@ public class ApartmentDetails extends AppCompatActivity {
                         String title = data1.get("title").toString();
                         String place = data1.get("place").toString();
                         String des = data1.get("description").toString();
-                        String Address = data1.get("address").toString();
+                        String address = data1.get("address").toString();
+                        String date = data1.get("date").toString();
+                        String sutra = data1.get("sutra").toString();
                         Uid = data1.get("userId").toString();
                         ApartmentDetails.this.title.setText(title);
                         ApartmentDetails.this.place.setText(place);
+                        ApartmentDetails.this.address.setText(address);
+                        ApartmentDetails.this.date.setText(date);
+                        ApartmentDetails.this.des.setText(des);
+                        ApartmentDetails.this.sutra.setText(sutra);
+
                         String lat = data1.get("latitude").toString();
                         String lng = data1.get("longitude").toString();
                         browser.loadUrl("file:///android_asset/local.html?lat=" + lat + "&lng=" + lng);

@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -45,7 +46,7 @@ class Ui implements OnMapReadyCallback, PlaceSelectionListener, GoogleMap.OnMark
 
     private void initGoogleMapMarkerIconFactory() {
         iconFactory = new IconGenerator(fragment.getActivity());
-        iconFactory.setBackground(fragment.getActivity().getResources().getDrawable(R.drawable.locationpin));
+        iconFactory.setBackground(fragment.getActivity().getResources().getDrawable(R.drawable.marker1));
         iconFactory.setTextAppearance(R.style.myStyleText);
     }
 
@@ -74,7 +75,7 @@ class Ui implements OnMapReadyCallback, PlaceSelectionListener, GoogleMap.OnMark
     void putApartmentMarker(Apartment apartment) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.alpha(1.0f);
-        //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(place)));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon()));
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
         markerOptions.position(apartment.getLocation());
         Marker marker = googleMap.addMarker(markerOptions);

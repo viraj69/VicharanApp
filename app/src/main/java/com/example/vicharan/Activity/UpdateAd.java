@@ -24,6 +24,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.generic.DbInsertionListener;
+import com.example.vicharan.firebase.location.DbLocation;
+import com.example.vicharan.firebase.location.Location;
+import com.example.vicharan.firebase.media.DbMedia;
+import com.example.vicharan.firebase.media.Media;
+import com.example.vicharan.firebase.prasang.DbPrasang;
+import com.example.vicharan.firebase.prasang.Prasang;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,6 +62,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -230,23 +239,16 @@ public class UpdateAd extends AppCompatActivity {
 
                 if (title.isEmpty()) {
                     Toast.makeText(UpdateAd.this, "Please Enter Title", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (title.length() > 65) {
                     Toast.makeText(UpdateAd.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (description.length() > 10000) {
                     Toast.makeText(UpdateAd.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (address == null) {
                     Toast.makeText(UpdateAd.this, "Please enter Address ", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (cityName == null) {
                     Toast.makeText(UpdateAd.this, "Please select City", Toast.LENGTH_LONG).show();
-                    return;
-
                 } else if (country.isEmpty()) {
                     Toast.makeText(UpdateAd.this, "Please enter Country name ", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (photos < 1) {
                     Toast.makeText(UpdateAd.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
                 } else {
@@ -257,44 +259,26 @@ public class UpdateAd extends AppCompatActivity {
 
                     auth = FirebaseAuth.getInstance();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
-                    String uid = firebaseUser.getUid();
-                    Log.v("tagvv", " " + uid);
+                    String userId = firebaseUser.getUid();
 
-                    Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("userId", uid);
-                    userMap.put("title", title);
-                    userMap.put("description", description);
-                    userMap.put("place", place);
-                    userMap.put("date", date);
-                    userMap.put("sutra", sutra);
-                    userMap.put("country", country);
-                    userMap.put("cityName", cityName);
-                    userMap.put("latitude", latLng.latitude);
-                    userMap.put("longitude", latLng.longitude);
-                    userMap.put("address", address);
-                    userMap.put("googlePlaceId", googlePlaceId);
+                    Location location = new Location();
+                    location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
+                    location.setUserId(userId);
+                    location.setDescription(description);
+                    location.setCountry(country);
+                    location.setCity(cityName);
+                    location.setPlace(place);
+                    location.setGooglePlaceId(googlePlaceId);
+                    location.setAddress(address);
 
-                    fstore.collection("Apartment").document(aptid)
-                            .set(userMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    if (changed) {
-                                        uploadImage((aptid));
-                                    }
-                                    Log.d("TAG", "DocumentSnapshot successfully written!");
-                                    SystemClock.sleep(3000);
-                                    Toast.makeText(UpdateAd.this, "Post Updated Successfully", Toast.LENGTH_SHORT).show();
-                                    pd.dismiss();
-                                    finish();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("TAG", "Error writing document", e);
-                                }
-                            });
+                    Prasang prasang = new Prasang();
+                    prasang.setUserId(userId);
+                    //prasang.setTitle();
+                    prasang.setSutra(sutra);
+                    prasang.setDescription(description);
+                    prasang.setDate(date);
+                    //prasang.setNotes();
+                    saveLocationDb(location, prasang);
 
                 }
 
@@ -304,6 +288,25 @@ public class UpdateAd extends AppCompatActivity {
 
     }
 
+    private void saveLocationDb(Location location, Prasang prasang) {
+        DbLocation.insert(location, new DbInsertionListener() {
+            @Override
+            public void onSuccess(String locationId) {
+                prasang.setLocationId(locationId);
+                uploadImage(prasang);
+                Toast.makeText(UpdateAd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
+                //pd.dismiss();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println(e);
+                String Error = e.getMessage();
+                Toast.makeText(UpdateAd.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void getImages() {
         StorageReference listRef = FirebaseStorage.getInstance().getReference().child("images/" + aptid);
@@ -522,25 +525,61 @@ public class UpdateAd extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(String id) {
+
+    private void uploadImage(Prasang prasang) {
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        long currentTimeMillis = System.currentTimeMillis();
+        List<Media> medias = new LinkedList<>();
         for (int j = 0; j < contenturi.size(); j++) {
-            StorageReference ref = storageReference.child("images").child(id + "/" + j);
+
+            String mediaName = (currentTimeMillis + j) + ".png";
+
+            Media media = new Media();
+            media.setName(mediaName);
+            media.setMimeType(1);   // image
+            medias.add(media);
+
+            StorageReference ref = storageReference.child("images").child(prasang.getLocationId() + "/" + mediaName);
             ref.putFile(contenturi.get(j))
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    .addOnSuccessListener(taskSnapshot -> {
 
-                        }
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                    .addOnFailureListener(e -> Toast.makeText(UpdateAd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        }
+        saveImageInDb(prasang, medias);
+    }
 
-                            Toast.makeText(UpdateAd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+    private void saveImageInDb(Prasang prasang, List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media media = medias.get(i);
+            final int n = i;
+            DbMedia.insert(media, new DbInsertionListener() {
+                @Override
+                public void onSuccess(String id) {
+                    prasang.addMedia(id);
+                    if (n == medias.size() - 1) savePrasangDb(prasang);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    System.out.println(e);
+                }
+            });
         }
     }
 
+    private void savePrasangDb(Prasang prasang) {
+        DbPrasang.insert(prasang, new DbInsertionListener() {
+            @Override
+            public void onSuccess(String id) {
+                System.out.println("prasang saved: " + id);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println(e);
+            }
+        });
+    }
 }

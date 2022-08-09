@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.vicharan.Fragments.LocationFragment;
 import com.example.vicharan.R;
-import com.example.vicharan.firebase.Apartment.DbApartment;
+import com.example.vicharan.firebase.location.DbLocation;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -40,7 +40,7 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
         if (country == null) {
             country = DefaultCountryName;
         }
-        DbApartment.getByCountryName(country, ui::putApartmentMarkers);
+        DbLocation.getByCountryName(country, ui::putApartmentMarkers);
     }
 
 

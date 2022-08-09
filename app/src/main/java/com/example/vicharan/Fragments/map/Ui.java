@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.example.vicharan.Activity.ApartmentDialog;
 import com.example.vicharan.R;
-import com.example.vicharan.firebase.Apartment.Apartment;
+import com.example.vicharan.firebase.location.Location;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -71,19 +71,19 @@ class Ui implements OnMapReadyCallback, PlaceSelectionListener, GoogleMap.OnMark
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
     }
 
-    void putApartmentMarker(Apartment apartment) {
+    void putApartmentMarker(Location location) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.alpha(1.0f);
         //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(place)));
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
-        markerOptions.position(apartment.getLocation());
+        markerOptions.position(location.getLocation());
         Marker marker = googleMap.addMarker(markerOptions);
-        marker.setTag(apartment.getId());
+        marker.setTag(location.getId());
         marker.setTitle("vvv");
     }
 
-    void putApartmentMarkers(List<Apartment> apartments) {
-        for (Apartment apartment : apartments) putApartmentMarker(apartment);
+    void putApartmentMarkers(List<Location> locations) {
+        for (Location location : locations) putApartmentMarker(location);
     }
 
     void clearGoogleMap() {

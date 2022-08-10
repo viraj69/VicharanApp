@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +23,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.generic.DbInsertionListener;
+import com.example.vicharan.firebase.location.DbLocation;
+import com.example.vicharan.firebase.location.Location;
+import com.example.vicharan.firebase.media.DbMedia;
+import com.example.vicharan.firebase.media.Media;
+import com.example.vicharan.firebase.prasang.DbPrasang;
+import com.example.vicharan.firebase.prasang.Prasang;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.TypeFilter;
@@ -42,26 +46,28 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.ListResult;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.TimeZone;
 
-
 public class UpdateAd extends AppCompatActivity {
-
+    private static final String LOCATION_INTENT_KEY = "location";
+    private static final String PRASANG_INTENT_KEY = "prasang";
     public static final int GALLERY_REQUEST_CODE = 105;
+
+    private Location location;
+    private Prasang prasang;
+
     String cityName, address, googlePlaceId, aptid;
     LatLng latLng;
     FirebaseFirestore fstore;
@@ -75,12 +81,26 @@ public class UpdateAd extends AppCompatActivity {
     Boolean changed = false;
     private TextInputLayout et_title, et_des, et_place, et_date, et_sutra, et_country;
 
+    public static void startActivity(AppCompatActivity caller, Location location, Prasang prasang) {
+        Intent i = new Intent(caller, UpdateAd.class);
+        i.putExtra("id", location.getId()); // TODO: delete later
+        i.putExtra(LOCATION_INTENT_KEY, location);
+        i.putExtra(PRASANG_INTENT_KEY, prasang);
+        caller.startActivity(i);
+    }
+
+    private void parseIntent() {
+        Intent intent = getIntent();
+        aptid = intent.getStringExtra("id");
+        location = (Location) intent.getSerializableExtra(LOCATION_INTENT_KEY);
+        prasang = (Prasang) intent.getSerializableExtra(PRASANG_INTENT_KEY);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_ad);
-        Intent intent = getIntent();
-        aptid = intent.getStringExtra("id");
+        parseIntent();
 
         et_title = findViewById(R.id.titleUpdate);
         et_des = findViewById(R.id.desUpdate);
@@ -185,7 +205,7 @@ public class UpdateAd extends AppCompatActivity {
             }
         });
 
-        getdata();
+        fetchLocation();
         getImages();
 
         del.setOnClickListener(new View.OnClickListener() {
@@ -230,23 +250,16 @@ public class UpdateAd extends AppCompatActivity {
 
                 if (title.isEmpty()) {
                     Toast.makeText(UpdateAd.this, "Please Enter Title", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (title.length() > 65) {
                     Toast.makeText(UpdateAd.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (description.length() > 10000) {
                     Toast.makeText(UpdateAd.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (address == null) {
                     Toast.makeText(UpdateAd.this, "Please enter Address ", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (cityName == null) {
                     Toast.makeText(UpdateAd.this, "Please select City", Toast.LENGTH_LONG).show();
-                    return;
-
                 } else if (country.isEmpty()) {
                     Toast.makeText(UpdateAd.this, "Please enter Country name ", Toast.LENGTH_LONG).show();
-                    return;
                 } else if (photos < 1) {
                     Toast.makeText(UpdateAd.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
                 } else {
@@ -257,44 +270,26 @@ public class UpdateAd extends AppCompatActivity {
 
                     auth = FirebaseAuth.getInstance();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
-                    String uid = firebaseUser.getUid();
-                    Log.v("tagvv", " " + uid);
+                    String userId = firebaseUser.getUid();
 
-                    Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("userId", uid);
-                    userMap.put("title", title);
-                    userMap.put("description", description);
-                    userMap.put("place", place);
-                    userMap.put("date", date);
-                    userMap.put("sutra", sutra);
-                    userMap.put("country", country);
-                    userMap.put("cityName", cityName);
-                    userMap.put("latitude", latLng.latitude);
-                    userMap.put("longitude", latLng.longitude);
-                    userMap.put("address", address);
-                    userMap.put("googlePlaceId", googlePlaceId);
+                    Location location = new Location();
+                    location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
+                    location.setUserId(userId);
+                    location.setDescription(description);
+                    location.setCountry(country);
+                    location.setCity(cityName);
+                    location.setPlace(place);
+                    location.setGooglePlaceId(googlePlaceId);
+                    location.setAddress(address);
 
-                    fstore.collection("Apartment").document(aptid)
-                            .set(userMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    if (changed) {
-                                        uploadImage((aptid));
-                                    }
-                                    Log.d("TAG", "DocumentSnapshot successfully written!");
-                                    SystemClock.sleep(3000);
-                                    Toast.makeText(UpdateAd.this, "Post Updated Successfully", Toast.LENGTH_SHORT).show();
-                                    pd.dismiss();
-                                    finish();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w("TAG", "Error writing document", e);
-                                }
-                            });
+                    Prasang prasang = new Prasang();
+                    prasang.setUserId(userId);
+                    //prasang.setTitle();
+                    prasang.setSutra(sutra);
+                    prasang.setDescription(description);
+                    prasang.setDate(date);
+                    //prasang.setNotes();
+                    saveLocationDb(location, prasang);
 
                 }
 
@@ -304,6 +299,25 @@ public class UpdateAd extends AppCompatActivity {
 
     }
 
+    private void saveLocationDb(Location location, Prasang prasang) {
+        DbLocation.insert(location, new DbInsertionListener() {
+            @Override
+            public void onSuccess(String locationId) {
+                prasang.setLocationId(locationId);
+                uploadImage(prasang);
+                Toast.makeText(UpdateAd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
+                //pd.dismiss();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println(e);
+                String Error = e.getMessage();
+                Toast.makeText(UpdateAd.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void getImages() {
         StorageReference listRef = FirebaseStorage.getInstance().getReference().child("images/" + aptid);
@@ -373,48 +387,38 @@ public class UpdateAd extends AppCompatActivity {
 
     }
 
-    private void getdata() {
-        fstore = FirebaseFirestore.getInstance();
-        DocumentReference docRef = fstore.collection("Apartment").document(aptid);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
+    private void loadLocation(Location location) {
+        googlePlaceId = location.getGooglePlaceId();
+        latLng = location.getLocation();
+        cityName = location.getCity();
+        address = location.getAddress();
+        et_place.getEditText().setText(location.getPlace());
+        autocompleteFragment.setText(location.getAddress());
+        city.setText(location.getCity());
+    }
 
-                        Map<String, Object> data1 = document.getData();
+    private void loadPrasang(Prasang prasang) {
+        et_title.getEditText().setText(prasang.getTitle());
+        et_des.getEditText().setText(prasang.getDescription());
+        et_date.getEditText().setText(prasang.getDate());
+        et_sutra.getEditText().setText(prasang.getSutra());
+    }
 
-                        String Title1 = data1.get("title").toString();
-                        String Description1 = data1.get("description").toString();
-                        String Place1 = data1.get("place").toString();
-                        String Address1 = data1.get("address").toString();
-                        String CityName1 = data1.get("cityName").toString();
-                        String Date1 = data1.get("date").toString();
-                        String Sutra1 = data1.get("sutra").toString();
-                        googlePlaceId = data1.get("googlePlaceId").toString();
-                        double latitude = (Double) data1.get("latitude");
-                        double longitude = (Double) data1.get("longitude");
-                        latLng = new LatLng(latitude, longitude);
-                        cityName = CityName1;
-                        address = Address1;
-
-                        et_title.getEditText().setText(Title1);
-                        et_des.getEditText().setText(Description1);
-                        et_place.getEditText().setText(Place1);
-                        autocompleteFragment.setText(Address1);
-                        city.setText(CityName1);
-                        et_date.getEditText().setText(Date1);
-                        et_sutra.getEditText().setText(Sutra1);
-
-                        Log.d("tagvv", "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d("tagvv", "No such document");
-                    }
-                } else {
-                    Log.d("tagvv", "get failed with ", task.getException());
-                }
+    private void fetchPrasang(Location location) {
+        DbPrasang.getByLocationId(location.getId(), (List<Prasang> prasangs) -> {
+            if (prasangs == null || prasangs.isEmpty()) {
+                System.out.println("no prasangs found");
+                return;
             }
+            Prasang prasang = prasangs.get(0);
+            loadPrasang(prasang);
+        });
+    }
+
+    private void fetchLocation() {
+        DbLocation.getById(aptid, (Location location) -> {
+            loadLocation(location);
+            fetchPrasang(location);
         });
     }
 
@@ -465,7 +469,6 @@ public class UpdateAd extends AppCompatActivity {
         });
         builder1.show();
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -522,25 +525,60 @@ public class UpdateAd extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(String id) {
+    private void uploadImage(Prasang prasang) {
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        long currentTimeMillis = System.currentTimeMillis();
+        List<Media> medias = new LinkedList<>();
         for (int j = 0; j < contenturi.size(); j++) {
-            StorageReference ref = storageReference.child("images").child(id + "/" + j);
+
+            String mediaName = (currentTimeMillis + j) + ".png";
+
+            Media media = new Media();
+            media.setName(mediaName);
+            media.setMimeType(1);   // image
+            medias.add(media);
+
+            StorageReference ref = storageReference.child("images").child(prasang.getLocationId() + "/" + mediaName);
             ref.putFile(contenturi.get(j))
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    .addOnSuccessListener(taskSnapshot -> {
 
-                        }
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                    .addOnFailureListener(e -> Toast.makeText(UpdateAd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        }
+        saveImageInDb(prasang, medias);
+    }
 
-                            Toast.makeText(UpdateAd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+    private void saveImageInDb(Prasang prasang, List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media media = medias.get(i);
+            final int n = i;
+            DbMedia.insert(media, new DbInsertionListener() {
+                @Override
+                public void onSuccess(String id) {
+                    prasang.addMedia(id);
+                    if (n == medias.size() - 1) savePrasangDb(prasang);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    System.out.println(e);
+                }
+            });
         }
     }
 
+    private void savePrasangDb(Prasang prasang) {
+        DbPrasang.insert(prasang, new DbInsertionListener() {
+            @Override
+            public void onSuccess(String id) {
+                System.out.println("prasang saved: " + id);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println(e);
+            }
+        });
+    }
 }

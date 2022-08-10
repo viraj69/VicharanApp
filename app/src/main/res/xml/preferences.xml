@@ -23,7 +23,7 @@
         <Preference
             app:icon="@drawable/addpost"
             app:key="newpost"
-            app:summary="Post new apartment details"
+            app:summary="Post new location details"
             app:title="Add a new post" />
     </PreferenceCategory>
     <PreferenceCategory>

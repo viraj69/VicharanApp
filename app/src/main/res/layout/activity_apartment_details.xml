@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ApartmentDetails">
+    tools:context=".Activity.apartmentDetails.PrasangDetails">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -46,13 +45,23 @@
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/imageslider"
                 android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                android:layout_height="350dp" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Title: "
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/title"
@@ -62,8 +71,7 @@
                     android:layout_marginTop="5dp"
                     android:text="Title"
                     android:textColor="@color/quantum_black_100"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp" />
 
 
             </LinearLayout>
@@ -74,14 +82,94 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Place: "
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="place"
                     android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Des : "
+                    android:textColor="@color/quantum_black_100"
                     android:textSize="25sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="des"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Date : "
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="date"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Sutra : "
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sutra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="sutra"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="20sp" />
             </LinearLayout>
 
 
@@ -91,28 +179,6 @@
                 android:orientation="horizontal">
 
             </LinearLayout>
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tablayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorColor="@android:color/holo_blue_dark"
-                app:tabSelectedTextColor="@android:color/black"
-                app:tabTextColor="@android:color/darker_gray" />
-
-            <view
-                android:id="@+id/viewPager"
-                class="com.example.vicharan.Activity.CustomeViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true" />
-
-            <WebView
-                android:id="@+id/browser2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
 
         </LinearLayout>
 

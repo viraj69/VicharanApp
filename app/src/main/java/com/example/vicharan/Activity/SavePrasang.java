@@ -19,15 +19,19 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.generic.DbInsertionListener;
+import com.example.vicharan.firebase.location.DbLocation;
+import com.example.vicharan.firebase.location.Location;
+import com.example.vicharan.firebase.media.DbMedia;
+import com.example.vicharan.firebase.media.Media;
+import com.example.vicharan.firebase.prasang.DbPrasang;
+import com.example.vicharan.firebase.prasang.Prasang;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.TypeFilter;
@@ -39,23 +43,21 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.TimeZone;
 
 
-public class Postadd extends AppCompatActivity {
+public class SavePrasang extends AppCompatActivity {
 
     public static final int GALLERY_REQUEST_CODE = 105;
     String cityName, address, googlePlaceId;
@@ -196,69 +198,71 @@ public class Postadd extends AppCompatActivity {
                 String date = et_date.getEditText().getText().toString().trim();
 
                 if (title.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please Enter Title", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please Enter Title", Toast.LENGTH_LONG).show();
                     return;
                 } else if (title.length() > 65) {
-                    Toast.makeText(Postadd.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
                     return;
                 } else if (description.length() > 10000) {
-                    Toast.makeText(Postadd.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
                     return;
                 } else if (address == null) {
-                    Toast.makeText(Postadd.this, "Please enter Address ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please enter Address ", Toast.LENGTH_LONG).show();
                     return;
                 } else if (cityName == null) {
-                    Toast.makeText(Postadd.this, "Please select City", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please select City", Toast.LENGTH_LONG).show();
                     return;
                 } else if (country.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please enter Country name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please enter Country name", Toast.LENGTH_LONG).show();
                     return;
                 } else if (photos < 1) {
-                    Toast.makeText(Postadd.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
                 } else {
-                    final ProgressDialog pd = new ProgressDialog(Postadd.this);
-                    pd.setMessage("Loading...");
-                    pd.show();
+
 
                     auth = FirebaseAuth.getInstance();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
-                    String uid = firebaseUser.getUid();
-                    Log.v("tagvv", " " + uid);
+                    String userId = firebaseUser.getUid();
 
-                    Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("userId", uid);
-                    userMap.put("title", title);
-                    userMap.put("description", description);
-                    userMap.put("place", place);
-                    userMap.put("date", date);
-                    userMap.put("sutra", sutra);
-                    userMap.put("country", country);
-                    userMap.put("cityName", cityName);
-                    userMap.put("latitude", latLng.latitude);
-                    userMap.put("longitude", latLng.longitude);
-                    userMap.put("address", address);
-                    userMap.put("googlePlaceId", googlePlaceId);
+                    Location location = new Location();
+                    location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
+                    location.setUserId(userId);
+                    location.setDescription(description);
+                    location.setCountry(country);
+                    location.setCity(cityName);
+                    location.setPlace(place);
+                    location.setGooglePlaceId(googlePlaceId);
+                    location.setAddress(address);
 
-
-                    fstore.collection("Apartment").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-
-                            uploadImage((String) documentReference.getId());
-                            Toast.makeText(Postadd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
-                            pd.dismiss();
-                            finish();
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            String Error = e.getMessage();
-                            Toast.makeText(Postadd.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    Prasang prasang = new Prasang();
+                    prasang.setUserId(userId);
+                    prasang.setTitle(title);
+                    prasang.setSutra(sutra);
+                    prasang.setDescription(description);
+                    prasang.setDate(date);
+                    //prasang.setNotes();
+                    saveLocationDb(location, prasang);
                 }
+            }
+        });
+    }
+
+    private void saveLocationDb(Location location, Prasang prasang) {
+        DbLocation.insert(location, new DbInsertionListener() {
+            @Override
+            public void onSuccess(String locationId) {
+                prasang.setLocationId(locationId);
+                uploadImage(prasang);
+                Toast.makeText(SavePrasang.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
+                //pd.dismiss();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println(e);
+                String Error = e.getMessage();
+                Toast.makeText(SavePrasang.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -289,7 +293,7 @@ public class Postadd extends AppCompatActivity {
 
     private void selectImage() {
         final CharSequence[] options = {"Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(Postadd.this);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(SavePrasang.this);
         builder1.setTitle("Add Photo!");
         builder1.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -311,7 +315,6 @@ public class Postadd extends AppCompatActivity {
         builder1.show();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -322,7 +325,7 @@ public class Postadd extends AppCompatActivity {
 
                 if (clipdata != null) {
                     photos = clipdata.getItemCount();
-                    if (clipdata.getItemCount() > 4) {
+                    if (clipdata.getItemCount() > 10) {
                         Toast.makeText(this, "Please select only four items", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -338,29 +341,60 @@ public class Postadd extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(String id) {
+    private void uploadImage(Prasang prasang) {
         storageReference = FirebaseStorage.getInstance().getReference();
+
+        long currentTimeMillis = System.currentTimeMillis();
+        List<Media> medias = new LinkedList<>();
         for (int j = 0; j < contenturi.size(); j++) {
 
-            StorageReference ref = storageReference.child("images").child(id + "/" + j);
+            String mediaName = (currentTimeMillis + j) + ".png";
+
+            Media media = new Media();
+            media.setName(mediaName);
+            media.setMimeType(1);   // image
+            medias.add(media);
+
+            StorageReference ref = storageReference.child("images").child(prasang.getLocationId() + "/" + mediaName);
             ref.putFile(contenturi.get(j))
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    .addOnSuccessListener(taskSnapshot -> {
 
-                        }
                     })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            Toast.makeText(Postadd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                    .addOnFailureListener(e -> Toast.makeText(SavePrasang.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
         }
-
+        saveImageInDb(prasang, medias);
     }
 
+    private void saveImageInDb(Prasang prasang, List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media media = medias.get(i);
+            final int n = i;
+            DbMedia.insert(media, new DbInsertionListener() {
+                @Override
+                public void onSuccess(String id) {
+                    prasang.addMedia(id);
+                    if (n == medias.size() - 1) savePrasangDb(prasang);
+                }
 
+                @Override
+                public void onFailure(Exception e) {
+                    System.out.println(e);
+                }
+            });
+        }
+    }
+
+    private void savePrasangDb(Prasang prasang) {
+        DbPrasang.insert(prasang, new DbInsertionListener() {
+            @Override
+            public void onSuccess(String id) {
+                System.out.println("prasang saved: " + id);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println(e);
+            }
+        });
+    }
 }

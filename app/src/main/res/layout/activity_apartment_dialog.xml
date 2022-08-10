@@ -24,7 +24,7 @@
         android:layout_marginTop="10dp"
 
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="title"
+        android:text="..."
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
@@ -36,7 +36,7 @@
         android:layout_marginLeft="6dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="Sutra"
+        android:text="..."
         android:textColor="#ff000000"
         android:textSize="18sp" />
 
@@ -48,7 +48,7 @@
         android:layout_marginLeft="6dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
-        android:text="Place"
+        android:text="..."
         android:textColor="#ff000000"
         android:textSize="18sp" />
 

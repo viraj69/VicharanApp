@@ -1,4 +1,4 @@
-package com.example.vicharan.Adapters;
+package com.example.vicharan.Activity.apartmentDetails.adapter;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,22 +12,24 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.vicharan.R;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ViewImagePagerAdapter extends PagerAdapter {
-    FirebaseStorage storage;
-    StorageReference storageReference;
     private final Context context;
-    private ArrayList<Uri> images = new ArrayList<Uri>();
+    private List<Uri> images = new LinkedList<>();
 
 
-    public ViewImagePagerAdapter(Context context, ArrayList<Uri> images) {
+    public ViewImagePagerAdapter(Context context) {
         this.context = context;
         this.images = images;
+    }
+
+    public void addItem(Uri uri) {
+        images.add(uri);
+        notifyDataSetChanged();
     }
 
     @Override

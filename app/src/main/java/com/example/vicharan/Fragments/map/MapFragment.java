@@ -12,8 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.vicharan.Fragments.LocationFragment;
+import com.example.vicharan.Fragments.map.ui.Ui;
 import com.example.vicharan.R;
-import com.example.vicharan.firebase.Apartment.DbApartment;
+import com.example.vicharan.firebase.location.DbLocation;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -29,18 +30,18 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         Places.initialize(getActivity().getApplicationContext(), "AIzaSyDeFuuo_ueSXMlCCQQLUIFgFAs4Xo3ULNg");
+        super.onViewCreated(view, savedInstanceState);
         //PlacesClient placesClient = Places.createClient(getActivity());
         ui.onViewCreated(view);
     }
 
-    private void fetchDbApartments(String country) {
-        ui.clearGoogleMap();
+    private void fetchDbLocations(String country) {
+        ui.getGoogleMapUi().clearGoogleMap();
         if (country == null) {
             country = DefaultCountryName;
         }
-        DbApartment.getByCountryName(country, ui::putApartmentMarkers);
+        DbLocation.getByCountryName(country, locations -> ui.getGoogleMapUi().putMarkers(locations));
     }
 
 
@@ -63,18 +64,18 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
 
     @Override
     public void onLocationAvailable(Location location) {
-        fetchDbApartments(null);
+        fetchDbLocations(null);
     }
 
 
     @Override
     public void onPlaceSelectedWithGoogleAutoComplete(@NonNull Place place) {
-        ui.focusOnMap(place.getLatLng());
+        ui.getGoogleMapUi().focusOnMap(place.getLatLng());
     }
 
     @Override
     protected void onLocationPermissionAvailable() {
-        ui.onLocationEnabled();
+        ui.getGoogleMapUi().onLocationEnabled();
         createFusedLocationClient();
     }
 }

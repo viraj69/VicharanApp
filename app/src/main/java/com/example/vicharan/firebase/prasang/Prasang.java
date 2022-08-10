@@ -2,11 +2,12 @@ package com.example.vicharan.firebase.prasang;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Prasang {
+public class Prasang implements Serializable {
     private String id;
     private String locationId;
     private String userId;

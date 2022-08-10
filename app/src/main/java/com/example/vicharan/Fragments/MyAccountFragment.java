@@ -11,9 +11,9 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.vicharan.Activity.ForgotPassword;
 import com.example.vicharan.Activity.MainActivity;
-import com.example.vicharan.Activity.Postadd;
+import com.example.vicharan.Activity.SavePrasang;
 import com.example.vicharan.Activity.ProfileDetails;
-import com.example.vicharan.PostList;
+import com.example.vicharan.Activity.prasangList.PrasangList;
 import com.example.vicharan.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -79,7 +79,7 @@ public class MyAccountFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                Intent i = new Intent(getActivity(), Postadd.class);
+                Intent i = new Intent(getActivity(), SavePrasang.class);
                 startActivity(i);
                 return true;
             }
@@ -88,7 +88,7 @@ public class MyAccountFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                Intent i = new Intent(getActivity(), PostList.class);
+                Intent i = new Intent(getActivity(), PrasangList.class);
                 startActivity(i);
                 return true;
             }

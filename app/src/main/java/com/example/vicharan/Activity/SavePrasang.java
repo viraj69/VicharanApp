@@ -57,7 +57,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 
-public class Postadd extends AppCompatActivity {
+public class SavePrasang extends AppCompatActivity {
 
     public static final int GALLERY_REQUEST_CODE = 105;
     String cityName, address, googlePlaceId;
@@ -198,29 +198,27 @@ public class Postadd extends AppCompatActivity {
                 String date = et_date.getEditText().getText().toString().trim();
 
                 if (title.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please Enter Title", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please Enter Title", Toast.LENGTH_LONG).show();
                     return;
                 } else if (title.length() > 65) {
-                    Toast.makeText(Postadd.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
                     return;
                 } else if (description.length() > 10000) {
-                    Toast.makeText(Postadd.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
                     return;
                 } else if (address == null) {
-                    Toast.makeText(Postadd.this, "Please enter Address ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please enter Address ", Toast.LENGTH_LONG).show();
                     return;
                 } else if (cityName == null) {
-                    Toast.makeText(Postadd.this, "Please select City", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please select City", Toast.LENGTH_LONG).show();
                     return;
                 } else if (country.isEmpty()) {
-                    Toast.makeText(Postadd.this, "Please enter Country name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please enter Country name", Toast.LENGTH_LONG).show();
                     return;
                 } else if (photos < 1) {
-                    Toast.makeText(Postadd.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SavePrasang.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
                 } else {
-                    final ProgressDialog pd = new ProgressDialog(Postadd.this);
-                    pd.setMessage("Loading...");
-                    pd.show();
+
 
                     auth = FirebaseAuth.getInstance();
                     FirebaseUser firebaseUser = auth.getCurrentUser();
@@ -238,7 +236,7 @@ public class Postadd extends AppCompatActivity {
 
                     Prasang prasang = new Prasang();
                     prasang.setUserId(userId);
-                    //prasang.setTitle();
+                    prasang.setTitle(title);
                     prasang.setSutra(sutra);
                     prasang.setDescription(description);
                     prasang.setDate(date);
@@ -255,7 +253,7 @@ public class Postadd extends AppCompatActivity {
             public void onSuccess(String locationId) {
                 prasang.setLocationId(locationId);
                 uploadImage(prasang);
-                Toast.makeText(Postadd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavePrasang.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
                 //pd.dismiss();
                 finish();
             }
@@ -264,7 +262,7 @@ public class Postadd extends AppCompatActivity {
             public void onFailure(Exception e) {
                 System.out.println(e);
                 String Error = e.getMessage();
-                Toast.makeText(Postadd.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavePrasang.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -295,7 +293,7 @@ public class Postadd extends AppCompatActivity {
 
     private void selectImage() {
         final CharSequence[] options = {"Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(Postadd.this);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(SavePrasang.this);
         builder1.setTitle("Add Photo!");
         builder1.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -317,7 +315,6 @@ public class Postadd extends AppCompatActivity {
         builder1.show();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -328,7 +325,7 @@ public class Postadd extends AppCompatActivity {
 
                 if (clipdata != null) {
                     photos = clipdata.getItemCount();
-                    if (clipdata.getItemCount() > 4) {
+                    if (clipdata.getItemCount() > 10) {
                         Toast.makeText(this, "Please select only four items", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -363,7 +360,7 @@ public class Postadd extends AppCompatActivity {
                     .addOnSuccessListener(taskSnapshot -> {
 
                     })
-                    .addOnFailureListener(e -> Toast.makeText(Postadd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> Toast.makeText(SavePrasang.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
         }
         saveImageInDb(prasang, medias);
     }

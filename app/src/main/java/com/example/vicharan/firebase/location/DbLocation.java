@@ -64,7 +64,7 @@ public class DbLocation {
     }
 
     public static void getByCountryName(String countryName, final DbListCallbackListener<Location> dbListCallbackListener) {
-        db.collection(DbCollectionName).whereEqualTo(Fields.country.Name, countryName).whereEqualTo(Fields.inactive.Name, null).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection(DbCollectionName).whereEqualTo(Fields.country.Name, countryName)/*.whereNotEqualTo(Fields.inactive.Name, true)*/.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {

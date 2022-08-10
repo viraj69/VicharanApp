@@ -20,14 +20,13 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.vicharan.PostList" />
+        <activity android:name="com.example.vicharan.Activity.prasangList.PrasangList" />
         <activity android:name="com.example.vicharan.Activity.UpdateAd" />
-        <activity android:name="com.example.vicharan.Activity.ApartmentDialog" />
-        <activity android:name="com.example.vicharan.Activity.ApartmentDetails" />
+        <activity android:name="com.example.vicharan.Activity.apartmentDetails.PrasangDetails" />
         <activity android:name="com.example.vicharan.Activity.MainActivity" />
         <activity android:name="com.example.vicharan.Activity.ProfileDetails" />
         <activity android:name="com.example.vicharan.Activity.CreateAccount" />
-        <activity android:name="com.example.vicharan.Activity.Postadd" />
+        <activity android:name="com.example.vicharan.Activity.SavePrasang" />
         <activity android:name="com.example.vicharan.Activity.ForgotPassword" />
 
         <meta-data

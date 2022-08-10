@@ -8,7 +8,8 @@ import java.util.Map;
 
 public class Location implements Serializable {
     private String id;
-    private LatLng location;
+    private double lat;
+    private double lng;
     private String userId;
     private String googlePlaceId;
     private String country;
@@ -23,7 +24,8 @@ public class Location implements Serializable {
             Location location = new Location();
 
             location.id = document.getId();
-            location.location = new LatLng((Double) data.get(DbLocation.Fields.latitude.Name), (Double) data.get(DbLocation.Fields.longitude.Name));
+            location.lat = (Double) data.get(DbLocation.Fields.latitude.Name);
+            location.lng = (Double) data.get(DbLocation.Fields.longitude.Name);
             location.userId = (String) data.get(DbLocation.Fields.userId.Name);
             location.googlePlaceId = (String) data.get(DbLocation.Fields.googlePlaceId.Name);
             location.country = (String) data.get(DbLocation.Fields.country.Name);
@@ -43,11 +45,12 @@ public class Location implements Serializable {
     }
 
     public LatLng getLocation() {
-        return location;
+        return new LatLng(lat, lng);
     }
 
     public void setLocation(LatLng location) {
-        this.location = location;
+        this.lat = location.latitude;
+        this.lng = location.longitude;
     }
 
     public String getUserId() {

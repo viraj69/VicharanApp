@@ -70,20 +70,30 @@ public class DbPrasang {
     }
 
     public static void getByLocationId(String locationId, final DbListCallbackListener<Prasang> dbListCallbackListener) {
-        db.collection(DbCollectionName).whereEqualTo(Fields.locationId.Name, locationId)
-                .whereEqualTo(Fields.inactive.Name, null).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<Prasang> list = new LinkedList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                list.add(Prasang.parseDb(document));
-                            }
-                            dbListCallbackListener.onDbListCallback(list);
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+        db.collection(DbCollectionName).whereEqualTo(Fields.locationId.Name, locationId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<Prasang> list = new LinkedList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    list.add(Prasang.parseDb(document));
+                }
+                dbListCallbackListener.onDbListCallback(list);
+            } else {
+                Log.d("TAG", "Error getting documents: ", task.getException());
+            }
+        });
+    }
+
+    public static void getByUserId(String userId, final DbListCallbackListener<Prasang> dbListCallbackListener) {
+        db.collection(DbCollectionName).whereEqualTo(Fields.userId.Name, userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<Prasang> list = new LinkedList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    list.add(Prasang.parseDb(document));
+                }
+                dbListCallbackListener.onDbListCallback(list);
+            } else {
+                Log.d("TAG", "Error getting documents: ", task.getException());
+            }
+        });
     }
 }

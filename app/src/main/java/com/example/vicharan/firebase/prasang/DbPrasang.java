@@ -8,11 +8,13 @@ import com.example.vicharan.firebase.generic.DbCallbackListener;
 import com.example.vicharan.firebase.generic.DbInsertionListener;
 import com.example.vicharan.firebase.generic.DbListCallbackListener;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -56,6 +58,31 @@ public class DbPrasang {
         db.collection(DbCollectionName).add(map)
                 .addOnSuccessListener(documentReference -> dbInsertionListener.onSuccess(documentReference.getId()))
                 .addOnFailureListener(e -> dbInsertionListener.onFailure(e));
+    }
+
+    public static void update(Prasang prasang, OnSuccessListener<Void> onSuccessListener) {
+        if(prasang.getId() == null) {
+            throw new RuntimeException("prasang id is null");
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put(Fields.locationId.Name, prasang.getLocationId());
+        map.put(Fields.userId.Name, prasang.getUserId());
+        map.put(Fields.title.Name, prasang.getTitle());
+        map.put(Fields.sutra.Name, prasang.getSutra());
+        map.put(Fields.description.Name, prasang.getDescription());
+        map.put(Fields.notes.Name, prasang.getNotes());
+        map.put(Fields.date.Name, prasang.getDate());
+
+        if (prasang.getMedia() != null) {
+            Map<String, String> images = new HashMap<>();
+            for (int i = 0; i < prasang.getMedia().size(); i++) {
+                String img = prasang.getMedia().get(i);
+                images.put(i + "", img);
+            }
+            map.put(Fields.media.Name, images);
+        }
+
+        db.collection(DbCollectionName).document(prasang.getId()).set(map).addOnSuccessListener(onSuccessListener);
     }
 
     public static void getById(String id, final DbCallbackListener<Prasang> dbCallbackListener) {

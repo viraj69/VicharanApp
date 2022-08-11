@@ -23,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vicharan.R;
-import com.example.vicharan.firebase.generic.DbInsertionListener;
 import com.example.vicharan.firebase.location.DbLocation;
 import com.example.vicharan.firebase.location.Location;
 import com.example.vicharan.firebase.media.DbMedia;
@@ -43,8 +42,6 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -71,7 +68,6 @@ public class UpdateAd extends AppCompatActivity {
     String cityName, address, googlePlaceId, aptid;
     LatLng latLng;
     FirebaseFirestore fstore;
-    FirebaseAuth auth;
     AutocompleteSupportFragment autocompleteFragment, city;
     ImageView selectedImage1, selectedImage2, selectedImage3, upload, del, rent;
     ImageView[] image;
@@ -266,57 +262,56 @@ public class UpdateAd extends AppCompatActivity {
                     final ProgressDialog pd;
                     pd = new ProgressDialog(UpdateAd.this);
                     pd.setMessage("Loading...");
-                    pd.show();
+                    //pd.show();
 
-                    auth = FirebaseAuth.getInstance();
-                    FirebaseUser firebaseUser = auth.getCurrentUser();
-                    String userId = firebaseUser.getUid();
-
-                    Location location = new Location();
                     location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
-                    location.setUserId(userId);
-                    location.setDescription(description);
                     location.setCountry(country);
                     location.setCity(cityName);
                     location.setPlace(place);
                     location.setGooglePlaceId(googlePlaceId);
                     location.setAddress(address);
 
-                    Prasang prasang = new Prasang();
-                    prasang.setUserId(userId);
-                    //prasang.setTitle();
+                    prasang.setTitle(title);
                     prasang.setSutra(sutra);
                     prasang.setDescription(description);
                     prasang.setDate(date);
                     //prasang.setNotes();
-                    saveLocationDb(location, prasang);
-
+                    updateDbLocationAndDbPrasand(location, prasang);
                 }
 
             }
         });
 
-
     }
 
-    private void saveLocationDb(Location location, Prasang prasang) {
-        DbLocation.insert(location, new DbInsertionListener() {
-            @Override
-            public void onSuccess(String locationId) {
-                prasang.setLocationId(locationId);
-                uploadImage(prasang);
-                Toast.makeText(UpdateAd.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
-                //pd.dismiss();
-                finish();
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                System.out.println(e);
-                String Error = e.getMessage();
-                Toast.makeText(UpdateAd.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
-            }
+    private void updateDbLocationAndDbPrasand(final Location location, final Prasang prasang) {
+        DbLocation.update(location, unused -> {
+            System.out.println("location updated successfully!");
+            onDbLocationUpdatedSuccessfully(location, prasang);
+            //uploadImage(prasang);
+            //pd.dismiss();
+            finish();
         });
+    }
+
+    private void onDbLocationUpdatedSuccessfully(Location location, Prasang prasang) {
+        updateDbPrasang(location, prasang);
+    }
+
+    private void updateDbPrasang(Location location, Prasang prasang) {
+        DbPrasang.update(prasang, unused -> {
+            System.out.println("prasang updated successfully!");
+            Toast.makeText(UpdateAd.this, "Prasang updated Successfully ", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void updateImageInDb(Prasang prasang, List<Media> medias) {
+        for (int i = 0; i < medias.size(); i++) {
+            Media media = medias.get(i);
+            final int n = i;
+            DbMedia.update(media, unused -> {
+            });
+        }
     }
 
     private void getImages() {
@@ -546,39 +541,6 @@ public class UpdateAd extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> Toast.makeText(UpdateAd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
         }
-        saveImageInDb(prasang, medias);
-    }
-
-    private void saveImageInDb(Prasang prasang, List<Media> medias) {
-        for (int i = 0; i < medias.size(); i++) {
-            Media media = medias.get(i);
-            final int n = i;
-            DbMedia.insert(media, new DbInsertionListener() {
-                @Override
-                public void onSuccess(String id) {
-                    prasang.addMedia(id);
-                    if (n == medias.size() - 1) savePrasangDb(prasang);
-                }
-
-                @Override
-                public void onFailure(Exception e) {
-                    System.out.println(e);
-                }
-            });
-        }
-    }
-
-    private void savePrasangDb(Prasang prasang) {
-        DbPrasang.insert(prasang, new DbInsertionListener() {
-            @Override
-            public void onSuccess(String id) {
-                System.out.println("prasang saved: " + id);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                System.out.println(e);
-            }
-        });
+        updateImageInDb(prasang, medias);
     }
 }

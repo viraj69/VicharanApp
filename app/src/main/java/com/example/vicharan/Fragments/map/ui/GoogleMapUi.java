@@ -12,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -32,7 +33,7 @@ public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickL
 
     private void initGoogleMapMarkerIconFactory(Context context) {
         iconFactory = new IconGenerator(context);
-        iconFactory.setBackground(context.getResources().getDrawable(R.drawable.locationpin));
+        iconFactory.setBackground(context.getResources().getDrawable(R.drawable.marker1));
         iconFactory.setTextAppearance(R.style.myStyleText);
     }
 
@@ -47,7 +48,7 @@ public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickL
     public void putMarker(Location location) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.alpha(1.0f);
-        //markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(place)));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon()));
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
         markerOptions.position(location.getLocation());
         Marker marker = googleMap.addMarker(markerOptions);

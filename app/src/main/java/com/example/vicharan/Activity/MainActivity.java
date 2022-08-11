@@ -16,6 +16,7 @@ import com.example.vicharan.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
     final Fragment profile = new ProfileFragment();
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.nav_view);
+
+        FirebaseFirestore.setLoggingEnabled(true);
+
         auth = FirebaseAuth.getInstance();
 
         final FragmentManager fm = getSupportFragmentManager();

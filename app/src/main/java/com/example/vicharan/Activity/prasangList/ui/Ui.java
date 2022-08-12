@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vicharan.Activity.prasangList.adapter.PrasangListAdapter;
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.prasang.DbPrasang;
 import com.example.vicharan.generic.UiService;
 
 import java.util.LinkedList;
@@ -52,9 +53,9 @@ public class Ui implements UiService {
     public void onClick(View view) {
     }
 
-    public void setList(List<PrasangListItemUi.LocationPrasangPair> prasangList) {
+    public void setList(List<DbPrasang.LocationPrasangPair> prasangList) {
         List<PrasangListItemUi> prasangListItemUis = new LinkedList<>();
-        for (PrasangListItemUi.LocationPrasangPair locationPrasangPair : prasangList) {
+        for (DbPrasang.LocationPrasangPair locationPrasangPair : prasangList) {
             prasangListItemUis.add(new PrasangListItemUi(locationPrasangPair, appCompatActivity, prasangClickListener));
         }
         postlistAdapter.setData(prasangListItemUis);

@@ -1,4 +1,4 @@
-package com.example.vicharan.Activity.apartmentDetails.adapter;
+package com.example.vicharan.Activity.prasangDetails.adapter;
 
 import android.content.Context;
 import android.net.Uri;

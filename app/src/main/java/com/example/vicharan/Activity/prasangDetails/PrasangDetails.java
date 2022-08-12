@@ -1,4 +1,4 @@
-package com.example.vicharan.Activity.apartmentDetails;
+package com.example.vicharan.Activity.prasangDetails;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,14 +8,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.vicharan.Activity.apartmentDetails.adapter.ViewImagePagerAdapter;
+import com.example.vicharan.Activity.prasangDetails.adapter.ViewImagePagerAdapter;
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.FirebaseUtils;
 import com.example.vicharan.firebase.location.Location;
 import com.example.vicharan.firebase.media.DbMedia;
 import com.example.vicharan.firebase.media.Media;
 import com.example.vicharan.firebase.prasang.Prasang;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 public class PrasangDetails extends AppCompatActivity {
     private static final String LOCATION_INTENT_KEY = "location";
@@ -23,8 +22,6 @@ public class PrasangDetails extends AppCompatActivity {
     private static final String MEDIA_INTENT_KEY = "media";
 
     private TextView title, place, des, date, sutra;
-
-    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private ViewImagePagerAdapter viewImagePagerAdapter;
 
     private Location location;
@@ -63,17 +60,16 @@ public class PrasangDetails extends AppCompatActivity {
 
         loadLocation(location);
         loadPrasang(prasang);
-        getImages(location, prasang);
+        getImages(prasang);
     }
 
-    private void getImages(final Location location, final Prasang prasang) {
+    private void getImages(final Prasang prasang) {
         for (String mediaId : prasang.getMedia()) {
             DbMedia.getById(mediaId, (Media media) -> {
                 if (media == null) return;
-                String firebaseStringPath = "images/" + location.getId() + "/" + media.getName();
-                storageReference.child(firebaseStringPath).getDownloadUrl()
-                        .addOnSuccessListener(viewImagePagerAdapter::addItem)
-                        .addOnFailureListener(exception -> System.out.println("Error downloading media file: " + exception.getMessage()));
+                FirebaseUtils.loadImage(prasang.getId(), media.getName(), viewImagePagerAdapter::addItem, e -> {
+                    System.out.println("Error downloading media file: " + e.getMessage());
+                });
             });
         }
     }

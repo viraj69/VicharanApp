@@ -1,4 +1,4 @@
-package com.example.vicharan.Activity;
+package com.example.vicharan.Activity.updatePrasang;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -23,6 +23,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.FirebaseUtils;
+import com.example.vicharan.firebase.generic.DbInsertionListener;
 import com.example.vicharan.firebase.location.DbLocation;
 import com.example.vicharan.firebase.location.Location;
 import com.example.vicharan.firebase.media.DbMedia;
@@ -34,6 +36,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.AddressComponents;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -57,7 +60,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TimeZone;
 
-public class UpdateAd extends AppCompatActivity {
+public class UpdatePrasang extends AppCompatActivity {
     private static final String LOCATION_INTENT_KEY = "location";
     private static final String PRASANG_INTENT_KEY = "prasang";
     public static final int GALLERY_REQUEST_CODE = 105;
@@ -78,7 +81,7 @@ public class UpdateAd extends AppCompatActivity {
     private TextInputLayout et_title, et_des, et_place, et_date, et_sutra, et_country;
 
     public static void startActivity(AppCompatActivity caller, Location location, Prasang prasang) {
-        Intent i = new Intent(caller, UpdateAd.class);
+        Intent i = new Intent(caller, UpdatePrasang.class);
         i.putExtra("id", location.getId()); // TODO: delete later
         i.putExtra(LOCATION_INTENT_KEY, location);
         i.putExtra(PRASANG_INTENT_KEY, prasang);
@@ -169,6 +172,8 @@ public class UpdateAd extends AppCompatActivity {
                 latLng = place.getLatLng();
                 address = place.getName();
                 googlePlaceId = place.getId();
+                AddressComponents addressComponent = place.getAddressComponents();
+                System.out.println(addressComponent);
             }
 
             @Override
@@ -208,7 +213,7 @@ public class UpdateAd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final CharSequence[] options = {"Delete", "Cancel"};
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(UpdateAd.this);
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(UpdatePrasang.this);
                 builder1.setTitle("Delete Post");
                 builder1.setItems(options, new DialogInterface.OnClickListener() {
                     @Override
@@ -224,84 +229,87 @@ public class UpdateAd extends AppCompatActivity {
 
             }
         });
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectImage();
+        upload.setOnClickListener(view -> selectImage());
+
+        btn_postad.setOnClickListener(view -> {
+            fstore = FirebaseFirestore.getInstance();
+
+            final String title = et_title.getEditText().getText().toString().trim();
+            final String description = et_des.getEditText().getText().toString().trim();
+            final String place = et_place.getEditText().getText().toString().trim();
+            String sutra = et_sutra.getEditText().getText().toString().trim();
+            String country = et_country.getEditText().getText().toString().trim();
+            String date = et_date.getEditText().getText().toString().trim();
+
+
+            if (title.isEmpty()) {
+                Toast.makeText(UpdatePrasang.this, "Please Enter Title", Toast.LENGTH_LONG).show();
+            } else if (title.length() > 65) {
+                Toast.makeText(UpdatePrasang.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
+            } else if (description.length() > 10000) {
+                Toast.makeText(UpdatePrasang.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
+            } else if (address == null) {
+                Toast.makeText(UpdatePrasang.this, "Please enter Address ", Toast.LENGTH_LONG).show();
+            } else if (cityName == null) {
+                Toast.makeText(UpdatePrasang.this, "Please select City", Toast.LENGTH_LONG).show();
+            } else if (country.isEmpty()) {
+                Toast.makeText(UpdatePrasang.this, "Please enter Country name ", Toast.LENGTH_LONG).show();
+            } else if (photos < 1) {
+                Toast.makeText(UpdatePrasang.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
+            } else {
+                final ProgressDialog pd;
+                pd = new ProgressDialog(UpdatePrasang.this);
+                pd.setMessage("Loading...");
+                //pd.show();
+
+                location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
+                location.setCountry(country);
+                location.setCity(cityName);
+                location.setPlace(place);
+                location.setGooglePlaceId(googlePlaceId);
+                location.setAddress(address);
+
+                prasang.setTitle(title);
+                prasang.setSutra(sutra);
+                prasang.setDescription(description);
+                prasang.setDate(date);
+
+                upsertLocationAndUpdatePrasang(location, prasang);
             }
         });
+    }
 
-        btn_postad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fstore = FirebaseFirestore.getInstance();
-
-                final String title = et_title.getEditText().getText().toString().trim();
-                final String description = et_des.getEditText().getText().toString().trim();
-                final String place = et_place.getEditText().getText().toString().trim();
-                String sutra = et_sutra.getEditText().getText().toString().trim();
-                String country = et_country.getEditText().getText().toString().trim();
-                String date = et_date.getEditText().getText().toString().trim();
-
-
-                if (title.isEmpty()) {
-                    Toast.makeText(UpdateAd.this, "Please Enter Title", Toast.LENGTH_LONG).show();
-                } else if (title.length() > 65) {
-                    Toast.makeText(UpdateAd.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
-                } else if (description.length() > 10000) {
-                    Toast.makeText(UpdateAd.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
-                } else if (address == null) {
-                    Toast.makeText(UpdateAd.this, "Please enter Address ", Toast.LENGTH_LONG).show();
-                } else if (cityName == null) {
-                    Toast.makeText(UpdateAd.this, "Please select City", Toast.LENGTH_LONG).show();
-                } else if (country.isEmpty()) {
-                    Toast.makeText(UpdateAd.this, "Please enter Country name ", Toast.LENGTH_LONG).show();
-                } else if (photos < 1) {
-                    Toast.makeText(UpdateAd.this, "Please Select atleast 1 photo", Toast.LENGTH_LONG).show();
-                } else {
-                    final ProgressDialog pd;
-                    pd = new ProgressDialog(UpdateAd.this);
-                    pd.setMessage("Loading...");
-                    //pd.show();
-
-                    location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
-                    location.setCountry(country);
-                    location.setCity(cityName);
-                    location.setPlace(place);
-                    location.setGooglePlaceId(googlePlaceId);
-                    location.setAddress(address);
-
-                    prasang.setTitle(title);
-                    prasang.setSutra(sutra);
-                    prasang.setDescription(description);
-                    prasang.setDate(date);
-                    //prasang.setNotes();
-                    updateDbLocationAndDbPrasand(location, prasang);
-                }
-
+    private void upsertLocationAndUpdatePrasang(final Location location, final Prasang prasang) {
+        DbLocation.getByGooglePlaceId(location.getGooglePlaceId(), loc -> {
+            if (loc == null) {
+                insertNewDbLocationAndSaveUpdatedPrasang(location, prasang);
+            } else {
+                prasang.setLocationId(loc.getId());
+                updateDbPrasang(prasang);
             }
         });
-
     }
 
-    private void updateDbLocationAndDbPrasand(final Location location, final Prasang prasang) {
-        DbLocation.update(location, unused -> {
-            System.out.println("location updated successfully!");
-            onDbLocationUpdatedSuccessfully(location, prasang);
-            //uploadImage(prasang);
-            //pd.dismiss();
-            finish();
+    private void insertNewDbLocationAndSaveUpdatedPrasang(Location location, final Prasang prasang) {
+        DbLocation.insert(location, new DbInsertionListener() {
+            @Override
+            public void onSuccess(String id) {
+                prasang.setLocationId(id);
+                updateDbPrasang(prasang);
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                System.out.println("Error saving location: " + e.getMessage());
+            }
         });
     }
 
-    private void onDbLocationUpdatedSuccessfully(Location location, Prasang prasang) {
-        updateDbPrasang(location, prasang);
-    }
-
-    private void updateDbPrasang(Location location, Prasang prasang) {
+    private void updateDbPrasang(Prasang prasang) {
         DbPrasang.update(prasang, unused -> {
             System.out.println("prasang updated successfully!");
-            Toast.makeText(UpdateAd.this, "Prasang updated Successfully ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdatePrasang.this, "Prasang updated Successfully ", Toast.LENGTH_SHORT).show();
+            finish();
         });
     }
 
@@ -369,7 +377,7 @@ public class UpdateAd extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         deleteImages();
                         Log.d("tagvv", "DocumentSnapshot successfully deleted!");
-                        Toast.makeText(UpdateAd.this, "Post Deleted Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdatePrasang.this, "Post Deleted Successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 })
@@ -390,6 +398,7 @@ public class UpdateAd extends AppCompatActivity {
         et_place.getEditText().setText(location.getPlace());
         autocompleteFragment.setText(location.getAddress());
         city.setText(location.getCity());
+        et_country.getEditText().setText(location.getCountry());
     }
 
     private void loadPrasang(Prasang prasang) {
@@ -443,7 +452,7 @@ public class UpdateAd extends AppCompatActivity {
 
     private void selectImage() {
         final CharSequence[] options = {"Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(UpdateAd.this);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(UpdatePrasang.this);
         builder1.setTitle("Add Photo!");
         builder1.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -521,8 +530,6 @@ public class UpdateAd extends AppCompatActivity {
     }
 
     private void uploadImage(Prasang prasang) {
-        storageReference = FirebaseStorage.getInstance().getReference();
-
         long currentTimeMillis = System.currentTimeMillis();
         List<Media> medias = new LinkedList<>();
         for (int j = 0; j < contenturi.size(); j++) {
@@ -534,12 +541,9 @@ public class UpdateAd extends AppCompatActivity {
             media.setMimeType(1);   // image
             medias.add(media);
 
-            StorageReference ref = storageReference.child("images").child(prasang.getLocationId() + "/" + mediaName);
-            ref.putFile(contenturi.get(j))
-                    .addOnSuccessListener(taskSnapshot -> {
-
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(UpdateAd.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            FirebaseUtils.saveImage(prasang.getId(), mediaName, contenturi.get(j), null, e -> {
+                Toast.makeText(UpdatePrasang.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
         }
         updateImageInDb(prasang, medias);
     }

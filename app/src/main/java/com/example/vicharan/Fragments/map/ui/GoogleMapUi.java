@@ -19,10 +19,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-    private final  OnMarkerClickListener onMarkerClickListener;
+    private final OnMarkerClickListener onMarkerClickListener;
 
     private GoogleMap googleMap;
     private IconGenerator iconFactory;
@@ -45,10 +45,10 @@ public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickL
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
     }
 
-    public void putMarker(Location location) {
+    public void putMarker(Location location, Integer count) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.alpha(1.0f);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon()));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("" + (count == null ? 0 : count))));
         markerOptions.anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
         markerOptions.position(location.getLocation());
         Marker marker = googleMap.addMarker(markerOptions);
@@ -56,8 +56,10 @@ public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickL
         marker.setTitle("vvv");
     }
 
-    public void putMarkers(List<Location> locations) {
-        for (Location location : locations) putMarker(location);
+    public void putMarkers(HashMap<Location, Integer> locationPrasangCountHashmap) {
+        for (Location location : locationPrasangCountHashmap.keySet()) {
+            putMarker(location, locationPrasangCountHashmap.get(location));
+        }
     }
 
     public void clearGoogleMap() {

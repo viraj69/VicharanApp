@@ -9,12 +9,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vicharan.R;
-import com.example.vicharan.firebase.location.Location;
-import com.example.vicharan.firebase.prasang.Prasang;
+import com.example.vicharan.firebase.prasang.DbPrasang;
 import com.example.vicharan.generic.UiService;
 
 public class PrasangListItemUi implements UiService {
-    private final LocationPrasangPair locationPrasangPair;
+    private final DbPrasang.LocationPrasangPair locationPrasangPair;
     private final AppCompatActivity activity;
     private final OnPrasangClickListener prasangClickListener;
     private final PrasangMediaUi prasangMediaUi;
@@ -23,14 +22,14 @@ public class PrasangListItemUi implements UiService {
     private TextView sutra;
     private TextView title;
 
-    public PrasangListItemUi(LocationPrasangPair locationPrasangPair, AppCompatActivity activity, OnPrasangClickListener prasangClickListener) {
+    public PrasangListItemUi(DbPrasang.LocationPrasangPair locationPrasangPair, AppCompatActivity activity, OnPrasangClickListener prasangClickListener) {
         this.locationPrasangPair = locationPrasangPair;
         this.activity = activity;
         this.prasangClickListener = prasangClickListener;
         prasangMediaUi = new PrasangMediaUi(locationPrasangPair.getPrasang());
     }
 
-    public LocationPrasangPair getLocationPrasangPair() {
+    public DbPrasang.LocationPrasangPair getLocationPrasangPair() {
         return locationPrasangPair;
     }
 
@@ -70,21 +69,4 @@ public class PrasangListItemUi implements UiService {
         void onPrasangClick(PrasangListItemUi prasangListItemUi);
     }
 
-    public static class LocationPrasangPair {
-        private final Location location;
-        private final Prasang prasang;
-
-        public LocationPrasangPair(Location location, Prasang prasang) {
-            this.location = location;
-            this.prasang = prasang;
-        }
-
-        public Location getLocation() {
-            return location;
-        }
-
-        public Prasang getPrasang() {
-            return prasang;
-        }
-    }
 }

@@ -21,12 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.vicharan.Activity.prasangList.PrasangList" />
-        <activity android:name="com.example.vicharan.Activity.UpdateAd" />
-        <activity android:name="com.example.vicharan.Activity.apartmentDetails.PrasangDetails" />
+        <activity android:name="com.example.vicharan.Activity.updatePrasang.UpdatePrasang" />
+        <activity android:name="com.example.vicharan.Activity.prasangDetails.PrasangDetails" />
         <activity android:name="com.example.vicharan.Activity.MainActivity" />
         <activity android:name="com.example.vicharan.Activity.ProfileDetails" />
         <activity android:name="com.example.vicharan.Activity.CreateAccount" />
-        <activity android:name="com.example.vicharan.Activity.SavePrasang" />
+        <activity android:name="com.example.vicharan.Activity.savePrasang.SavePrasang" />
         <activity android:name="com.example.vicharan.Activity.ForgotPassword" />
 
         <meta-data

@@ -43,7 +43,7 @@ public class PrasangMediaUi implements UiService {
         String firstMediaId = prasang.getMedia().get(0);
         DbMedia.getById(firstMediaId, (Media media) -> {
             if (media == null) return;
-            FirebaseUtils.loadImage(prasang.getLocationId(), media.getName(), this::showImage, this::onErrorLoadingImage);
+            FirebaseUtils.loadImage(prasang.getId(), media.getName(), this::showImage, this::onErrorLoadingImage);
         });
     }
 

@@ -14,16 +14,17 @@ import androidx.annotation.Nullable;
 import com.example.vicharan.Fragments.LocationFragment;
 import com.example.vicharan.Fragments.map.ui.Ui;
 import com.example.vicharan.R;
-import com.example.vicharan.firebase.location.DbLocation;
+import com.example.vicharan.firebase.prasang.DbPrasang;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 
-public class MapFragment extends LocationFragment implements Ui.UiListener, LocationCallbackWrapper.LocationCallbackListener {
-    private static final String DefaultCountryName = "Canada";
+import java.util.HashMap;
+import java.util.List;
 
+public class MapFragment extends LocationFragment implements Ui.UiListener, LocationCallbackWrapper.LocationCallbackListener {
     private final Ui ui = new Ui(this, this);
 
     private FusedLocationProviderClient mFusedLocationClient;
@@ -35,15 +36,6 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
         //PlacesClient placesClient = Places.createClient(getActivity());
         ui.onViewCreated(view);
     }
-
-    private void fetchDbLocations(String country) {
-        ui.getGoogleMapUi().clearGoogleMap();
-        if (country == null) {
-            country = DefaultCountryName;
-        }
-        DbLocation.getByCountryName(country, locations -> ui.getGoogleMapUi().putMarkers(locations));
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,8 +55,28 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        DbPrasang.getAllWithLocation((List<DbPrasang.LocationPrasangPair> locationPrasangPairList) -> {
+
+            HashMap<com.example.vicharan.firebase.location.Location, Integer> locationsPrasangCountHashmap = new HashMap<>();
+
+            for (DbPrasang.LocationPrasangPair locationPrasangPair : locationPrasangPairList) {
+                Integer prasangCount = locationsPrasangCountHashmap.get(locationPrasangPair.getLocation());
+                if (prasangCount == null) {
+                    prasangCount = 1;
+                } else {
+                    prasangCount++;
+                }
+                locationsPrasangCountHashmap.put(locationPrasangPair.getLocation(), prasangCount);
+            }
+            ui.getGoogleMapUi().putMarkers(locationsPrasangCountHashmap);
+        });
+    }
+
+    @Override
     public void onLocationAvailable(Location location) {
-        fetchDbLocations(null);
+
     }
 
 

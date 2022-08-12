@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.vicharan.Activity.apartmentDetails.PrasangDetails;
+import com.example.vicharan.Activity.prasangDetails.PrasangDetails;
 import com.example.vicharan.R;
 import com.example.vicharan.firebase.FirebaseUtils;
 import com.example.vicharan.firebase.location.DbLocation;
@@ -74,15 +74,15 @@ public class PrasangDialog {
         Picasso.get().load(uri).fit().into(image);
     }
 
-    private void fetchImage(String locationId, String mediaName) {
-        FirebaseUtils.loadImage(locationId, mediaName, this::loadImage, e -> {
+    private void fetchImage(String prasangId, String mediaName) {
+        FirebaseUtils.loadImage(prasangId, mediaName, this::loadImage, e -> {
         });
     }
 
-    private void fetchMedia(final Location location, Prasang prasang) {
+    private void fetchMedia(final Location location, final Prasang prasang) {
         DbMedia.getById(prasang.getMedia().get(0), (Media media) -> {
             if (media == null) return;
-            fetchImage(location.getId(), media.getName());
+            fetchImage(prasang.getId(), media.getName());
             initPrasangDialoagNextClickListener(location, prasang, media);
         });
     }

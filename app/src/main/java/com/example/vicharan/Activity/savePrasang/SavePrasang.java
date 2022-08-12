@@ -1,10 +1,9 @@
-package com.example.vicharan.Activity;
+package com.example.vicharan.Activity.savePrasang;
 
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.FirebaseUtils;
 import com.example.vicharan.firebase.generic.DbInsertionListener;
 import com.example.vicharan.firebase.location.DbLocation;
 import com.example.vicharan.firebase.location.Location;
@@ -44,16 +44,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.TimeZone;
 
 
@@ -67,8 +64,7 @@ public class SavePrasang extends AppCompatActivity {
     AutocompleteSupportFragment autocompleteFragment, city;
     ImageView selectedImage1, selectedImage2, selectedImage3, upload;
     ImageView[] image;
-    StorageReference storageReference;
-    ArrayList<Uri> contenturi = new ArrayList<Uri>();
+    ArrayList<Uri> contenturi = new ArrayList<>();
     private TextInputLayout et_title, et_des, et_place, et_date, et_sutra, et_country;
     int photos = 0;
 
@@ -241,28 +237,32 @@ public class SavePrasang extends AppCompatActivity {
                     prasang.setDescription(description);
                     prasang.setDate(date);
                     //prasang.setNotes();
-                    saveLocationDb(location, prasang);
+                    upsertDbLocation(location, prasang);
                 }
             }
         });
     }
 
-    private void saveLocationDb(Location location, Prasang prasang) {
-        DbLocation.insert(location, new DbInsertionListener() {
-            @Override
-            public void onSuccess(String locationId) {
-                prasang.setLocationId(locationId);
-                uploadImage(prasang);
-                Toast.makeText(SavePrasang.this, " Post added Successfully ", Toast.LENGTH_SHORT).show();
-                //pd.dismiss();
-                finish();
-            }
+    private void upsertDbLocation(Location location, Prasang prasang) {
+        DbLocation.getByGooglePlaceId(location.getGooglePlaceId(), (Location loc) -> {
+            if(loc == null) {
+                DbLocation.insert(location, new DbInsertionListener() {
+                    @Override
+                    public void onSuccess(String locationId) {
+                        prasang.setLocationId(locationId);
+                        saveDbMediaAndDbPrasangAndUploadImage(prasang);
+                    }
 
-            @Override
-            public void onFailure(Exception e) {
-                System.out.println(e);
-                String Error = e.getMessage();
-                Toast.makeText(SavePrasang.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onFailure(Exception e) {
+                        System.out.println("error saving location: " + e.getMessage());
+                        String Error = e.getMessage();
+                        Toast.makeText(SavePrasang.this, " Error:" + Error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                prasang.setLocationId(loc.getId());
+                saveDbMediaAndDbPrasangAndUploadImage(prasang);
             }
         });
     }
@@ -341,60 +341,58 @@ public class SavePrasang extends AppCompatActivity {
         }
     }
 
-    private void uploadImage(Prasang prasang) {
-        storageReference = FirebaseStorage.getInstance().getReference();
-
+    private void saveDbMediaAndDbPrasangAndUploadImage(Prasang prasang) {
         long currentTimeMillis = System.currentTimeMillis();
-        List<Media> medias = new LinkedList<>();
+
+        final HashMap<Uri, Media> medias = new HashMap<>();
+
         for (int j = 0; j < contenturi.size(); j++) {
+            final int n = j;
 
             String mediaName = (currentTimeMillis + j) + ".png";
-
             Media media = new Media();
             media.setName(mediaName);
             media.setMimeType(1);   // image
-            medias.add(media);
+            medias.put(contenturi.get(j), media);
 
-            StorageReference ref = storageReference.child("images").child(prasang.getLocationId() + "/" + mediaName);
-            ref.putFile(contenturi.get(j))
-                    .addOnSuccessListener(taskSnapshot -> {
-
-                    })
-                    .addOnFailureListener(e -> Toast.makeText(SavePrasang.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show());
-        }
-        saveImageInDb(prasang, medias);
-    }
-
-    private void saveImageInDb(Prasang prasang, List<Media> medias) {
-        for (int i = 0; i < medias.size(); i++) {
-            Media media = medias.get(i);
-            final int n = i;
             DbMedia.insert(media, new DbInsertionListener() {
                 @Override
                 public void onSuccess(String id) {
                     prasang.addMedia(id);
-                    if (n == medias.size() - 1) savePrasangDb(prasang);
+                    if (n == medias.size() - 1) saveDbPrasangAndUploadImages(prasang, medias);
                 }
 
                 @Override
                 public void onFailure(Exception e) {
-                    System.out.println(e);
+                    System.out.println("error saving DbMedia record: " + e);
                 }
             });
         }
     }
 
-    private void savePrasangDb(Prasang prasang) {
+    private void saveDbPrasangAndUploadImages(Prasang prasang, final HashMap<Uri, Media> medias) {
         DbPrasang.insert(prasang, new DbInsertionListener() {
             @Override
-            public void onSuccess(String id) {
-                System.out.println("prasang saved: " + id);
+            public void onSuccess(String prasangId) {
+                System.out.println("DbPrasang saved: " + prasangId);
+                uploadImages(prasangId, medias);
+                Toast.makeText(SavePrasang.this, "Prasang added Successfully", Toast.LENGTH_SHORT).show();
+                //pd.dismiss();
+                finish();
             }
 
             @Override
             public void onFailure(Exception e) {
-                System.out.println(e);
+                System.out.println("error saving DbPrasang record: " + e);
             }
         });
+    }
+
+    private void uploadImages(String prasangId, HashMap<Uri, Media> medias) {
+        for (Uri uri : medias.keySet()) {
+            FirebaseUtils.saveImage(prasangId, medias.get(uri).getName(), uri, null, e -> {
+                Toast.makeText(SavePrasang.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
+        }
     }
 }

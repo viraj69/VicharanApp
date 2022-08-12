@@ -4,6 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.19844124700239807" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/ic_baseline_filter_list_24.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/prabodhswamiji_background.xml" value="0.118" />
         <entry key="app/src/main/res/layout/activity_apartment_details.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_apartment_dialog.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_contact.xml" value="0.4180253623188406" />
@@ -29,6 +35,8 @@
         <entry key="app/src/main/res/layout/row_thebuilding.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/row_theunit.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.118" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/prabodhswamiji.xml" value="0.118" />
         <entry key="app/src/main/res/xml/preferences.xml" value="0.2598958333333333" />
       </map>
     </option>

@@ -13,8 +13,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -72,7 +70,7 @@ complaintsRef.whereEqualTo("id", 5).get().addOnCompleteListener(new OnCompleteLi
     * */
 
     public static void update(Location location, OnSuccessListener<Void> onSuccessListener) {
-        if(location.getId() == null) {
+        if (location.getId() == null) {
             throw new RuntimeException("location id is null");
         }
         Map<String, Object> userMap = new HashMap<>();
@@ -89,8 +87,6 @@ complaintsRef.whereEqualTo("id", 5).get().addOnCompleteListener(new OnCompleteLi
         db.collection(DbCollectionName).document(location.getId()).set(userMap).addOnSuccessListener(onSuccessListener);
     }
 
-
-
     public static void getById(String id, final DbCallbackListener<Location> dbCallbackListener) {
         db.collection(DbCollectionName).document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -102,19 +98,30 @@ complaintsRef.whereEqualTo("id", 5).get().addOnCompleteListener(new OnCompleteLi
         });
     }
 
-    public static void getByCountryName(String countryName, final DbListCallbackListener<Location> dbListCallbackListener) {
-        db.collection(DbCollectionName).whereEqualTo(Fields.country.Name, countryName)/*.whereNotEqualTo(Fields.inactive.Name, true)*/.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<Location> list = new LinkedList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        list.add(Location.parseDb(document));
-                    }
-                    dbListCallbackListener.onDbListCallback(list);
-                } else {
-                    Log.d("TAG", "Error getting documents: ", task.getException());
+    public static void getByGooglePlaceId(String googlePlaceId, final DbCallbackListener<Location> dbCallbackListener) {
+        db.collection(DbCollectionName).whereEqualTo(Fields.googlePlaceId.Name, googlePlaceId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (task.getResult().size() > 0) {
+                    dbCallbackListener.onDbCallback(Location.parseDb(task.getResult().getDocuments().get(0)));
+                    return;
                 }
+            } else {
+                Log.d("TAG", "Error getting documents by googlePlaceId: ", task.getException());
+            }
+            dbCallbackListener.onDbCallback(null);
+        });
+    }
+
+    public static void getByCountryName(String countryName, final DbListCallbackListener<Location> dbListCallbackListener) {
+        db.collection(DbCollectionName).whereEqualTo(Fields.country.Name, countryName)/*.whereNotEqualTo(Fields.inactive.Name, true)*/.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<Location> list = new LinkedList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    list.add(Location.parseDb(document));
+                }
+                dbListCallbackListener.onDbListCallback(list);
+            } else {
+                Log.d("TAG", "Error getting documents: ", task.getException());
             }
         });
     }

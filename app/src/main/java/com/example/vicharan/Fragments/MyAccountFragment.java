@@ -11,7 +11,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.vicharan.Activity.ForgotPassword;
 import com.example.vicharan.Activity.MainActivity;
-import com.example.vicharan.Activity.SavePrasang;
+import com.example.vicharan.Activity.savePrasang.SavePrasang;
 import com.example.vicharan.Activity.ProfileDetails;
 import com.example.vicharan.Activity.prasangList.PrasangList;
 import com.example.vicharan.R;

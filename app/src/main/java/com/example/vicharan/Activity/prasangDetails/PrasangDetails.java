@@ -13,6 +13,7 @@ import com.example.vicharan.R;
 import com.example.vicharan.firebase.prasang.DbPrasang;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class PrasangDetails extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class PrasangDetails extends AppCompatActivity {
         setContentView(R.layout.activity_prasang_details);
         parseIntent();
         viewPager = findViewById(R.id.view_pager);
+        Collections.shuffle(locationPrasangPairList);
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), locationPrasangPairList);
         viewPager.setAdapter(pagerAdapter);
     }

@@ -20,6 +20,7 @@ import com.example.vicharan.firebase.prasang.DbPrasang;
 import com.example.vicharan.firebase.prasang.Prasang;
 import com.squareup.picasso.Picasso;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class PrasangDialog {
@@ -52,9 +53,9 @@ public class PrasangDialog {
         showDialog();
     }
 
-    private void initPrasangDialoagNextClickListener(final Location location, final Prasang prasang, final Media media) {
+    private void initPrasangDialoagNextClickListener(final Location location, final Prasang prasang, final Media media, LinkedList<DbPrasang.LocationPrasangPair> locationPrasangPairs) {
         ImageView next = prasangDialog.findViewById(R.id.btn_dialog);
-        next.setOnClickListener(v -> PrasangDetails.startActivity(activity, location, prasang, media));
+        next.setOnClickListener(v -> PrasangDetails.startActivity(activity, locationPrasangPairs));
     }
 
     private void loadLocation(Location location) {
@@ -79,11 +80,11 @@ public class PrasangDialog {
         });
     }
 
-    private void fetchMedia(final Location location, final Prasang prasang) {
+    private void fetchMedia(final Location location, final Prasang prasang, LinkedList<DbPrasang.LocationPrasangPair> locationPrasangPairs) {
         DbMedia.getById(prasang.getMedia().get(0), (Media media) -> {
             if (media == null) return;
             fetchImage(prasang.getId(), media.getName());
-            initPrasangDialoagNextClickListener(location, prasang, media);
+            initPrasangDialoagNextClickListener(location, prasang, media, locationPrasangPairs);
         });
     }
 
@@ -96,7 +97,11 @@ public class PrasangDialog {
             Prasang prasang = prasangs.get(0);
             loadLocation(location);
             loadPrasang(prasang);
-            fetchMedia(location, prasang);
+
+            LinkedList<DbPrasang.LocationPrasangPair> locationPrasangPairs = new LinkedList<>();
+            for (Prasang p : prasangs)
+                locationPrasangPairs.add(new DbPrasang.LocationPrasangPair(location, p));
+            fetchMedia(location, prasang, locationPrasangPairs);
         });
     }
 

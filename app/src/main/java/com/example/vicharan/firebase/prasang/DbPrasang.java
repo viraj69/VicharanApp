@@ -16,6 +16,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -190,7 +191,7 @@ public class DbPrasang {
         }
     }
 
-    public static class LocationPrasangPair {
+    public static class LocationPrasangPair implements Serializable {
         private Location location;
         private final Prasang prasang;
 

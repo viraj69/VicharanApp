@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_post_list.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_postadd.xml" value="0.24389051808406648" />
+        <entry key="app/src/main/res/layout/activity_prasang_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_profile_details.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/activity_update_ad.xml" value="0.2190982776089159" />
@@ -27,7 +28,11 @@
         <entry key="app/src/main/res/layout/custom_layout.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/fragment_page1.xml" value="0.39809782608695654" />
+        <entry key="app/src/main/res/layout/fragment_page2.xml" value="0.39809782608695654" />
+        <entry key="app/src/main/res/layout/fragment_page3.xml" value="0.39809782608695654" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.4180253623188406" />
+        <entry key="app/src/main/res/layout/fragment_viewpager.xml" value="0.39809782608695654" />
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.4180253623188406" />
         <entry key="app/src/main/res/layout/postlist_item.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/row_accessibility.xml" value="0.4180253623188406" />
@@ -46,5 +51,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

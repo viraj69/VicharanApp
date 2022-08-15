@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.vicharan.Fragments.MyAccountFragment;
 import com.example.vicharan.Fragments.ProfileFragment;
 import com.example.vicharan.Fragments.map.MapFragment;

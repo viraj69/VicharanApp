@@ -1,6 +1,6 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
-    <!-- This means match_parent -->
-    <dimen name="prasang_overlay_width">-1dp</dimen>
+    <dimen name="prasang_overlay_width">500dp</dimen>
+
 </resources>

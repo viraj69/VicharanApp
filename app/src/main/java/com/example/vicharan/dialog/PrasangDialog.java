@@ -2,8 +2,11 @@ package com.example.vicharan.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -32,13 +35,13 @@ public class PrasangDialog {
         prasangDialog = new Dialog(activity);
         prasangDialog.requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         prasangDialog.setCancelable(true);
-        prasangDialog.setContentView(R.layout.activity_apartment_dialog);
+        prasangDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        prasangDialog.setContentView(R.layout.c_prasang_overlay);
         Window window = prasangDialog.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
 
         wlp.gravity = Gravity.BOTTOM;
         wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        wlp.width = WindowManager.LayoutParams.MATCH_PARENT;
         wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         wlp.y = 150;
         window.setAttributes(wlp);
@@ -54,7 +57,7 @@ public class PrasangDialog {
     }
 
     private void initPrasangDialoagNextClickListener(final Location location, final Prasang prasang, final Media media, LinkedList<DbPrasang.LocationPrasangPair> locationPrasangPairs) {
-        ImageView next = prasangDialog.findViewById(R.id.btn_dialog);
+        View next = prasangDialog.findViewById(R.id.root);
         next.setOnClickListener(v -> PrasangDetails.startActivity(activity, locationPrasangPairs));
     }
 

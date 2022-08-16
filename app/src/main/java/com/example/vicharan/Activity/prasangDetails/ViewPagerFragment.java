@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import com.chahinem.pageindicator.PageIndicator;
 import com.example.vicharan.Activity.prasangDetails.adapter.ViewImagePagerAdapter;
 import com.example.vicharan.R;
 import com.example.vicharan.firebase.FirebaseUtils;
@@ -24,6 +25,8 @@ public class ViewPagerFragment extends Fragment {
     private DbPrasang.LocationPrasangPair locationPrasangPair;
 
     private TextView title, place, des, date, sutra;
+    private ViewPager imageViewPager;
+    private PageIndicator pageIndicator;
     private ViewImagePagerAdapter viewImagePagerAdapter;
 
     public void setData(DbPrasang.LocationPrasangPair locationPrasangPair) {
@@ -41,7 +44,7 @@ public class ViewPagerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_viewpager, container, false);
+        return inflater.inflate(R.layout.fragment_prasang_detail, container, false);
     }
 
     @Override
@@ -51,9 +54,11 @@ public class ViewPagerFragment extends Fragment {
         des = view.findViewById(R.id.des);
         date = view.findViewById(R.id.date);
         sutra = view.findViewById(R.id.sutra);
-        ViewPager imageViewPager = view.findViewById(R.id.imageslider);
+        imageViewPager = view.findViewById(R.id.imageslider);
+        imageViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         viewImagePagerAdapter = new ViewImagePagerAdapter(getActivity());
         imageViewPager.setAdapter(viewImagePagerAdapter);
+        pageIndicator = view.findViewById(R.id.pageIndicator);
 
         loadLocation(locationPrasangPair.getLocation());
         loadPrasang(locationPrasangPair.getPrasang());
@@ -61,10 +66,14 @@ public class ViewPagerFragment extends Fragment {
     }
 
     private void getImages(final Prasang prasang) {
-        for (String mediaId : prasang.getMedia()) {
+        for (int i = 0; i < prasang.getMedia().size(); i++) {
+            String mediaId = prasang.getMedia().get(i);
             DbMedia.getById(mediaId, (Media media) -> {
                 if (media == null) return;
-                FirebaseUtils.loadImage(prasang.getId(), media.getName(), viewImagePagerAdapter::addItem, e -> {
+                FirebaseUtils.loadImage(prasang.getId(), media.getName(), (item) -> {
+                    viewImagePagerAdapter.addItem(item);
+                    pageIndicator.attachTo(imageViewPager);
+                }, e -> {
                     System.out.println("Error downloading media file: " + e.getMessage());
                 });
             });

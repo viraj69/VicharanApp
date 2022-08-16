@@ -6,43 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="0dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:background="#FB8C00">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="55dp"
-            android:src="@drawable/logo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Vicharan"
-            android:textColor="#ffffff"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/delete"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:src="@drawable/trash" />
-
-        <ImageView
-            android:id="@+id/rent"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:tooltipText="" />
-
-    </androidx.appcompat.widget.Toolbar>
-
+    <include layout="@layout/generic_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,7 +20,7 @@
 
 
             <ImageView
-                android:id="@+id/updateImage"
+                android:id="@+id/uploadImage"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
@@ -64,7 +28,7 @@
                 android:src="@drawable/uploadnew" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/titleUpdate"
+                android:id="@+id/title"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,7 +47,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/desUpdate"
+                android:id="@+id/des"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,7 +68,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/placeUpdate"
+                android:id="@+id/place"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -124,7 +88,7 @@
                 android:orientation="horizontal">
 
                 <fragment
-                    android:id="@+id/location_fragmentUpdate"
+                    android:id="@+id/location_fragment"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -132,7 +96,7 @@
                     android:layout_marginTop="5dp" />
 
                 <fragment
-                    android:id="@+id/cityUpdate"
+                    android:id="@+id/city"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -149,7 +113,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/dateUpdate"
+                    android:id="@+id/date"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
@@ -165,7 +129,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/calenderUpdate"
+                    android:id="@+id/calender"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
@@ -180,7 +144,7 @@
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sutraUpdate"
+                android:id="@+id/sutra"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,7 +159,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/countryUpdate"
+                android:id="@+id/country"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,7 +173,6 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <Button
                 android:id="@+id/post_ad"
                 style="@style/Widget.AppCompat.Button"
@@ -221,8 +184,7 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#3cb6d3"
                 android:singleLine="true"
-                android:text="Update" />
-
+                android:text="Post Ad" />
 
         </LinearLayout>
 

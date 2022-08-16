@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialoglayout"
-    android:layout_width="match_parent"
+    android:id="@+id/root"
+    android:layout_width="@dimen/prasang_overlay_width"
     android:layout_height="wrap_content"
-
+    android:background="@drawable/layout_bg"
     android:clickable="true"
     android:orientation="vertical">
 
@@ -22,10 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="10dp"
-
         android:layout_toRightOf="@+id/dialogimage"
         android:text="..."
-        android:textColor="#ff000000"
+        android:textColor="@color/txtWithBg1"
         android:textSize="18sp" />
 
     <TextView
@@ -37,7 +36,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
         android:text="..."
-        android:textColor="#ff000000"
+        android:textColor="@color/txtWithBg1"
         android:textSize="18sp" />
 
     <TextView
@@ -49,21 +48,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
         android:text="..."
-        android:textColor="#ff000000"
+        android:textColor="@color/txtWithBg1"
         android:textSize="18sp" />
-
-    <ImageView
-        android:id="@+id/btn_dialog"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_below="@+id/title"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="20dp"
-        android:layout_toRightOf="@id/place1"
-        android:src="@drawable/next"
-        android:text="More Details"
-
-        />
 
 </RelativeLayout>

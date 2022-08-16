@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -35,7 +34,6 @@
         android:layout_below="@+id/postlist_title"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="3dp"
-
         android:layout_toRightOf="@+id/postlist_image"
         android:text="Sutra"
         android:textColor="#ff000000"
@@ -49,8 +47,6 @@
         android:layout_below="@+id/postlist_sutra"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="3dp"
-
-
         android:layout_toRightOf="@+id/postlist_image"
         android:text="place"
         android:textColor="#ff000000"
@@ -61,7 +57,7 @@
         android:layout_height="1dp"
         android:layout_below="@+id/postlist_place"
         android:layout_marginTop="20dp"
-        android:background="#FB8C00" />
+        android:background="@color/colorPrimary" />
 
 
 </RelativeLayout>

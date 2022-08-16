@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,7 @@ import java.util.List;
 public class ViewImagePagerAdapter extends PagerAdapter {
     private final Context context;
     private List<Uri> images = new LinkedList<>();
+    Animation animZoomIn;
 
 
     public ViewImagePagerAdapter(Context context) {
@@ -45,11 +48,14 @@ public class ViewImagePagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
-
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.custom_layout, null);
+        View view = layoutInflater.inflate(R.layout.prasang_img, null);
         ImageView imageView = view.findViewById(R.id.img1);
+        animZoomIn = AnimationUtils.loadAnimation(context.getApplicationContext(),
+                R.anim.zoom_in);
         Picasso.get().load(images.get(position)).into(imageView);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.startAnimation(animZoomIn);
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view);
         return view;

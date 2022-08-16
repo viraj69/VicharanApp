@@ -22,7 +22,7 @@ public class PrasangList extends AppCompatActivity implements PrasangListItemUi.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_list);
+        setContentView(R.layout.activity_prasang_list);
         getUi().onViewCreated(null);
         init();
     }

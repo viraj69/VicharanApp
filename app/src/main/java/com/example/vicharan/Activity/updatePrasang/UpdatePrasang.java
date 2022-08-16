@@ -98,7 +98,7 @@ public class UpdatePrasang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_ad);
+        setContentView(R.layout.activity_update_prasang);
         parseIntent();
 
         et_title = findViewById(R.id.titleUpdate);

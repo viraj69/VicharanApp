@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.vicharan.R;
 import com.example.vicharan.firebase.location.Location;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
@@ -24,10 +26,13 @@ import java.util.HashMap;
 public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private final OnMarkerClickListener onMarkerClickListener;
 
+    private final Fragment fragment;
+
     private GoogleMap googleMap;
     private IconGenerator iconFactory;
 
-    public GoogleMapUi(OnMarkerClickListener onMarkerClickListener) {
+    public GoogleMapUi(Fragment fragment, OnMarkerClickListener onMarkerClickListener) {
+        this.fragment = fragment;
         this.onMarkerClickListener = onMarkerClickListener;
     }
 
@@ -71,10 +76,11 @@ public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickL
         this.googleMap = googleMap;
         this.googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        this.googleMap.setMapStyle(new MapStyleOptions(fragment.getActivity().getResources().getString(R.string.style_json)));
         this.googleMap.setMaxZoomPreference(50);
         this.googleMap.setMinZoomPreference(3);
 
-        double bottomCordinate = 41.232345;
+        double bottomCordinate = 40.232345;
         double leftCordinate = -129.216371;
         double topCordinate = 62.341938;
         double rightCordinate = -55.564033;

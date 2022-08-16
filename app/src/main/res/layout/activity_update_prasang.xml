@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
-        android:background="#FB8C00">
+        android:background="@color/colorPrimary">
 
         <ImageView
             android:layout_width="50dp"
@@ -26,6 +26,20 @@
             android:textColor="#ffffff"
             android:textSize="28sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:src="@drawable/trash" />
+
+        <ImageView
+            android:id="@+id/rent"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:tooltipText="" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -42,7 +56,7 @@
 
 
             <ImageView
-                android:id="@+id/uploadImage"
+                android:id="@+id/updateImage"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
@@ -50,7 +64,7 @@
                 android:src="@drawable/uploadnew" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/title"
+                android:id="@+id/titleUpdate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +83,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/des"
+                android:id="@+id/desUpdate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +104,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/place"
+                android:id="@+id/placeUpdate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,7 +124,7 @@
                 android:orientation="horizontal">
 
                 <fragment
-                    android:id="@+id/location_fragment"
+                    android:id="@+id/location_fragmentUpdate"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -118,7 +132,7 @@
                     android:layout_marginTop="5dp" />
 
                 <fragment
-                    android:id="@+id/city"
+                    android:id="@+id/cityUpdate"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -135,7 +149,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/date"
+                    android:id="@+id/dateUpdate"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
@@ -151,7 +165,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/calender"
+                    android:id="@+id/calenderUpdate"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
@@ -166,7 +180,7 @@
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/sutra"
+                android:id="@+id/sutraUpdate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,7 +195,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/country"
+                android:id="@+id/countryUpdate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,6 +209,7 @@
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <Button
                 android:id="@+id/post_ad"
                 style="@style/Widget.AppCompat.Button"
@@ -206,7 +221,8 @@
                 android:layout_marginRight="10dp"
                 android:backgroundTint="#3cb6d3"
                 android:singleLine="true"
-                android:text="Post Ad" />
+                android:text="Update" />
+
 
         </LinearLayout>
 

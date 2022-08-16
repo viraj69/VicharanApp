@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.chahinem.pageindicator.PageIndicator;
 import com.example.vicharan.Activity.prasangDetails.adapter.ViewPagerAdapter;
 import com.example.vicharan.R;
 import com.example.vicharan.firebase.prasang.DbPrasang;
@@ -37,6 +38,7 @@ public class PrasangDetails extends AppCompatActivity {
         setContentView(R.layout.activity_prasang_details);
         parseIntent();
         viewPager = findViewById(R.id.view_pager);
+        viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         Collections.shuffle(locationPrasangPairList);
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), locationPrasangPairList);
         viewPager.setAdapter(pagerAdapter);

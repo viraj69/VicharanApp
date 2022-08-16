@@ -31,7 +31,7 @@ public class Ui implements PlaceSelectionListener, GoogleMapUi.OnMarkerClickList
     public Ui(MapFragment fragment, UiListener uiListener) {
         this.fragment = fragment;
         this.uiListener = uiListener;
-        googleMapUi = new GoogleMapUi(this);
+        googleMapUi = new GoogleMapUi(fragment, this);
     }
 
     public GoogleMapUi getGoogleMapUi() {

@@ -53,7 +53,7 @@ public class PrasangListAdapter extends RecyclerView.Adapter<PrasangListAdapter.
     @NonNull
     @Override
     public PrasangListAdapter.PostListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.postlist_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.prasanglist_item, parent, false);
         return new PrasangListAdapter.PostListViewHolder(view);
     }
 

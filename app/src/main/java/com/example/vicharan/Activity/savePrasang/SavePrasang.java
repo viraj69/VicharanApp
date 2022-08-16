@@ -71,7 +71,7 @@ public class SavePrasang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_postadd);
+        setContentView(R.layout.activity_save_prasang);
 
         et_title = findViewById(R.id.title);
         et_des = findViewById(R.id.des);
@@ -325,8 +325,8 @@ public class SavePrasang extends AppCompatActivity {
 
                 if (clipdata != null) {
                     photos = clipdata.getItemCount();
-                    if (clipdata.getItemCount() > 10) {
-                        Toast.makeText(this, "Please select only four items", Toast.LENGTH_SHORT).show();
+                    if (clipdata.getItemCount() > 20) {
+                        Toast.makeText(this, "Please select only Twenty items", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     for (int i = 0; i < clipdata.getItemCount(); i++) {

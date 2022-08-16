@@ -35,7 +35,7 @@ public class PrasangListItemUi implements UiService {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return LayoutInflater.from(activity).inflate(R.layout.postlist_item, container, false);
+        return LayoutInflater.from(activity).inflate(R.layout.prasanglist_item, container, false);
     }
 
     @Override

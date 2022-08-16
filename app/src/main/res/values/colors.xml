@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FB8C00</color>
-    <color name="colorPrimaryDark">#FB8C00</color>
+    <color name="colorPrimary">#FFB74D</color>
+    <color name="colorPrimaryDark">#FFA726</color>
     <color name="colorAccent">#FFB74D</color>
+    <!--<color name="colorPrimary">#A31519</color>
+    <color name="colorPrimaryDark">#A31519</color>
+    <color name="colorAccent">#A31519</color>-->
 
-    <color name="simpletooltip_background">@color/colorPrimary</color>
-    <color name="simpletooltip_text">@android:color/primary_text_light</color>
-    <color name="simpletooltip_arrow">@color/colorPrimary</color>
+    <color name="toolbarColor">@color/colorPrimary</color>
+
+    <color name="lightBg1">#FFE0B2</color>
+    <color name="txtWithBg1">#1D1D1D</color>
+    <color name="lightBg2">#FFCCBC</color>
 </resources>

@@ -25,10 +25,12 @@ import com.example.vicharan.R;
 import com.example.vicharan.firebase.FirebaseUtils;
 import com.example.vicharan.firebase.generic.DbInsertionListener;
 import com.example.vicharan.firebase.location.DbLocation;
+import com.example.vicharan.firebase.location.GenericLocation;
 import com.example.vicharan.firebase.location.Location;
 import com.example.vicharan.firebase.media.DbMedia;
 import com.example.vicharan.firebase.media.Media;
 import com.example.vicharan.firebase.prasang.DbPrasang;
+import com.example.vicharan.firebase.prasang.GenericPrasang;
 import com.example.vicharan.firebase.prasang.Prasang;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
@@ -224,19 +226,23 @@ public class SavePrasang extends AppCompatActivity {
                     location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
                     location.setUserId(userId);
                     location.setDescription(description);
-                    location.setCountry(country);
-                    location.setCity(cityName);
-                    location.setPlace(place);
                     location.setGooglePlaceId(googlePlaceId);
                     location.setAddress(address);
+                    GenericLocation englishVersionLocation = new GenericLocation();
+                    englishVersionLocation.setCountry(country);
+                    englishVersionLocation.setCity(cityName);
+                    englishVersionLocation.setPlace(place);
+                    location.setEnglishVersion(englishVersionLocation);
 
                     Prasang prasang = new Prasang();
                     prasang.setUserId(userId);
-                    prasang.setTitle(title);
-                    prasang.setSutra(sutra);
-                    prasang.setDescription(description);
                     prasang.setDate(date);
                     //prasang.setNotes();
+                    GenericPrasang englishVersionPrasang = new GenericPrasang();
+                    englishVersionPrasang.setTitle(title);
+                    englishVersionPrasang.setSutra(sutra);
+                    englishVersionPrasang.setDescription(description);
+                    prasang.setEnglishVersion(englishVersionPrasang);
                     upsertDbLocation(location, prasang);
                 }
             }
@@ -245,7 +251,7 @@ public class SavePrasang extends AppCompatActivity {
 
     private void upsertDbLocation(Location location, Prasang prasang) {
         DbLocation.getByGooglePlaceId(location.getGooglePlaceId(), (Location loc) -> {
-            if(loc == null) {
+            if (loc == null) {
                 DbLocation.insert(location, new DbInsertionListener() {
                     @Override
                     public void onSuccess(String locationId) {

@@ -2,7 +2,7 @@
     android:id="@+id/root"
     android:layout_width="@dimen/prasang_overlay_width"
     android:layout_height="wrap_content"
-    android:background="@drawable/layout_bg"
+    android:background="@drawable/gradient_gray"
     android:clickable="true"
     android:orientation="vertical">
 
@@ -20,35 +20,35 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/dialogimage"
         android:text="..."
         android:textColor="@color/txtWithBg1"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/place1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/dialogimage"
-        android:text="..."
-        android:textColor="@color/txtWithBg1"
-        android:textSize="18sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/sutra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/place1"
-        android:layout_marginLeft="6dp"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/dialogimage"
         android:text="..."
-        android:textColor="@color/txtWithBg1"
-        android:textSize="18sp" />
+        android:textColor="@color/txtLightWithBg1"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/place1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sutra"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@+id/dialogimage"
+        android:text="..."
+        android:textColor="@color/txtLightWithBg1"
+        android:textSize="16sp" />
 
 </RelativeLayout>

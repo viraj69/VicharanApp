@@ -1,14 +1,17 @@
 package com.example.vicharan.Fragments.map.ui;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.vicharan.Fragments.map.MapFragment;
+import com.example.vicharan.GlobalApplication;
 import com.example.vicharan.R;
 import com.example.vicharan.dialog.PrasangDialog;
 import com.google.android.gms.common.api.Status;
@@ -21,11 +24,13 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 
 import java.util.Arrays;
 
-public class Ui implements PlaceSelectionListener, GoogleMapUi.OnMarkerClickListener {
+public class Ui implements PlaceSelectionListener, GoogleMapUi.OnMarkerClickListener, View.OnClickListener {
     private final MapFragment fragment;
     private final UiListener uiListener;
     private final GoogleMapUi googleMapUi;
 
+    private TextView lbl_eng_language;
+    private TextView lbl_guj_language;
     private AutocompleteSupportFragment autocompleteFragment;
 
     public Ui(MapFragment fragment, UiListener uiListener) {
@@ -39,6 +44,9 @@ public class Ui implements PlaceSelectionListener, GoogleMapUi.OnMarkerClickList
     }
 
     public void onViewCreated(View v) {
+        (lbl_eng_language = v.findViewById(R.id.lbl_eng_language)).setOnClickListener(this);
+        (lbl_guj_language = v.findViewById(R.id.lbl_guj_language)).setOnClickListener(this);
+
         getGoogleMapUi().onViewCreated(v);
         SupportMapFragment mapFrag = (SupportMapFragment) fragment.getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFrag == null) {
@@ -83,6 +91,36 @@ public class Ui implements PlaceSelectionListener, GoogleMapUi.OnMarkerClickList
         PrasangDialog prasangDialog = new PrasangDialog(fragment.getActivity());
         prasangDialog.loadDataAndShowDialog(locationId);
         return true;
+    }
+
+    private void selectEnglishLanguage() {
+        GlobalApplication.getInstance().setGujaratiLanguageSelected(false);
+        Resources res = fragment.getActivity().getResources();
+        lbl_guj_language.setBackground(res.getDrawable(R.drawable.no_selection_border));
+        lbl_guj_language.setTextColor(res.getColor(R.color.black2));
+        lbl_eng_language.setBackground(res.getDrawable(R.drawable.selection_border));
+        lbl_eng_language.setTextColor(res.getColor(R.color.white1));
+    }
+
+    private void selectGujaratiLanguage() {
+        GlobalApplication.getInstance().setGujaratiLanguageSelected(true);
+        Resources res = fragment.getActivity().getResources();
+        lbl_guj_language.setBackground(res.getDrawable(R.drawable.selection_border));
+        lbl_guj_language.setTextColor(res.getColor(R.color.white1));
+        lbl_eng_language.setBackground(res.getDrawable(R.drawable.no_selection_border));
+        lbl_eng_language.setTextColor(res.getColor(R.color.black2));
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.lbl_eng_language:
+                selectEnglishLanguage();
+                break;
+            case R.id.lbl_guj_language:
+                selectGujaratiLanguage();
+                break;
+        }
     }
 
     public interface UiListener {

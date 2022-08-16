@@ -6,11 +6,15 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.19844124700239807" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.118" />
         <entry key="app/src/main/res/drawable-v24/layout_bg.xml" value="0.2655" />
+        <entry key="app/src/main/res/drawable/bg_shadow.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/gradient_gray.xml" value="0.22" />
         <entry key="app/src/main/res/drawable/ic_baseline_filter_list_24.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/no_selection_border.xml" value="0.4015" />
         <entry key="app/src/main/res/drawable/prabodhswamiji_background.xml" value="0.118" />
+        <entry key="app/src/main/res/drawable/selection_border.xml" value="0.4015" />
         <entry key="app/src/main/res/layout-w720dp/fragment_prasang_detail.xml" value="0.2927321668909825" />
         <entry key="app/src/main/res/layout/activity_apartment_details.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_apartment_dialog.xml" value="0.2598958333333333" />
@@ -35,7 +39,7 @@
         <entry key="app/src/main/res/layout/c_prasang_overlay.xml" value="0.10187449062754686" />
         <entry key="app/src/main/res/layout/custom_layout.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_page1.xml" value="0.39809782608695654" />
         <entry key="app/src/main/res/layout/fragment_page2.xml" value="0.39809782608695654" />
         <entry key="app/src/main/res/layout/fragment_page3.xml" value="0.39809782608695654" />

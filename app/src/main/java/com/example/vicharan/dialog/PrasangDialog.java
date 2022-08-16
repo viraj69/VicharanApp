@@ -2,8 +2,6 @@ package com.example.vicharan.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.Gravity;
 import android.view.View;
@@ -13,13 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vicharan.Activity.prasangDetails.PrasangDetails;
+import com.example.vicharan.GlobalApplication;
 import com.example.vicharan.R;
 import com.example.vicharan.firebase.FirebaseUtils;
 import com.example.vicharan.firebase.location.DbLocation;
+import com.example.vicharan.firebase.location.GenericLocation;
 import com.example.vicharan.firebase.location.Location;
 import com.example.vicharan.firebase.media.DbMedia;
 import com.example.vicharan.firebase.media.Media;
 import com.example.vicharan.firebase.prasang.DbPrasang;
+import com.example.vicharan.firebase.prasang.GenericPrasang;
 import com.example.vicharan.firebase.prasang.Prasang;
 import com.squareup.picasso.Picasso;
 
@@ -35,8 +36,8 @@ public class PrasangDialog {
         prasangDialog = new Dialog(activity);
         prasangDialog.requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
         prasangDialog.setCancelable(true);
-        prasangDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         prasangDialog.setContentView(R.layout.c_prasang_overlay);
+        prasangDialog.getWindow().setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.gradient_gray));
         Window window = prasangDialog.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
 
@@ -61,12 +62,12 @@ public class PrasangDialog {
         next.setOnClickListener(v -> PrasangDetails.startActivity(activity, locationPrasangPairs));
     }
 
-    private void loadLocation(Location location) {
+    private void loadLocation(GenericLocation location) {
         TextView place = prasangDialog.findViewById(R.id.place1);
         place.setText(location.getPlace());
     }
 
-    private void loadPrasang(Prasang prasang) {
+    private void loadPrasang(GenericPrasang prasang) {
         TextView title = prasangDialog.findViewById(R.id.title);
         title.setText(prasang.getTitle());
         TextView sutra = prasangDialog.findViewById(R.id.sutra);
@@ -98,8 +99,15 @@ public class PrasangDialog {
                 return;
             }
             Prasang prasang = prasangs.get(0);
-            loadLocation(location);
-            loadPrasang(prasang);
+
+            boolean isGujaratiLanguageSelected = GlobalApplication.getInstance().isGujaratiLanguageSelected();
+            if (isGujaratiLanguageSelected) {
+                loadLocation(location.getGujaratiVersion());
+                loadPrasang(prasang.getGujaratiVersion());
+            } else {
+                loadLocation(location.getEnglishVersion());
+                loadPrasang(prasang.getEnglishVersion());
+            }
 
             LinkedList<DbPrasang.LocationPrasangPair> locationPrasangPairs = new LinkedList<>();
             for (Prasang p : prasangs)

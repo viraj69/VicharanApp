@@ -11,5 +11,11 @@
 
     <color name="lightBg1">#FFE0B2</color>
     <color name="txtWithBg1">#1D1D1D</color>
+    <color name="txtLightWithBg1">#3D3D3D</color>
     <color name="lightBg2">#FFCCBC</color>
+
+    <color name="white1">#FFFFFF</color>
+    <color name="white2">#DDDDDD</color>
+    <color name="black1">#000000</color>
+    <color name="black2">#3D3D3D</color>
 </resources>

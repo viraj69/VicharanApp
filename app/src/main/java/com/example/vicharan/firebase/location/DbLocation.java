@@ -26,7 +26,7 @@ public class DbLocation {
     public enum Fields {
         id("id"), userId("userId"), googlePlaceId("googlePlaceId"),
         country("country"), city("city"), place("place"), address("address"), description("description"),
-        latitude("latitude"), longitude("longitude"), inactive("inactive");
+        latitude("latitude"), longitude("longitude"), inactive("inactive"), guj("guj"), eng("eng");
 
         public String Name;
 
@@ -39,9 +39,30 @@ public class DbLocation {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put(Fields.userId.Name, location.getUserId());
         userMap.put(Fields.googlePlaceId.Name, location.getGooglePlaceId());
-        userMap.put(Fields.country.Name, location.getCountry());
-        userMap.put(Fields.city.Name, location.getCity());
-        userMap.put(Fields.place.Name, location.getPlace());
+
+        {
+            // TODO: delete below 3 - as it is just used for backward compatibility
+            userMap.put(Fields.country.Name, location.getEnglishVersion().getCountry());
+            userMap.put(Fields.city.Name, location.getEnglishVersion().getCity());
+            userMap.put(Fields.place.Name, location.getEnglishVersion().getPlace());
+        }
+
+        if (location.getEnglishVersion() != null) {
+            Map<String, Object> englishVersion = new HashMap<>();
+            englishVersion.put(Fields.country.Name, location.getEnglishVersion().getCountry());
+            englishVersion.put(Fields.city.Name, location.getEnglishVersion().getCity());
+            englishVersion.put(Fields.place.Name, location.getEnglishVersion().getPlace());
+            userMap.put(Fields.eng.Name, englishVersion);
+        }
+
+        if (location.getGujaratiVersion() != null) {
+            Map<String, Object> gujaratiVersion = new HashMap<>();
+            gujaratiVersion.put(Fields.country.Name, location.getEnglishVersion().getCountry());
+            gujaratiVersion.put(Fields.city.Name, location.getEnglishVersion().getCity());
+            gujaratiVersion.put(Fields.place.Name, location.getEnglishVersion().getPlace());
+            userMap.put(Fields.guj.Name, gujaratiVersion);
+        }
+
         userMap.put(Fields.address.Name, location.getAddress());
         userMap.put(Fields.description.Name, location.getDescription());
         userMap.put(Fields.latitude.Name, location.getLocation().latitude);
@@ -76,9 +97,32 @@ complaintsRef.whereEqualTo("id", 5).get().addOnCompleteListener(new OnCompleteLi
         Map<String, Object> userMap = new HashMap<>();
         userMap.put(Fields.userId.Name, location.getUserId());
         userMap.put(Fields.googlePlaceId.Name, location.getGooglePlaceId());
-        userMap.put(Fields.country.Name, location.getCountry());
-        userMap.put(Fields.city.Name, location.getCity());
-        userMap.put(Fields.place.Name, location.getPlace());
+
+        {
+            // TODO: delete below 3 - as it is just used for backward compatibility
+            userMap.put(Fields.country.Name, location.getEnglishVersion().getCountry());
+            userMap.put(Fields.city.Name, location.getEnglishVersion().getCity());
+            userMap.put(Fields.place.Name, location.getEnglishVersion().getPlace());
+        }
+
+        // updating english version
+        if (location.getEnglishVersion() != null) {
+            Map<String, Object> englishVersion = new HashMap<>();
+            englishVersion.put(Fields.country.Name, location.getEnglishVersion().getCountry());
+            englishVersion.put(Fields.city.Name, location.getEnglishVersion().getCity());
+            englishVersion.put(Fields.place.Name, location.getEnglishVersion().getPlace());
+            userMap.put(Fields.eng.Name, englishVersion);
+        }
+
+        if (location.getGujaratiVersion() != null) {
+            // updating gujarati version
+            Map<String, Object> gujaratiVersion = new HashMap<>();
+            gujaratiVersion.put(Fields.country.Name, location.getGujaratiVersion().getCountry());
+            gujaratiVersion.put(Fields.city.Name, location.getGujaratiVersion().getCity());
+            gujaratiVersion.put(Fields.place.Name, location.getGujaratiVersion().getPlace());
+            userMap.put(Fields.eng.Name, gujaratiVersion);
+        }
+
         userMap.put(Fields.address.Name, location.getAddress());
         userMap.put(Fields.description.Name, location.getDescription());
         userMap.put(Fields.latitude.Name, location.getLocation().latitude);

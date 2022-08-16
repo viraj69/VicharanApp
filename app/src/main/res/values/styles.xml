@@ -24,4 +24,9 @@
 
     <style name="simpletooltip_default" parent="@android:style/TextAppearance.Medium"></style>>
 
+    <style name="AppCompatAlertDialogStyle" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@drawable/bg_shadow</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
 </resources>

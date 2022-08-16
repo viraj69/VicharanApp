@@ -27,7 +27,6 @@ public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickL
     private final OnMarkerClickListener onMarkerClickListener;
 
     private final Fragment fragment;
-
     private GoogleMap googleMap;
     private IconGenerator iconFactory;
 

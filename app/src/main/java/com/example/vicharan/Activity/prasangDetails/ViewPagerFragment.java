@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.chahinem.pageindicator.PageIndicator;
 import com.example.vicharan.Activity.prasangDetails.adapter.ViewImagePagerAdapter;
+import com.example.vicharan.GlobalApplication;
 import com.example.vicharan.R;
 import com.example.vicharan.firebase.FirebaseUtils;
 import com.example.vicharan.firebase.location.Location;
@@ -81,13 +82,25 @@ public class ViewPagerFragment extends Fragment {
     }
 
     private void loadLocation(Location location) {
-        place.setText(location.getPlace());
+        boolean isGujaratiLanguageSelected = GlobalApplication.getInstance().isGujaratiLanguageSelected();
+        if (isGujaratiLanguageSelected) {
+            place.setText(location.getGujaratiVersion().getPlace());
+        } else {
+            place.setText(location.getEnglishVersion().getPlace());
+        }
     }
 
     private void loadPrasang(Prasang prasang) {
-        title.setText(prasang.getTitle());
-        des.setText(prasang.getDescription());
         date.setText(prasang.getDate());
-        sutra.setText(prasang.getSutra());
+        boolean isGujaratiLanguageSelected = GlobalApplication.getInstance().isGujaratiLanguageSelected();
+        if (isGujaratiLanguageSelected) {
+            title.setText(prasang.getGujaratiVersion().getTitle());
+            des.setText(prasang.getGujaratiVersion().getDescription());
+            sutra.setText(prasang.getGujaratiVersion().getSutra());
+        } else {
+            title.setText(prasang.getEnglishVersion().getTitle());
+            des.setText(prasang.getEnglishVersion().getDescription());
+            sutra.setText(prasang.getEnglishVersion().getSutra());
+        }
     }
 }

@@ -8,8 +8,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.vicharan.GlobalApplication;
 import com.example.vicharan.R;
+import com.example.vicharan.firebase.location.GenericLocation;
 import com.example.vicharan.firebase.prasang.DbPrasang;
+import com.example.vicharan.firebase.prasang.GenericPrasang;
 import com.example.vicharan.generic.UiService;
 
 public class PrasangListItemUi implements UiService {
@@ -49,10 +52,24 @@ public class PrasangListItemUi implements UiService {
 
     @Override
     public void init() {
-        title.setText(locationPrasangPair.getPrasang().getTitle());
-        sutra.setText(locationPrasangPair.getPrasang().getSutra());
-        place.setText(locationPrasangPair.getLocation().getPlace());
+        boolean isGujaratiLanguageSelected = GlobalApplication.getInstance().isGujaratiLanguageSelected();
+        if (isGujaratiLanguageSelected) {
+            loadPrasang(locationPrasangPair.getPrasang().getGujaratiVersion());
+            loadLocation(locationPrasangPair.getLocation().getGujaratiVersion());
+        } else {
+            loadPrasang(locationPrasangPair.getPrasang().getEnglishVersion());
+            loadLocation(locationPrasangPair.getLocation().getEnglishVersion());
+        }
         prasangMediaUi.init();
+    }
+
+    private void loadPrasang(GenericPrasang prasang) {
+        title.setText(prasang.getTitle());
+        sutra.setText(prasang.getSutra());
+    }
+
+    private void loadLocation(GenericLocation location) {
+        place.setText(location.getPlace());
     }
 
     @Override

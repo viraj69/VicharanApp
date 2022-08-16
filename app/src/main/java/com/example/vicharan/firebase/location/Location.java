@@ -4,6 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Location implements Serializable {
@@ -12,11 +13,10 @@ public class Location implements Serializable {
     private double lng;
     private String userId;
     private String googlePlaceId;
-    private String country;
-    private String city;
-    private String place;
     private String address;
     private String description;
+    private GenericLocation englishVersion;
+    private GenericLocation gujaratiVersion;
 
     public static Location parseDb(DocumentSnapshot document) {
         try {
@@ -28,11 +28,20 @@ public class Location implements Serializable {
             location.lng = (Double) data.get(DbLocation.Fields.longitude.Name);
             location.userId = (String) data.get(DbLocation.Fields.userId.Name);
             location.googlePlaceId = (String) data.get(DbLocation.Fields.googlePlaceId.Name);
-            location.country = (String) data.get(DbLocation.Fields.country.Name);
-            location.city = (String) data.get(DbLocation.Fields.city.Name);
-            location.place = (String) data.get(DbLocation.Fields.place.Name);
             location.address = (String) data.get(DbLocation.Fields.address.Name);
             location.description = (String) data.get(DbLocation.Fields.description.Name);
+
+            if (document.contains(DbLocation.Fields.eng.Name)) {
+                location.englishVersion = GenericLocation.parseDb((HashMap<String, Object>) document.get(DbLocation.Fields.eng.Name));
+            } else {    // TODO: delete this - as it is just used for backward compatibility
+                location.englishVersion = GenericLocation.parseDb(data);
+            }
+
+            if (document.contains(DbLocation.Fields.guj.Name)) {
+                location.gujaratiVersion = GenericLocation.parseDb((HashMap<String, Object>) document.get(DbLocation.Fields.guj.Name));
+            } else {
+                location.gujaratiVersion = location.englishVersion;
+            }
 
             return location;
         } catch (Exception e) {
@@ -69,30 +78,6 @@ public class Location implements Serializable {
         this.googlePlaceId = googlePlaceId;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -107,5 +92,21 @@ public class Location implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public GenericLocation getGujaratiVersion() {
+        return gujaratiVersion;
+    }
+
+    public GenericLocation getEnglishVersion() {
+        return englishVersion;
+    }
+
+    public void setEnglishVersion(GenericLocation englishVersion) {
+        this.englishVersion = englishVersion;
+    }
+
+    public void setGujaratiVersion(GenericLocation gujaratiVersion) {
+        this.gujaratiVersion = gujaratiVersion;
     }
 }

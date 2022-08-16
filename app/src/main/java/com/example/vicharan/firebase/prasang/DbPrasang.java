@@ -28,7 +28,9 @@ public class DbPrasang {
 
     public enum Fields {
         id("id"), locationId("locationId"), userId("userId"), title("title"), sutra("sutra"),
-        description("description"), notes("notes"), date("date"), media("media"), inactive("inactive");
+        description("description"), notes("notes"), date("date"), media("media"),
+        guj("guj"), eng("eng"),
+        inactive("inactive");
 
         public String Name;
 
@@ -41,11 +43,34 @@ public class DbPrasang {
         Map<String, Object> map = new HashMap<>();
         map.put(Fields.locationId.Name, prasang.getLocationId());
         map.put(Fields.userId.Name, prasang.getUserId());
-        map.put(Fields.title.Name, prasang.getTitle());
-        map.put(Fields.sutra.Name, prasang.getSutra());
-        map.put(Fields.description.Name, prasang.getDescription());
-        map.put(Fields.notes.Name, prasang.getNotes());
         map.put(Fields.date.Name, prasang.getDate());
+
+        {
+            // TODO: delete these fields as they are just used for backward compatibility
+            map.put(Fields.title.Name, prasang.getEnglishVersion().getTitle());
+            map.put(Fields.sutra.Name, prasang.getEnglishVersion().getSutra());
+            map.put(Fields.description.Name, prasang.getEnglishVersion().getDescription());
+            map.put(Fields.notes.Name, prasang.getEnglishVersion().getNotes());
+        }
+
+        if (prasang.getEnglishVersion() != null) {
+            Map<String, Object> englishVersion = new HashMap<>();
+            englishVersion.put(Fields.title.Name, prasang.getEnglishVersion().getTitle());
+            englishVersion.put(Fields.sutra.Name, prasang.getEnglishVersion().getSutra());
+            englishVersion.put(Fields.description.Name, prasang.getEnglishVersion().getDescription());
+            englishVersion.put(Fields.notes.Name, prasang.getEnglishVersion().getNotes());
+            map.put(Fields.eng.Name, englishVersion);
+        }
+
+        if (prasang.getGujaratiVersion() != null) {
+            Map<String, Object> gujaratiVersion = new HashMap<>();
+            gujaratiVersion.put(Fields.title.Name, prasang.getGujaratiVersion().getTitle());
+            gujaratiVersion.put(Fields.sutra.Name, prasang.getGujaratiVersion().getSutra());
+            gujaratiVersion.put(Fields.description.Name, prasang.getGujaratiVersion().getDescription());
+            gujaratiVersion.put(Fields.notes.Name, prasang.getGujaratiVersion().getNotes());
+            map.put(Fields.guj.Name, gujaratiVersion);
+        }
+
 
         if (prasang.getMedia() != null) {
             Map<String, String> images = new HashMap<>();
@@ -68,11 +93,33 @@ public class DbPrasang {
         Map<String, Object> map = new HashMap<>();
         map.put(Fields.locationId.Name, prasang.getLocationId());
         map.put(Fields.userId.Name, prasang.getUserId());
-        map.put(Fields.title.Name, prasang.getTitle());
-        map.put(Fields.sutra.Name, prasang.getSutra());
-        map.put(Fields.description.Name, prasang.getDescription());
-        map.put(Fields.notes.Name, prasang.getNotes());
         map.put(Fields.date.Name, prasang.getDate());
+
+        {
+            // TODO: delete these fields as they are just used for backward compatibility
+            map.put(Fields.title.Name, prasang.getEnglishVersion().getTitle());
+            map.put(Fields.sutra.Name, prasang.getEnglishVersion().getSutra());
+            map.put(Fields.description.Name, prasang.getEnglishVersion().getDescription());
+            map.put(Fields.notes.Name, prasang.getEnglishVersion().getNotes());
+        }
+
+        if (prasang.getEnglishVersion() != null) {
+            Map<String, Object> englishVersion = new HashMap<>();
+            englishVersion.put(Fields.title.Name, prasang.getEnglishVersion().getTitle());
+            englishVersion.put(Fields.sutra.Name, prasang.getEnglishVersion().getSutra());
+            englishVersion.put(Fields.description.Name, prasang.getEnglishVersion().getDescription());
+            englishVersion.put(Fields.notes.Name, prasang.getEnglishVersion().getNotes());
+            map.put(Fields.eng.Name, englishVersion);
+        }
+
+        if (prasang.getGujaratiVersion() != null) {
+            Map<String, Object> gujaratiVersion = new HashMap<>();
+            gujaratiVersion.put(Fields.title.Name, prasang.getGujaratiVersion().getTitle());
+            gujaratiVersion.put(Fields.sutra.Name, prasang.getGujaratiVersion().getSutra());
+            gujaratiVersion.put(Fields.description.Name, prasang.getGujaratiVersion().getDescription());
+            gujaratiVersion.put(Fields.notes.Name, prasang.getGujaratiVersion().getNotes());
+            map.put(Fields.guj.Name, gujaratiVersion);
+        }
 
         if (prasang.getMedia() != null) {
             Map<String, String> images = new HashMap<>();

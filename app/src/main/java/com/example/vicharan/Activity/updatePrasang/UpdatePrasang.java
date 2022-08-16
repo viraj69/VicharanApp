@@ -26,10 +26,12 @@ import com.example.vicharan.R;
 import com.example.vicharan.firebase.FirebaseUtils;
 import com.example.vicharan.firebase.generic.DbInsertionListener;
 import com.example.vicharan.firebase.location.DbLocation;
+import com.example.vicharan.firebase.location.GenericLocation;
 import com.example.vicharan.firebase.location.Location;
 import com.example.vicharan.firebase.media.DbMedia;
 import com.example.vicharan.firebase.media.Media;
 import com.example.vicharan.firebase.prasang.DbPrasang;
+import com.example.vicharan.firebase.prasang.GenericPrasang;
 import com.example.vicharan.firebase.prasang.Prasang;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
@@ -263,16 +265,20 @@ public class UpdatePrasang extends AppCompatActivity {
                 //pd.show();
 
                 location.setLocation(new LatLng(latLng.latitude, latLng.longitude));
-                location.setCountry(country);
-                location.setCity(cityName);
-                location.setPlace(place);
                 location.setGooglePlaceId(googlePlaceId);
                 location.setAddress(address);
+                GenericLocation englishVersionLocation = new GenericLocation();
+                englishVersionLocation.setCountry(country);
+                englishVersionLocation.setCity(cityName);
+                englishVersionLocation.setPlace(place);
+                location.setEnglishVersion(englishVersionLocation);
 
-                prasang.setTitle(title);
-                prasang.setSutra(sutra);
-                prasang.setDescription(description);
                 prasang.setDate(date);
+                GenericPrasang englishVersionPrasang = new GenericPrasang();
+                englishVersionPrasang.setTitle(title);
+                englishVersionPrasang.setSutra(sutra);
+                englishVersionPrasang.setDescription(description);
+                prasang.setEnglishVersion(englishVersionPrasang);
 
                 upsertLocationAndUpdatePrasang(location, prasang);
             }
@@ -393,19 +399,19 @@ public class UpdatePrasang extends AppCompatActivity {
     private void loadLocation(Location location) {
         googlePlaceId = location.getGooglePlaceId();
         latLng = location.getLocation();
-        cityName = location.getCity();
+        cityName = location.getEnglishVersion().getCity();
         address = location.getAddress();
-        et_place.getEditText().setText(location.getPlace());
+        et_place.getEditText().setText(location.getEnglishVersion().getPlace());
         autocompleteFragment.setText(location.getAddress());
-        city.setText(location.getCity());
-        et_country.getEditText().setText(location.getCountry());
+        city.setText(location.getEnglishVersion().getCity());
+        et_country.getEditText().setText(location.getEnglishVersion().getCountry());
     }
 
     private void loadPrasang(Prasang prasang) {
-        et_title.getEditText().setText(prasang.getTitle());
-        et_des.getEditText().setText(prasang.getDescription());
         et_date.getEditText().setText(prasang.getDate());
-        et_sutra.getEditText().setText(prasang.getSutra());
+        et_title.getEditText().setText(prasang.getEnglishVersion().getTitle());
+        et_des.getEditText().setText(prasang.getEnglishVersion().getDescription());
+        et_sutra.getEditText().setText(prasang.getEnglishVersion().getSutra());
     }
 
     private void fetchPrasang(Location location) {

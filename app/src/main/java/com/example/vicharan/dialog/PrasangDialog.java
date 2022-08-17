@@ -22,7 +22,9 @@ import com.example.vicharan.firebase.media.Media;
 import com.example.vicharan.firebase.prasang.DbPrasang;
 import com.example.vicharan.firebase.prasang.GenericPrasang;
 import com.example.vicharan.firebase.prasang.Prasang;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -76,7 +78,16 @@ public class PrasangDialog {
 
     private void loadImage(Uri uri) {
         ImageView image = prasangDialog.findViewById(R.id.dialogimage);
-        Picasso.get().load(uri).fit().into(image);
+        Transformation transformation = new RoundedTransformationBuilder()
+                .cornerRadiusDp(7)
+                .oval(false)
+                .build();
+
+        Picasso.get()
+                .load(uri)
+                .fit()
+                .transform(transformation)
+                .into(image);
     }
 
     private void fetchImage(String prasangId, String mediaName) {

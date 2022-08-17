@@ -35,8 +35,8 @@
         <entry key="app/src/main/res/layout/activity_update_ad.xml" value="0.2190982776089159" />
         <entry key="app/src/main/res/layout/activity_update_prasang.xml" value="0.1813118811881188" />
         <entry key="app/src/main/res/layout/activity_wishlistactivity.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/c_prasang_details_info.xml" value="0.39809782608695654" />
-        <entry key="app/src/main/res/layout/c_prasang_overlay.xml" value="0.10187449062754686" />
+        <entry key="app/src/main/res/layout/c_prasang_details_info.xml" value="0.21136627197265626" />
+        <entry key="app/src/main/res/layout/c_prasang_overlay.xml" value="0.8749762972681719" />
         <entry key="app/src/main/res/layout/custom_layout.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.25" />
@@ -52,6 +52,7 @@
         <entry key="app/src/main/res/layout/page_indicator.xml" value="0.45" />
         <entry key="app/src/main/res/layout/postlist_item.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/prasang_detail_layout.xml" value="0.1813118811881188" />
+        <entry key="app/src/main/res/layout/prasang_img.xml" value="0.10703125" />
         <entry key="app/src/main/res/layout/prasanglist_item.xml" value="0.1813118811881188" />
         <entry key="app/src/main/res/layout/row_accessibility.xml" value="0.4180253623188406" />
         <entry key="app/src/main/res/layout/row_overview.xml" value="0.2598958333333333" />

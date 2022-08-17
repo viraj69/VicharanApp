@@ -10,18 +10,20 @@
         android:id="@+id/imageslider"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/page_indicator"
-        android:layout_marginTop="8dp"
+    <include
+        layout="@layout/page_indicator"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@id/imageslider"
         app:layout_constraintStart_toStartOf="@id/imageslider"
-        app:layout_constraintTop_toBottomOf="@id/imageslider"/>
+        app:layout_constraintTop_toBottomOf="@id/imageslider" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,8 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pageIndicator">
 
-        <include layout="@layout/c_prasang_details_info"/>
+        <include layout="@layout/c_prasang_details_info" />
 
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

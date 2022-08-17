@@ -4,23 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.19844124700239807" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_left_arrow.xml" value="0.1925" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_right_arrow.xml" value="0.1925" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.118" />
-        <entry key="app/src/main/res/drawable-v24/layout_bg.xml" value="0.2655" />
-        <entry key="app/src/main/res/drawable/bg_shadow.xml" value="0.22" />
-        <entry key="app/src/main/res/drawable/gradient_gray.xml" value="0.22" />
         <entry key="app/src/main/res/drawable/ic_baseline_filter_list_24.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.118" />
-        <entry key="app/src/main/res/drawable/no_selection_border.xml" value="0.4015" />
         <entry key="app/src/main/res/drawable/prabodhswamiji_background.xml" value="0.118" />
-        <entry key="app/src/main/res/drawable/selection_border.xml" value="0.4015" />
-        <entry key="app/src/main/res/font-v26/fonts_family.xml" value="0.25677083333333334" />
-        <entry key="app/src/main/res/font/font.xml" value="0.12786458333333334" />
-        <entry key="app/src/main/res/font/fonts.xml" value="0.12786458333333334" />
-        <entry key="app/src/main/res/font/fonts_family.xml" value="0.12786458333333334" />
-        <entry key="app/src/main/res/font/fontsfamily.xml" value="0.12786458333333334" />
-        <entry key="app/src/main/res/layout-w720dp/fragment_prasang_detail.xml" value="0.2927321668909825" />
+        <entry key="app/src/main/res/layout-w720dp/fragment_prasang_detail.xml" value="0.30511463844797176" />
         <entry key="app/src/main/res/layout/activity_apartment_details.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_apartment_dialog.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_contact.xml" value="0.4180253623188406" />
@@ -31,34 +23,21 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_post_list.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_postadd.xml" value="0.24389051808406648" />
-        <entry key="app/src/main/res/layout/activity_prasang_details.xml" value="0.11222222222222222" />
-        <entry key="app/src/main/res/layout/activity_prasang_list.xml" value="0.1813118811881188" />
-        <entry key="app/src/main/res/layout/activity_prasang_overlay.xml" value="0.14635416666666667" />
+        <entry key="app/src/main/res/layout/activity_prasang_details.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/activity_profile_details.xml" value="0.20208333333333334" />
-        <entry key="app/src/main/res/layout/activity_save_prasang.xml" value="0.1813118811881188" />
+        <entry key="app/src/main/res/layout/activity_save_prasang.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/activity_update_ad.xml" value="0.2190982776089159" />
-        <entry key="app/src/main/res/layout/activity_update_prasang.xml" value="0.1813118811881188" />
         <entry key="app/src/main/res/layout/activity_wishlistactivity.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/c_prasang_details_info.xml" value="0.21136627197265626" />
-        <entry key="app/src/main/res/layout/c_prasang_overlay.xml" value="0.8749762972681719" />
+        <entry key="app/src/main/res/layout/c_prasang_details_info.xml" value="0.184375" />
+        <entry key="app/src/main/res/layout/c_prasang_overlay.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/custom_layout.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_page1.xml" value="0.39809782608695654" />
-        <entry key="app/src/main/res/layout/fragment_page2.xml" value="0.39809782608695654" />
-        <entry key="app/src/main/res/layout/fragment_page3.xml" value="0.39809782608695654" />
-        <entry key="app/src/main/res/layout/fragment_prasang_detail.xml" value="0.3826421547669944" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/fragment_prasang_detail.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.4180253623188406" />
-        <entry key="app/src/main/res/layout/fragment_viewpager.xml" value="0.39809782608695654" />
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.4180253623188406" />
-        <entry key="app/src/main/res/layout/generic_toolbar.xml" value="0.1813118811881188" />
-        <entry key="app/src/main/res/layout/layout_bg.xml" value="0.13020833333333334" />
-        <entry key="app/src/main/res/layout/page_indicator.xml" value="0.45" />
         <entry key="app/src/main/res/layout/postlist_item.xml" value="0.2598958333333333" />
-        <entry key="app/src/main/res/layout/prasang_detail_layout.xml" value="0.1813118811881188" />
-        <entry key="app/src/main/res/layout/prasang_img.xml" value="0.10703125" />
-        <entry key="app/src/main/res/layout/prasanglist_item.xml" value="0.1813118811881188" />
         <entry key="app/src/main/res/layout/row_accessibility.xml" value="0.4180253623188406" />
         <entry key="app/src/main/res/layout/row_overview.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/row_thebuilding.xml" value="0.2598958333333333" />
@@ -75,12 +54,5 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.1" />
-      </ProjectState>
-    </option>
   </component>
 </project>

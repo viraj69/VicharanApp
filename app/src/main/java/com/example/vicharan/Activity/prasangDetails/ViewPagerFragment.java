@@ -51,7 +51,7 @@ public class ViewPagerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         title = view.findViewById(R.id.title);
-        ((TextView)getActivity().findViewById(R.id.toolbar_title)).setText(locationPrasangPair.getLocation().getEnglishVersion().getPlace());
+        ((TextView) getActivity().findViewById(R.id.toolbar_title)).setText(locationPrasangPair.getLocation().getEnglishVersion().getPlace());
         place = view.findViewById(R.id.place);
         des = view.findViewById(R.id.des);
         date = view.findViewById(R.id.date);

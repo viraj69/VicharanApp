@@ -58,7 +58,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="10dp"
-            android:backgroundTint="#3cb6d3"
+            android:backgroundTint="#@color/colorPrimary"
             android:singleLine="true"
             android:text="Login" />
 
@@ -70,7 +70,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="Create Account"
-            android:textColor="#3cb6d3"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="Forgot Password?"
-            android:textColor="#3cb6d3"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             android:textStyle="bold" />
     </com.google.android.material.textfield.TextInputLayout>

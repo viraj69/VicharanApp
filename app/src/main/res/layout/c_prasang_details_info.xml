@@ -19,8 +19,8 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/helvetica"
         android:text="Title"
-        android:textColor="@color/quantum_black_100"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@id/title_label"
         app:layout_constraintStart_toEndOf="@id/title_label" />

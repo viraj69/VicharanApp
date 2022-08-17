@@ -15,6 +15,11 @@
         <entry key="app/src/main/res/drawable/no_selection_border.xml" value="0.4015" />
         <entry key="app/src/main/res/drawable/prabodhswamiji_background.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/selection_border.xml" value="0.4015" />
+        <entry key="app/src/main/res/font-v26/fonts_family.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/font/font.xml" value="0.12786458333333334" />
+        <entry key="app/src/main/res/font/fonts.xml" value="0.12786458333333334" />
+        <entry key="app/src/main/res/font/fonts_family.xml" value="0.12786458333333334" />
+        <entry key="app/src/main/res/font/fontsfamily.xml" value="0.12786458333333334" />
         <entry key="app/src/main/res/layout-w720dp/fragment_prasang_detail.xml" value="0.2927321668909825" />
         <entry key="app/src/main/res/layout/activity_apartment_details.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_apartment_dialog.xml" value="0.2598958333333333" />

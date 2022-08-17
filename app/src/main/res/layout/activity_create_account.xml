@@ -114,7 +114,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
 
-        android:backgroundTint="#3cb6d3"
+        android:backgroundTint="@color/colorPrimary"
         android:singleLine="true"
         android:text="Create Account" />
 
@@ -126,7 +126,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="7dp"
         android:text="Login"
-        android:textColor="#3cb6d3"
+        android:textColor="@color/colorPrimary"
         android:textSize="15sp"
         android:textStyle="bold" />
 

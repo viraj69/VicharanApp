@@ -1,6 +1,8 @@
 package com.example.vicharan.Activity.prasangDetails;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -85,23 +88,42 @@ public class ViewPagerFragment extends Fragment {
     private void loadLocation(Location location) {
         boolean isGujaratiLanguageSelected = GlobalApplication.getInstance().isGujaratiLanguageSelected();
         if (isGujaratiLanguageSelected) {
-            place.setText(location.getGujaratiVersion().getPlace());
+            Typeface europaregular = ResourcesCompat.getFont(getActivity(), R.font.europaregular);
+            place.setTypeface(europaregular);
+            place.setText(Html.fromHtml(location.getGujaratiVersion().getPlace()));
         } else {
-            place.setText(location.getEnglishVersion().getPlace());
+            Typeface europaRegular = ResourcesCompat.getFont(getActivity(), R.font.europaregular);
+            place.setTypeface(europaRegular);
+            place.setText(Html.fromHtml(location.getEnglishVersion().getPlace()));
         }
     }
 
     private void loadPrasang(Prasang prasang) {
-        date.setText(prasang.getDate());
+        date.setText(Html.fromHtml(prasang.getDate()));
         boolean isGujaratiLanguageSelected = GlobalApplication.getInstance().isGujaratiLanguageSelected();
         if (isGujaratiLanguageSelected) {
-            title.setText(prasang.getGujaratiVersion().getTitle());
-            des.setText(prasang.getGujaratiVersion().getDescription());
-            sutra.setText(prasang.getGujaratiVersion().getSutra());
+
+            Typeface kap026 = ResourcesCompat.getFont(getActivity(), R.font.kap026);
+
+            title.setTypeface(kap026);
+            title.setText(Html.fromHtml(prasang.getGujaratiVersion().getTitle()));
+            des.setTypeface(kap026);
+            des.setText(Html.fromHtml(prasang.getGujaratiVersion().getDescription()));
+            sutra.setTypeface(kap026);
+            sutra.setText(Html.fromHtml(prasang.getGujaratiVersion().getSutra()));
+            date.setTypeface(kap026);
         } else {
-            title.setText(prasang.getEnglishVersion().getTitle());
-            des.setText(prasang.getEnglishVersion().getDescription());
-            sutra.setText(prasang.getEnglishVersion().getSutra());
+
+            Typeface berkshireswashRegular = ResourcesCompat.getFont(getActivity(), R.font.berkshireswash_regular);
+            Typeface europaRegular = ResourcesCompat.getFont(getActivity(), R.font.europaregular);
+
+            title.setText(Html.fromHtml(prasang.getEnglishVersion().getTitle()));
+            title.setTypeface(berkshireswashRegular);
+            des.setText(Html.fromHtml(prasang.getEnglishVersion().getDescription()));
+            des.setTypeface(europaRegular);
+            sutra.setText(Html.fromHtml(prasang.getEnglishVersion().getSutra()));
+            sutra.setTypeface(europaRegular);
+            date.setTypeface(europaRegular);
         }
     }
 }

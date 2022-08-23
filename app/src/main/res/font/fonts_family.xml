@@ -1,24 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <font-family xmlns:android="http://schemas.android.com/apk/res/android">
     <font
-        android:fontWeight="400"
-        android:font="@font/helvetica" />
+        android:font="@font/helvetica"
+        android:fontWeight="400" />
     <font
-        android:fontWeight="400"
-        android:font="@font/helvetica_bold" />
+        android:font="@font/helvetica_bold"
+        android:fontWeight="400" />
     <font
-        android:fontWeight="400"
-        android:font="@font/helvetica_boldoblique" />
+        android:font="@font/helvetica_boldoblique"
+        android:fontWeight="400" />
     <font
-        android:fontWeight="400"
-        android:font="@font/helvetica_compressed_5871d14b6903a" />
+        android:font="@font/helvetica_compressed_5871d14b6903a"
+        android:fontWeight="400" />
     <font
-        android:fontWeight="400"
-        android:font="@font/helvetica_light_587ebe5a59211" />
+        android:font="@font/helvetica_light_587ebe5a59211"
+        android:fontWeight="400" />
     <font
-        android:fontWeight="400"
-        android:font="@font/helvetica_oblique" />
+        android:font="@font/helvetica_oblique"
+        android:fontWeight="400" />
     <font
-        android:fontWeight="400"
-        android:font="@font/helvetica_rounded_bold_5871d05ead8de" />
+        android:font="@font/helvetica_rounded_bold_5871d05ead8de"
+        android:fontWeight="400" />
+
+    <font
+        android:font="@font/berkshireswash_regular"
+        android:fontWeight="400" />
+    <font
+        android:font="@font/kap026"
+        android:fontWeight="400" />
+    <font
+        android:font="@font/europaregular"
+        android:fontWeight="400" />
 </font-family>

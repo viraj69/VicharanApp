@@ -6,36 +6,15 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/title_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title: "
-        android:textColor="@color/quantum_black_100"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/helvetica"
         android:text="Title"
-        android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/title_label"
-        app:layout_constraintStart_toEndOf="@id/title_label" />
-
-    <TextView
-        android:id="@+id/lbl_place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Place: "
-        android:textColor="@color/quantum_black_100"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/title_label"
-        app:layout_constraintTop_toBottomOf="@id/title_label" />
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/place"
@@ -44,19 +23,8 @@
         android:text="place"
         android:textColor="@color/quantum_black_100"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/lbl_place"
-        app:layout_constraintStart_toEndOf="@id/lbl_place" />
-
-    <TextView
-        android:id="@+id/lbl_des"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Des : "
-        android:textColor="@color/quantum_black_100"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/lbl_place"
-        app:layout_constraintTop_toBottomOf="@id/lbl_place" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView
         android:id="@+id/des"
@@ -65,52 +33,28 @@
         android:text="des"
         android:textColor="@color/quantum_black_100"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/lbl_des"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/lbl_des" />
-
-    <TextView
-        android:id="@+id/lbl_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date : "
-        android:textColor="@color/quantum_black_100"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/lbl_des"
-        app:layout_constraintTop_toBottomOf="@id/des" />
+        app:layout_constraintStart_toStartOf="@id/place"
+        app:layout_constraintTop_toBottomOf="@id/place" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
         android:text="date"
         android:textColor="@color/quantum_black_100"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/lbl_date"
-        app:layout_constraintStart_toEndOf="@id/lbl_date" />
+        app:layout_constraintStart_toStartOf="@id/des"
+        app:layout_constraintTop_toBottomOf="@id/des" />
 
-    <TextView
-        android:id="@+id/lbl_sutra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sutra : "
-        android:textColor="@color/quantum_black_100"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/lbl_date"
-        app:layout_constraintTop_toBottomOf="@id/lbl_date" />
 
     <TextView
         android:id="@+id/sutra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
         android:text="sutra"
         android:textColor="@color/quantum_black_100"
         android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/lbl_sutra"
-        app:layout_constraintStart_toEndOf="@id/lbl_sutra" />
+        app:layout_constraintStart_toStartOf="@id/date"
+        app:layout_constraintTop_toBottomOf="@id/date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,8 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.example.vicharan.Activity.prasangList.PrasangList" />
         <activity android:name="com.example.vicharan.Activity.updatePrasang.UpdatePrasang" />
-        <activity android:name="com.example.vicharan.Activity.prasangDetails.PrasangDetails" />
+        <activity android:name="com.example.vicharan.Activity.prasangDetails.PrasangDetails"
+            android:parentActivityName=".Activity.MainActivity" />
         <activity android:name="com.example.vicharan.Activity.MainActivity" />
         <activity android:name="com.example.vicharan.Activity.ProfileDetails" />
         <activity android:name="com.example.vicharan.Activity.CreateAccount" />

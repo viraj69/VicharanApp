@@ -20,7 +20,7 @@
         layout="@layout/page_indicator"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/imageslider"
         app:layout_constraintStart_toStartOf="@id/imageslider" />
@@ -28,7 +28,6 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageslider"
         app:layout_constraintTop_toTopOf="parent"

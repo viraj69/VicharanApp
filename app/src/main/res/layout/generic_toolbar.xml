@@ -6,6 +6,7 @@
     android:background="@color/toolbarColor">
 
     <ImageView
+        android:layout_marginLeft="30dp"
         android:layout_width="50dp"
         android:layout_height="55dp"
         android:src="@drawable/logo" />

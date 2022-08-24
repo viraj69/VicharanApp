@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -37,12 +38,24 @@ public class PrasangDetails extends AppCompatActivity implements View.OnClickLis
     }
 
     private void hideToolbarTitle() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("");
-        ((TextView) toolbar.findViewById(R.id.toolbar_title)).setText("");
+
+        Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
+        mTitle.setText("");
+        setSupportActionBar(toolbarTop);
+        ((TextView) toolbarTop.findViewById(R.id.toolbar_title)).setText("");
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowTitleEnabled(false);
+        ab.setHomeAsUpIndicator(R.drawable.ic_action_name);
+
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setTitle("");
+//        ((TextView) toolbar.findViewById(R.id.toolbar_title)).setText("");
     }
 
     private void setupFragmentViewPageListener() {

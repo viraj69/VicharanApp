@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.vicharan">
+    package="com.example.aksharSparsh">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -16,27 +16,27 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
-        android:label="@string/app_name"
+        android:label="Akshar Sparsh"
         android:roundIcon="@mipmap/prabodhswamiji"
         android:supportsRtl="true"
-        android:name=".GlobalApplication"
+        android:name="com.example.aksharSparsh.GlobalApplication"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.vicharan.Activity.prasangList.PrasangList" />
-        <activity android:name="com.example.vicharan.Activity.updatePrasang.UpdatePrasang" />
-        <activity android:name="com.example.vicharan.Activity.prasangDetails.PrasangDetails"
-            android:parentActivityName=".Activity.MainActivity" />
-        <activity android:name="com.example.vicharan.Activity.MainActivity" />
-        <activity android:name="com.example.vicharan.Activity.ProfileDetails" />
-        <activity android:name="com.example.vicharan.Activity.CreateAccount" />
-        <activity android:name="com.example.vicharan.Activity.savePrasang.SavePrasang" />
-        <activity android:name="com.example.vicharan.Activity.ForgotPassword" />
+        <activity android:name="com.example.aksharSparsh.Activity.prasangList.PrasangList" />
+        <activity android:name="com.example.aksharSparsh.Activity.updatePrasang.UpdatePrasang" />
+        <activity android:name="com.example.aksharSparsh.Activity.prasangDetails.PrasangDetails"
+            android:parentActivityName="com.example.aksharSparsh.Activity.MainActivity" />
+        <activity android:name="com.example.aksharSparsh.Activity.MainActivity" />
+        <activity android:name="com.example.aksharSparsh.Activity.ProfileDetails" />
+        <activity android:name="com.example.aksharSparsh.Activity.CreateAccount" />
+        <activity android:name="com.example.aksharSparsh.Activity.savePrasang.SavePrasang" />
+        <activity android:name="com.example.aksharSparsh.Activity.ForgotPassword" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDeFuuo_ueSXMlCCQQLUIFgFAs4Xo3ULNg" />
 
         <activity
-            android:name="com.example.vicharan.Activity.SplashScreen"
+            android:name="com.example.aksharSparsh.Activity.SplashScreen"
             android:grantUriPermissions="true"
             android:theme="@style/AppTheme"
             android:exported="true">

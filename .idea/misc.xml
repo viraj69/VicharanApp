@@ -3,9 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.1880766501064585" />
         <entry key="../../../../layout/custom_preview.xml" value="0.19844124700239807" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_left_arrow.xml" value="0.1925" />
-        <entry key="app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.2715" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_right_arrow.xml" value="0.1925" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1925" />
@@ -15,7 +15,8 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.118" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1925" />
         <entry key="app/src/main/res/drawable/prabodhswamiji_background.xml" value="0.118" />
-        <entry key="app/src/main/res/layout-w720dp/fragment_prasang_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/font/fonts_family.xml" value="0.23802083333333332" />
+        <entry key="app/src/main/res/layout-w720dp/fragment_prasang_detail.xml" value="0.30511463844797176" />
         <entry key="app/src/main/res/layout/activity_apartment_details.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_apartment_dialog.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_contact.xml" value="0.4180253623188406" />
@@ -26,13 +27,13 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_post_list.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/activity_postadd.xml" value="0.24389051808406648" />
-        <entry key="app/src/main/res/layout/activity_prasang_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_prasang_details.xml" value="0.26766196536153475" />
         <entry key="app/src/main/res/layout/activity_profile_details.xml" value="0.20208333333333334" />
         <entry key="app/src/main/res/layout/activity_save_prasang.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/activity_update_ad.xml" value="0.2190982776089159" />
         <entry key="app/src/main/res/layout/activity_wishlistactivity.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/c_prasang_details_info.xml" value="0.2923186344238976" />
+        <entry key="app/src/main/res/layout/c_prasang_details_info.xml" value="0.4046737670898438" />
         <entry key="app/src/main/res/layout/c_prasang_overlay.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/custom_layout.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.26666666666666666" />
@@ -42,6 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.4180253623188406" />
         <entry key="app/src/main/res/layout/generic_toolbar.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/postlist_item.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/prasang_img.xml" value="0.21557971014492755" />
         <entry key="app/src/main/res/layout/row_accessibility.xml" value="0.4180253623188406" />
         <entry key="app/src/main/res/layout/row_overview.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/row_thebuilding.xml" value="0.2598958333333333" />

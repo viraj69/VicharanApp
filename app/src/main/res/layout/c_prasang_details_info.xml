@@ -60,6 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/des"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,6 +70,19 @@
         android:text="des"
         android:textColor="@color/quantum_black_100"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/place" />
+
+    <WebView
+        android:id="@+id/web_des"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/quantum_black_100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

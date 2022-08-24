@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.vicharan.Fragments.map.MapFragment"
+        android:name="com.example.aksharSparsh.Fragments.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.vicharan.Fragments.ProfileFragment"
+        android:name="com.example.aksharSparsh.Fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

@@ -77,22 +77,17 @@ public class GoogleMapUi implements OnMapReadyCallback, GoogleMap.OnMarkerClickL
 
         this.googleMap.setMapStyle(new MapStyleOptions(fragment.getActivity().getResources().getString(R.string.style_json)));
         this.googleMap.setMaxZoomPreference(50);
-        this.googleMap.setMinZoomPreference(3);
-
-        double bottomCordinate = 40.232345;
-        double leftCordinate = -129.216371;
-        double topCordinate = 62.341938;
-        double rightCordinate = -55.564033;
+        this.googleMap.setMinZoomPreference(4);
 
         LatLngBounds canadaBounds = new LatLngBounds(
-                new LatLng(bottomCordinate, leftCordinate), // SW bounds
-                new LatLng(topCordinate, rightCordinate)  // NE bounds
+                new LatLng(60.08251, -140.57825), // Canada SW bounds
+                new LatLng(68.79696, -102.08215)  // Canada NE bounds
         );
+        this.googleMap.setLatLngBoundsForCameraTarget(canadaBounds);
+        this.googleMap.animateCamera(CameraUpdateFactory.zoomTo(4));
+        this.googleMap.setOnMarkerClickListener(this);
 
-        googleMap.setLatLngBoundsForCameraTarget(canadaBounds);
-        googleMap.setOnMarkerClickListener(this);
-
-        UiSettings mapsetting = googleMap.getUiSettings();
+        UiSettings mapsetting = this.googleMap.getUiSettings();
         mapsetting.setZoomControlsEnabled(true);
         mapsetting.setZoomGesturesEnabled(true);
         mapsetting.setAllGesturesEnabled(true);

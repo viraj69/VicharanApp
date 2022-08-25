@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/helvetica"
         android:text="Title"
+        android:textColor="#4981a3"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +25,7 @@
         android:layout_height="93.35dp"
         android:layout_marginTop="-36dp"
         android:src="@drawable/decorsep"
+        android:textColor="#4981a3"
         app:layout_constraintEnd_toEndOf="@id/title"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/title" />
@@ -33,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sutra"
-        android:textColor="@color/quantum_black_100"
+        android:textColor="#4981a3"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="@id/design"
         app:layout_constraintStart_toStartOf="@id/design"
@@ -44,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="place"
-        android:textColor="@color/quantum_black_100"
+        android:textColor="#4981a3"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sutra" />
@@ -54,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="date"
-        android:textColor="@color/quantum_black_100"
+        android:textColor="#4981a3"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@id/place"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -69,10 +71,22 @@
         android:text="des"
         android:textColor="@color/quantum_black_100"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/place" />
 
-
+    <WebView
+        android:id="@+id/web_des"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.76"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/place"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintWidth_percent="0.8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

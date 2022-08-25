@@ -1,92 +1,111 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="1000dp"
-    android:layout_marginStart="10dp"
+    android:layout_height="match_parent"
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="10dp"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/helvetica"
-        android:text="Title"
-        android:textColor="#4981a3"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/design"
-        android:layout_width="180dp"
-        android:layout_height="93.35dp"
-        android:layout_marginTop="-36dp"
-        android:src="@drawable/decorsep"
-        android:textColor="#4981a3"
-        app:layout_constraintEnd_toEndOf="@id/title"
-        app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title" />
-
-    <TextView
-        android:id="@+id/sutra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sutra"
-        android:textColor="#4981a3"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toEndOf="@id/design"
-        app:layout_constraintStart_toStartOf="@id/design"
-        app:layout_constraintTop_toBottomOf="@id/design" />
-
-    <TextView
-        android:id="@+id/place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="place"
-        android:textColor="#4981a3"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sutra" />
-
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="date"
-        android:textColor="#4981a3"
-        android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/place"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/des"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:text="des"
-        android:textColor="@color/quantum_black_100"
-        android:textSize="20sp"
-        android:visibility="gone"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/place" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.85">
 
-    <WebView
-        android:id="@+id/web_des"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.76"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/place"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintWidth_percent="0.8" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:text="Title"
+            android:textColor="#4981a3"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/design"
+            android:layout_width="180dp"
+            android:layout_height="93.35dp"
+            android:layout_marginTop="-36dp"
+            android:src="@drawable/decorsep"
+            android:textColor="#4981a3"
+            app:layout_constraintEnd_toEndOf="@id/title"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/sutra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sutra"
+            android:textColor="#4981a3"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="@id/design"
+            app:layout_constraintStart_toStartOf="@id/design"
+            app:layout_constraintTop_toBottomOf="@id/design" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info_panel"
+            android:background="@drawable/card"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sutra">
+
+            <TextView
+                android:id="@+id/place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="place"
+                android:textColor="#4981a3"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="date"
+                android:textColor="#4981a3"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@id/place"
+                app:layout_constraintTop_toBottomOf="@id/place" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/des"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:text="des"
+            android:textColor="@color/quantum_black_100"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_panel" />
+
+        <WebView
+            android:id="@+id/web_des"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.76"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/info_panel"
+            app:layout_constraintVertical_bias="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,12 +43,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="150dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:alpha="0.5"
         android:src="@drawable/mahotsavlogo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="15dp"/>
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -207,17 +207,24 @@ public class DbPrasang {
         }
     }
 
+    private static boolean isAllTrue(boolean[] arr) {
+        for (boolean b : arr) if (!b) return false;
+        return true;
+    }
+
     private static void getLocationsForPrasangs(List<Prasang> prasangs, final DbCallbackListener<List<LocationPrasangPair>> dbCallbackListener) {
         final HashMap<String, Location> locationHashMap = new HashMap<>();
         final List<LocationPrasangPair> locationPrasangPairs = new LinkedList<>();
 
+        final boolean[] fetchResult = new boolean[prasangs.size()];
         for (int i = 0; i < prasangs.size(); i++) {
             final int index = i;
             final Prasang prasang = prasangs.get(i);
             Location location = locationHashMap.get(prasang.getLocationId());
             if (location != null) {
+                fetchResult[i] = true;
                 locationPrasangPairs.add(new LocationPrasangPair(location, prasang));
-                if (i == prasangs.size() - 1) {
+                if (isAllTrue(fetchResult)) {
                     mergeDuplicateLocations(locationPrasangPairs);
                     dbCallbackListener.onDbCallback(locationPrasangPairs);
                 }
@@ -229,7 +236,8 @@ public class DbPrasang {
                         locationHashMap.put(prasang.getLocationId(), loc);
                         locationPrasangPairs.add(new LocationPrasangPair(loc, prasang));
                     }
-                    if (index == prasangs.size() - 1) {
+                    fetchResult[index] = true;
+                    if (isAllTrue(fetchResult)) {
                         mergeDuplicateLocations(locationPrasangPairs);
                         dbCallbackListener.onDbCallback(locationPrasangPairs);
                     }

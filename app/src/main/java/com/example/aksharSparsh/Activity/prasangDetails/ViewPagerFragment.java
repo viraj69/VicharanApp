@@ -1,11 +1,13 @@
 package com.example.aksharSparsh.Activity.prasangDetails;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,7 @@ public class ViewPagerFragment extends Fragment {
     private ViewPager imageViewPager;
     private PageIndicator pageIndicator;
     private ViewImagePagerAdapter viewImagePagerAdapter;
+    private WebView webviewDescription;
 
     public void setData(DbPrasang.LocationPrasangPair locationPrasangPair) {
         this.locationPrasangPair = locationPrasangPair;
@@ -57,6 +60,9 @@ public class ViewPagerFragment extends Fragment {
         ((TextView) getActivity().findViewById(R.id.toolbar_title)).setText(locationPrasangPair.getLocation().getEnglishVersion().getPlace());
         place = view.findViewById(R.id.place);
         des = view.findViewById(R.id.des);
+        webviewDescription = view.findViewById(R.id.web_des);
+        webviewDescription.getSettings().setJavaScriptEnabled(true);
+        webviewDescription.setBackgroundColor(Color.TRANSPARENT);
         date = view.findViewById(R.id.date);
         sutra = view.findViewById(R.id.sutra);
         imageViewPager = view.findViewById(R.id.imageslider);
@@ -109,6 +115,7 @@ public class ViewPagerFragment extends Fragment {
             title.setText(Html.fromHtml(prasang.getGujaratiVersion().getTitle()));
             des.setTypeface(kap026);
             des.setText(Html.fromHtml(prasang.getGujaratiVersion().getDescription()));
+            webviewDescription.loadDataWithBaseURL(null, prasang.getGujaratiVersion().getDescription(), "text/html", "utf-8", null);
             sutra.setTypeface(kap026);
             sutra.setText(Html.fromHtml(prasang.getGujaratiVersion().getSutra()));
             date.setTypeface(kap026);
@@ -121,9 +128,48 @@ public class ViewPagerFragment extends Fragment {
             title.setTypeface(berkshireswashRegular);
             des.setText(Html.fromHtml(prasang.getEnglishVersion().getDescription()));
             des.setTypeface(europaRegular);
+            webviewDescription.loadDataWithBaseURL(null, prasang.getEnglishVersion().getDescription(), "text/html", "utf-8", null);
             sutra.setText(Html.fromHtml(prasang.getEnglishVersion().getSutra()));
             sutra.setTypeface(europaRegular);
             date.setTypeface(europaRegular);
         }
     }
 }
+
+//=====================================================================================================================================================================
+
+// ENGLISH
+
+/*
+<html>
+<head>
+<style>
+@font-face { font-family: europa_regular;src: url('https://firebasestorage.googleapis.com/v0/b/vicharan-app.appspot.com/o/font%2Feuropa_regular.ttf?alt=media');} body {font-family: europa_regular, serif;}
+</style>
+</head>
+<body>
+<span style='color:#4981a3'>
+        ...
+</span>
+</body>
+</html>
+*/
+
+//=====================================================================================================================================================================
+
+//GUJARATI
+
+/*
+<html>
+<head>
+<style>
+@font-face { font-family: europa_regular;src: url('https://firebasestorage.googleapis.com/v0/b/vicharan-app.appspot.com/o/font%2Feuropa_regular.ttf?alt=media');} body {font-family: europa_regular, serif;}
+</style>
+</head>
+<body>
+<span style='color:#4981a3'>
+        ...
+</span>
+</body>
+</html>
+*/

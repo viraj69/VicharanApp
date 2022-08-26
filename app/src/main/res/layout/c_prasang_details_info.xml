@@ -50,13 +50,22 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/info_panel"
-            android:background="@drawable/card"
-            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/card"
+            android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sutra">
+
+            <ImageView
+                android:id="@+id/location_pin"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:src="@drawable/locationpin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/place"
@@ -65,8 +74,19 @@
                 android:text="place"
                 android:textColor="#4981a3"
                 android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/info_panel"
+                app:layout_constraintLeft_toRightOf="@+id/location_pin"
+                app:layout_constraintBottom_toBottomOf="@id/location_pin"/>
+
+            <ImageView
+                android:id="@+id/calendericon"
+                android:layout_width="45dp"
+                android:layout_height="35dp"
+                android:src="@drawable/calendarpin"
+                app:layout_constraintTop_toTopOf="@id/info_panel"
+                app:layout_constraintLeft_toRightOf="@+id/location_pin"
+                app:layout_constraintBottom_toBottomOf="@id/location_pin"
+                app:layout_constraintEnd_toStartOf="@id/date"/>
 
             <TextView
                 android:id="@+id/date"
@@ -75,8 +95,10 @@
                 android:text="date"
                 android:textColor="#4981a3"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@id/place"
-                app:layout_constraintTop_toBottomOf="@id/place" />
+                app:layout_constraintTop_toTopOf="@id/info_panel"
+                app:layout_constraintLeft_toRightOf="@+id/location_pin"
+                app:layout_constraintBottom_toBottomOf="@id/location_pin"
+                app:layout_constraintEnd_toEndOf="@id/info_panel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

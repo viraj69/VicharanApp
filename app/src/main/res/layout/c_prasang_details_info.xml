@@ -35,7 +35,8 @@
             android:textColor="#4981a3"
             app:layout_constraintEnd_toEndOf="@id/title"
             app:layout_constraintStart_toStartOf="@id/title"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:tint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/sutra"

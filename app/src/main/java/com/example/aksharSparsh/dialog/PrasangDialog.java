@@ -46,7 +46,7 @@ public class PrasangDialog {
         wlp.gravity = Gravity.BOTTOM;
         wlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-        wlp.y = 150;
+        wlp.y = 180;
         window.setAttributes(wlp);
     }
 
@@ -71,9 +71,9 @@ public class PrasangDialog {
 
     private void loadPrasang(GenericPrasang prasang) {
         TextView title = prasangDialog.findViewById(R.id.title);
-        title.setText(prasang.getTitle());
+//        title.setText(prasang.getTitle());
         TextView sutra = prasangDialog.findViewById(R.id.sutra);
-        sutra.setText(prasang.getSutra());
+//        sutra.setText(prasang.getSutra());
     }
 
     private void loadImage(Uri uri) {

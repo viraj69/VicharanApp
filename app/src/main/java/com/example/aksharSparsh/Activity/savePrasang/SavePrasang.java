@@ -204,7 +204,10 @@ public class SavePrasang extends AppCompatActivity {
                 } else if (description.length() > 10000) {
                     Toast.makeText(SavePrasang.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
                     return;
-                } else if (address == null) {
+                } else if (place == null) {
+                    Toast.makeText(SavePrasang.this, "Please enter Place ", Toast.LENGTH_LONG).show();
+                    return;
+                }else if (address == null) {
                     Toast.makeText(SavePrasang.this, "Please enter Address ", Toast.LENGTH_LONG).show();
                     return;
                 } else if (cityName == null) {

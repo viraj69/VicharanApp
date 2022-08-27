@@ -56,12 +56,11 @@ public class ViewImagePagerAdapter extends PagerAdapter {
         ImageView imageView = view.findViewById(R.id.img1);
         Transformation transformation = new RoundedTransformationBuilder()
                 .cornerRadiusDp(7)
-                .oval(false)
                 .build();
 
         animZoomIn = AnimationUtils.loadAnimation(context.getApplicationContext(),
                 R.anim.zoom_in);
-        Picasso.get().load(images.get(position)).fit().transform(transformation).into(imageView);
+        Picasso.get().load(images.get(position)).transform(transformation).into(imageView);
         imageView.setVisibility(View.VISIBLE);
         imageView.startAnimation(animZoomIn);
         ViewPager viewPager = (ViewPager) container;

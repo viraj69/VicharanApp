@@ -49,13 +49,6 @@ public class PrasangDetails extends AppCompatActivity implements View.OnClickLis
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowTitleEnabled(false);
         ab.setHomeAsUpIndicator(R.drawable.ic_action_name);
-
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setTitle("");
-//        ((TextView) toolbar.findViewById(R.id.toolbar_title)).setText("");
     }
 
     private void setupFragmentViewPageListener() {

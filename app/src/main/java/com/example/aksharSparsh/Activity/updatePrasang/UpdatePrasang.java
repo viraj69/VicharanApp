@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.aksharSparsh.Activity.savePrasang.SavePrasang;
 import com.example.aksharSparsh.R;
 import com.example.aksharSparsh.firebase.FirebaseUtils;
 import com.example.aksharSparsh.firebase.generic.DbInsertionListener;
@@ -250,7 +251,10 @@ public class UpdatePrasang extends AppCompatActivity {
                 Toast.makeText(UpdatePrasang.this, "Title should be 64 letters in length", Toast.LENGTH_LONG).show();
             } else if (description.length() > 10000) {
                 Toast.makeText(UpdatePrasang.this, "Title should be 100000 letters in length", Toast.LENGTH_LONG).show();
-            } else if (address == null) {
+            } else if (place == null) {
+                Toast.makeText(UpdatePrasang.this, "Please enter Place ", Toast.LENGTH_LONG).show();
+                return;
+            }else if (address == null) {
                 Toast.makeText(UpdatePrasang.this, "Please enter Address ", Toast.LENGTH_LONG).show();
             } else if (cityName == null) {
                 Toast.makeText(UpdatePrasang.this, "Please select City", Toast.LENGTH_LONG).show();

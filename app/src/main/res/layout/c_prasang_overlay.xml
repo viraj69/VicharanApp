@@ -22,38 +22,39 @@
         app:riv_mutate_background="true" />
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/dialogimage"
-        android:text="..."
-        android:textColor="@color/txtWithBg1"
-        android:textSize="22sp" />
-
-    <TextView
-        android:id="@+id/sutra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/dialogimage"
-        android:text="..."
-        android:textColor="@color/txtLightWithBg1"
-        android:textSize="16sp" />
-
-    <TextView
         android:id="@+id/place1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sutra"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/dialogimage"
         android:text="..."
-        android:textColor="@color/txtLightWithBg1"
-        android:textSize="16sp" />
+        android:textColor="#4981a3"
+        android:fontFamily="@font/berkshireswash_regular"
+        android:textSize="24sp" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/sutra"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/title"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_toRightOf="@+id/dialogimage"-->
+<!--        android:text="..."-->
+<!--        android:textColor="@color/txtLightWithBg1"-->
+<!--        android:textSize="16sp" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/place1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/sutra"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:layout_toRightOf="@+id/dialogimage"-->
+<!--        android:text="..."-->
+<!--        android:textColor="@color/txtLightWithBg1"-->
+<!--        android:textSize="16sp" />-->
 
 </RelativeLayout>

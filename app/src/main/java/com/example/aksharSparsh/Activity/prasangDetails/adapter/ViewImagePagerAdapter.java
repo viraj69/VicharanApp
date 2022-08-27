@@ -14,7 +14,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.aksharSparsh.R;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,10 +52,16 @@ public class ViewImagePagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.prasang_img, null);
+
         ImageView imageView = view.findViewById(R.id.img1);
+        Transformation transformation = new RoundedTransformationBuilder()
+                .cornerRadiusDp(7)
+                .oval(false)
+                .build();
+
         animZoomIn = AnimationUtils.loadAnimation(context.getApplicationContext(),
                 R.anim.zoom_in);
-        Picasso.get().load(images.get(position)).into(imageView);
+        Picasso.get().load(images.get(position)).fit().transform(transformation).into(imageView);
         imageView.setVisibility(View.VISIBLE);
         imageView.startAnimation(animZoomIn);
         ViewPager viewPager = (ViewPager) container;

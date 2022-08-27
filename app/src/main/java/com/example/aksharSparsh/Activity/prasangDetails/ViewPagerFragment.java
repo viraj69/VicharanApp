@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,9 @@ import com.example.aksharSparsh.firebase.media.DbMedia;
 import com.example.aksharSparsh.firebase.media.Media;
 import com.example.aksharSparsh.firebase.prasang.DbPrasang;
 import com.example.aksharSparsh.firebase.prasang.Prasang;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 public class ViewPagerFragment extends Fragment {
     private DbPrasang.LocationPrasangPair locationPrasangPair;

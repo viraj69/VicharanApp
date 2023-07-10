@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.aksharSparsh.Activity.savePrasang.SavePrasang;
 import com.example.aksharSparsh.R;
 import com.example.aksharSparsh.firebase.FirebaseUtils;
 import com.example.aksharSparsh.firebase.generic.DbInsertionListener;
@@ -254,7 +253,7 @@ public class UpdatePrasang extends AppCompatActivity {
             } else if (place == null) {
                 Toast.makeText(UpdatePrasang.this, "Please enter Place ", Toast.LENGTH_LONG).show();
                 return;
-            }else if (address == null) {
+            } else if (address == null) {
                 Toast.makeText(UpdatePrasang.this, "Please enter Address ", Toast.LENGTH_LONG).show();
             } else if (cityName == null) {
                 Toast.makeText(UpdatePrasang.this, "Please select City", Toast.LENGTH_LONG).show();
@@ -295,7 +294,7 @@ public class UpdatePrasang extends AppCompatActivity {
                 insertNewDbLocationAndSaveUpdatedPrasang(location, prasang);
             } else {
                 prasang.setLocationId(loc.getId());
-                updateDbPrasang(prasang);
+                onLocationUpdated(prasang);
             }
         });
     }
@@ -305,7 +304,7 @@ public class UpdatePrasang extends AppCompatActivity {
             @Override
             public void onSuccess(String id) {
                 prasang.setLocationId(id);
-                updateDbPrasang(prasang);
+                onLocationUpdated(prasang);
             }
 
             @Override
@@ -315,21 +314,92 @@ public class UpdatePrasang extends AppCompatActivity {
         });
     }
 
-    private void updateDbPrasang(Prasang prasang) {
-        DbPrasang.update(prasang, unused -> {
-            System.out.println("prasang updated successfully!");
-            Toast.makeText(UpdatePrasang.this, "Prasang updated Successfully ", Toast.LENGTH_SHORT).show();
-            finish();
-        });
+    private void onLocationUpdated(Prasang prasang) {
+        if (contenturi.isEmpty()) {
+            updateDbPrasang(prasang);
+        } else {
+            uploadImage(prasang);
+        }
     }
 
-    private void updateImageInDb(Prasang prasang, List<Media> medias) {
+    private void uploadImage(Prasang prasang) {
+        long currentTimeMillis = System.currentTimeMillis();
+        final String[] results = new String[contenturi.size()];
+        List<Media> medias = new LinkedList<>();
+        for (int j = 0; j < contenturi.size(); j++) {
+            final int n = j;
+            final String mediaName = (currentTimeMillis + j) + ".png";
+
+            Media media = new Media();
+            media.setName(mediaName);
+            media.setMimeType(1);   // image
+            medias.add(media);
+
+            Toast.makeText(UpdatePrasang.this, "Uploading Image " + (n + 1), Toast.LENGTH_SHORT).show();
+            FirebaseUtils.saveImage(prasang.getId(), mediaName, contenturi.get(j), unused -> {
+                results[n] = mediaName;
+                if (isAllNotNull(results)) {
+                    onImageUploaded(prasang, medias);
+                }
+            }, e -> {
+                Toast.makeText(UpdatePrasang.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+
+    private void onImageUploaded(Prasang prasang, List<Media> medias) {
+        insertMediaInDb(prasang, medias);
+    }
+
+    private void insertMediaInDb(Prasang prasang, List<Media> medias) {
+        final String[] results = new String[medias.size()];
         for (int i = 0; i < medias.size(); i++) {
             Media media = medias.get(i);
             final int n = i;
-            DbMedia.update(media, unused -> {
+
+            DbMedia.insert(media, new DbInsertionListener() {
+                @Override
+                public void onSuccess(String id) {
+                    results[n] = id;
+                    if (isAllNotNull(results)) {
+                        prasang.setMedia(Arrays.asList(results));
+                        onDbMediaInserted(prasang);
+                    }
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    System.out.println("error saving DbMedia record: " + e);
+                }
             });
         }
+    }
+
+    private void onDbMediaInserted(Prasang prasang) {
+        updateDbPrasang(prasang);
+    }
+
+    private void updateDbPrasang(Prasang prasang) {
+        DbPrasang.update(prasang, unused -> {
+            onPrasangUpdated(prasang);
+        });
+    }
+
+    private void onPrasangUpdated(Prasang prasang) {
+        onUpdateComplete();
+    }
+
+    private void onUpdateComplete() {
+        System.out.println("prasang updated successfully!");
+        Toast.makeText(this, "Prasang updated Successfully ", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private static boolean isAllNotNull(String[] arr) {
+        for (String s : arr) {
+            if (s == null) return false;
+        }
+        return true;
     }
 
     private void getImages() {
@@ -506,7 +576,7 @@ public class UpdatePrasang extends AppCompatActivity {
                         ClipData.Item item = clipdata.getItemAt(i);
                         contenturi.add(item.getUri());
                     }
-
+                    System.out.println(contenturi);
                 } else {
                     changed = true;
                     contenturi.add(data.getData());
@@ -537,24 +607,5 @@ public class UpdatePrasang extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    private void uploadImage(Prasang prasang) {
-        long currentTimeMillis = System.currentTimeMillis();
-        List<Media> medias = new LinkedList<>();
-        for (int j = 0; j < contenturi.size(); j++) {
-
-            String mediaName = (currentTimeMillis + j) + ".png";
-
-            Media media = new Media();
-            media.setName(mediaName);
-            media.setMimeType(1);   // image
-            medias.add(media);
-
-            FirebaseUtils.saveImage(prasang.getId(), mediaName, contenturi.get(j), null, e -> {
-                Toast.makeText(UpdatePrasang.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            });
-        }
-        updateImageInDb(prasang, medias);
     }
 }

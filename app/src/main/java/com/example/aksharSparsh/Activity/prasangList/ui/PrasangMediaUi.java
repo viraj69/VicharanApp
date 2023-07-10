@@ -40,11 +40,13 @@ public class PrasangMediaUi implements UiService {
 
     @Override
     public void init() {
-        String firstMediaId = prasang.getMedia().get(0);
-        DbMedia.getById(firstMediaId, (Media media) -> {
-            if (media == null) return;
-            FirebaseUtils.loadImage(prasang.getId(), media.getName(), this::showImage, this::onErrorLoadingImage);
-        });
+        if (prasang.getMedia() != null && !prasang.getMedia().isEmpty()) {
+            String firstMediaId = prasang.getMedia().get(0);
+            DbMedia.getById(firstMediaId, (Media media) -> {
+                if (media == null) return;
+                FirebaseUtils.loadImage(prasang.getId(), media.getName(), this::showImage, this::onErrorLoadingImage);
+            });
+        }
     }
 
     private void showImage(Uri uri) {

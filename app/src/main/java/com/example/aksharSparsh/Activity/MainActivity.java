@@ -8,10 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import com.example.aksharSparsh.Fragments.MyAccountFragment;
 import com.example.aksharSparsh.Fragments.ProfileFragment;
 import com.example.aksharSparsh.Fragments.map.MapFragment;
 import com.example.aksharSparsh.R;
+import com.example.aksharSparsh.firebase.prasang.DbPrasang;
+import com.example.aksharSparsh.firebase.prasang.Prasang;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.navigation_map);
         }
 
-
+        //runScriptForBlueColorDescription();
     }
 
     @Override
@@ -76,5 +79,31 @@ public class MainActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    private void runScriptForBlueColorDescription() {
+        DbPrasang.getAllWithLocation(locationPrasangPairs -> {
+            for (DbPrasang.LocationPrasangPair locationPrasangPair : locationPrasangPairs) {
+                Prasang prasang = locationPrasangPair.getPrasang();
 
+                String engDes = prasang.getEnglishVersion().getDescription();
+                if (!engDes.contains("html")) {
+                    engDes = "<html>"
+                            + "<head>"
+                            + "<style>"
+                            + "@font-face { font-family: europa_regular;src: url('https://firebasestorage.googleapis.com/v0/b/vicharan-app.appspot.com/o/font%2Feuropa_regular.ttf?alt=media');} body {font-family: europa_regular, serif;}"
+                            + "</style>"
+                            + "</head>"
+                            + "<body>"
+                            + "<span style='color:#4981a3'>"
+                            + engDes
+                            + "</span>"
+                            + "</body>"
+                            + "</html>";
+                    prasang.getEnglishVersion().setDescription(engDes);
+                    DbPrasang.update(prasang, (unused) -> {
+                        System.out.println("Updated: " + prasang.getId());
+                    });
+                }
+            }
+        });
+    }
 }

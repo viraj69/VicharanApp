@@ -232,7 +232,7 @@ public class SavePrasang extends AppCompatActivity {
                     location.setGooglePlaceId(googlePlaceId);
                     location.setAddress(address);
                     GenericLocation englishVersionLocation = new GenericLocation();
-                    englishVersionLocation.setCountry(country);
+                    englishVersionLocation.setCountry("Canada");
                     englishVersionLocation.setCity(cityName);
                     englishVersionLocation.setPlace(place);
                     location.setEnglishVersion(englishVersionLocation);
@@ -246,6 +246,7 @@ public class SavePrasang extends AppCompatActivity {
                     englishVersionPrasang.setSutra(sutra);
                     englishVersionPrasang.setDescription(description);
                     prasang.setEnglishVersion(englishVersionPrasang);
+
                     upsertDbLocation(location, prasang);
                 }
             }

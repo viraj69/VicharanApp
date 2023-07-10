@@ -8,7 +8,7 @@
         app:layout_constraintHorizontal_bias="0.9"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/simple_card"
+        android:background="@drawable/simple_border"
         android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1.2"

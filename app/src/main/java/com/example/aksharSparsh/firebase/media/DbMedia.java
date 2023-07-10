@@ -35,7 +35,7 @@ public class DbMedia {
                 .addOnFailureListener(e -> dbInsertionListener.onFailure(e));
     }
 
-    public static void update(@NonNull Media media, OnSuccessListener<Void> onSuccessListener) {
+    public static void updateById(@NonNull Media media, OnSuccessListener<Void> onSuccessListener) {
         Map<String, Object> userMap = new HashMap<>();
         userMap.put(Fields.name.Name, media.getName());
         userMap.put(Fields.mimeType.Name, media.getMimeType());

@@ -1,6 +1,8 @@
 package com.example.aksharSparsh.Fragments.map;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -27,7 +29,11 @@ import java.util.List;
 public class MapFragment extends LocationFragment implements Ui.UiListener, LocationCallbackWrapper.LocationCallbackListener {
     private final Ui ui = new Ui(this, this);
 
+    String keyTag;
+
+    String data;
     private FusedLocationProviderClient mFusedLocationClient;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -39,7 +45,17 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            keyTag = args.getString("Key");
+            System.out.println("HEY" + keyTag);
+        }
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        data = sharedPreferences.getString("key", "");
+        return view;
     }
 
     @SuppressLint("MissingPermission")
@@ -57,8 +73,7 @@ public class MapFragment extends LocationFragment implements Ui.UiListener, Loca
     @Override
     public void onStart() {
         super.onStart();
-        DbPrasang.getAllWithLocation((List<DbPrasang.LocationPrasangPair> locationPrasangPairList) -> {
-
+        DbPrasang.getAllWithLocation(data, (List<DbPrasang.LocationPrasangPair> locationPrasangPairList) -> {
             HashMap<com.example.aksharSparsh.firebase.location.Location, Integer> locationsPrasangCountHashmap = new HashMap<>();
 
             for (DbPrasang.LocationPrasangPair locationPrasangPair : locationPrasangPairList) {

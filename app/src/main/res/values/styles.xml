@@ -22,7 +22,7 @@
         //you can give your color here. that will change all divider color in your app.
     </style>
 
-    <style name="simpletooltip_default" parent="@android:style/TextAppearance.Medium"></style>>
+    <style name="simpletooltip_default" parent="@android:style/TextAppearance.Medium" />>
 
     <style name="AppCompatAlertDialogStyle" parent="android:Theme.Dialog">
         <item name="android:windowBackground">@drawable/bg_shadow</item>

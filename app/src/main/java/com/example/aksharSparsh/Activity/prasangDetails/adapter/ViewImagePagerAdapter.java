@@ -14,9 +14,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.aksharSparsh.R;
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.LinkedList;
 import java.util.List;

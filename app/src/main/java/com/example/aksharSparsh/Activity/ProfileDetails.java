@@ -313,4 +313,3 @@ public class ProfileDetails extends AppCompatActivity {
         });
     }
 }
-

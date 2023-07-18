@@ -16,6 +16,8 @@ public class Prasang implements Serializable {
     private GenericPrasang gujaratiVersion;
     private GenericPrasang englishVersion;
     private String date;
+    private String tag;
+
     private List<String> media;
 
     public static Prasang parseDb(DocumentSnapshot document) {
@@ -27,6 +29,7 @@ public class Prasang implements Serializable {
             prasang.locationId = (String) data.get(DbPrasang.Fields.locationId.Name);
             prasang.userId = (String) data.get(DbPrasang.Fields.userId.Name);
             prasang.date = (String) data.get(DbPrasang.Fields.date.Name);
+            prasang.tag = (String) data.get(DbPrasang.Fields.tag.Name);
             HashMap<String, String> imagesHashmap = data.get(DbPrasang.Fields.media.Name) == null ? null : (HashMap<String, String>) data.get(DbPrasang.Fields.media.Name);
             if (imagesHashmap != null) {
                 prasang.media = new LinkedList<>(imagesHashmap.values());
@@ -75,6 +78,14 @@ public class Prasang implements Serializable {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public List<String> getMedia() {

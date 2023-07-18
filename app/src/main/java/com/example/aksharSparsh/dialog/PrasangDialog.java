@@ -2,6 +2,7 @@ package com.example.aksharSparsh.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.Gravity;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.aksharSparsh.Activity.GridViewActivity;
+import com.example.aksharSparsh.Activity.MainActivity;
 import com.example.aksharSparsh.Activity.prasangDetails.PrasangDetails;
+import com.example.aksharSparsh.DynamicGridViewActivity;
 import com.example.aksharSparsh.GlobalApplication;
 import com.example.aksharSparsh.R;
 import com.example.aksharSparsh.firebase.FirebaseUtils;
@@ -61,7 +65,15 @@ public class PrasangDialog {
 
     private void initPrasangDialoagNextClickListener(final Location location, final Prasang prasang, final Media media, LinkedList<DbPrasang.LocationPrasangPair> locationPrasangPairs) {
         View next = prasangDialog.findViewById(R.id.root);
-        next.setOnClickListener(v -> PrasangDetails.startActivity(activity, locationPrasangPairs));
+//        next.setOnClickListener(v -> PrasangDetails.startActivity(activity, locationPrasangPairs));
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GridViewActivity.startActivity(activity, locationPrasangPairs);
+            }
+        });
+
     }
 
     private void loadLocation(GenericLocation location) {

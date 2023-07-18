@@ -13,8 +13,6 @@ import com.example.aksharSparsh.Fragments.MyAccountFragment;
 import com.example.aksharSparsh.Fragments.ProfileFragment;
 import com.example.aksharSparsh.Fragments.map.MapFragment;
 import com.example.aksharSparsh.R;
-import com.example.aksharSparsh.firebase.prasang.DbPrasang;
-import com.example.aksharSparsh.firebase.prasang.Prasang;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser curUser;
     private FirebaseAuth auth;
 
+    static String tag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
         final FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().add(R.id.frame, profile, "3").hide(profile).commit();
         fm.beginTransaction().add(R.id.frame, account, "4").hide(account).commit();
-        fm.beginTransaction().add(R.id.frame, map, "1").commit();
+        Bundle args = new Bundle();
+        args.putString("Key", tag);
+        map.setArguments(args);
+        fm.beginTransaction().add(R.id.frame, map, "1").replace(R.id.frame, map).commit();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
 
                 if (item.getItemId() == R.id.navigation_map) {
 
@@ -62,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
                         active = profile;
                     }
 
-
                 }
                 return true;
             }
@@ -71,39 +72,29 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.navigation_map);
         }
 
-        //runScriptForBlueColorDescription();
+//        runScriptForBlueColorDescription();
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         moveTaskToBack(true);
     }
 
-    private void runScriptForBlueColorDescription() {
-        DbPrasang.getAllWithLocation(locationPrasangPairs -> {
-            for (DbPrasang.LocationPrasangPair locationPrasangPair : locationPrasangPairs) {
-                Prasang prasang = locationPrasangPair.getPrasang();
-
-                String engDes = prasang.getEnglishVersion().getDescription();
-                if (!engDes.contains("html")) {
-                    engDes = "<html>"
-                            + "<head>"
-                            + "<style>"
-                            + "@font-face { font-family: europa_regular;src: url('https://firebasestorage.googleapis.com/v0/b/vicharan-app.appspot.com/o/font%2Feuropa_regular.ttf?alt=media');} body {font-family: europa_regular, serif;}"
-                            + "</style>"
-                            + "</head>"
-                            + "<body>"
-                            + "<span style='color:#4981a3'>"
-                            + engDes
-                            + "</span>"
-                            + "</body>"
-                            + "</html>";
-                    prasang.getEnglishVersion().setDescription(engDes);
-                    DbPrasang.update(prasang, (unused) -> {
-                        System.out.println("Updated: " + prasang.getId());
-                    });
-                }
-            }
-        });
-    }
+//    private void runScriptForBlueColorDescription() {
+//        DbPrasang.getAllWithLocation(locationPrasangPairs -> {
+//            for (DbPrasang.LocationPrasangPair locationPrasangPair : locationPrasangPairs) {
+//                Prasang prasang = locationPrasangPair.getPrasang();
+//
+//                String engDes = prasang.getEnglishVersion().getDescription();
+//                if (!engDes.contains("html")) {
+//                    engDes = "<html>" + "<head>" + "<style>" + "@font-face { font-family: europa_regular;src: url('https://firebasestorage.googleapis.com/v0/b/vicharan-app.appspot.com/o/font%2Feuropa_regular.ttf?alt=media');} body {font-family: europa_regular, serif;}" + "</style>" + "</head>" + "<body>" + "<span style='color:#4981a3'>" + engDes + "</span>" + "</body>" + "</html>";
+//                    prasang.getEnglishVersion().setDescription(engDes);
+//                    DbPrasang.update(prasang, (unused) -> {
+//                        System.out.println("Updated: " + prasang.getId());
+//                    });
+//                }
+//            }
+//        });
+//    }
 }

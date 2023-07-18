@@ -24,10 +24,11 @@ import java.util.Map;
 
 public class DbPrasang {
     private final static FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     public static String DbCollectionName = "Prasang";
 
     public enum Fields {
-        id("id"), locationId("locationId"), userId("userId"), title("title"), sutra("sutra"),
+        id("id"), locationId("locationId"), userId("userId"), title("title"), sutra("sutra"), tag("tag"),
         description("description"), notes("notes"), date("date"), media("media"),
         guj("guj"), eng("eng"),
         inactive("inactive");
@@ -44,6 +45,7 @@ public class DbPrasang {
         map.put(Fields.locationId.Name, prasang.getLocationId());
         map.put(Fields.userId.Name, prasang.getUserId());
         map.put(Fields.date.Name, prasang.getDate());
+        map.put(Fields.tag.Name, prasang.getTag());
 
         {
             // TODO: delete these fields as they are just used for backward compatibility
@@ -94,6 +96,7 @@ public class DbPrasang {
         map.put(Fields.locationId.Name, prasang.getLocationId());
         map.put(Fields.userId.Name, prasang.getUserId());
         map.put(Fields.date.Name, prasang.getDate());
+        map.put(Fields.tag.Name, prasang.getTag());
 
         {
             // TODO: delete these fields as they are just used for backward compatibility
@@ -176,12 +179,15 @@ public class DbPrasang {
         });
     }
 
-    public static void getAllWithLocation(final DbCallbackListener<List<LocationPrasangPair>> dbCallbackListener) {
-        db.collection(DbCollectionName).get().addOnCompleteListener(task -> {
+    public static void getAllWithLocation(String tag, final DbCallbackListener<List<LocationPrasangPair>> dbCallbackListener) {
+        db.collection(DbCollectionName).whereEqualTo(Fields.tag.name(), tag).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                System.out.println("Task on DBPrasang in getAllWithLocation" + task.toString());
                 List<Prasang> list = new LinkedList<>();
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     list.add(Prasang.parseDb(document));
+                    System.out.println("list on DBPrasang in getAllWithLocation" + list.toString());
+
                 }
                 getLocationsForPrasangs(list, dbCallbackListener);
             } else {

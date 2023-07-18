@@ -13,35 +13,47 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="Akshar Sparsh"
         android:roundIcon="@mipmap/prabodhswamiji"
         android:supportsRtl="true"
-        android:name="com.example.aksharSparsh.GlobalApplication"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.aksharSparsh.Activity.prasangList.PrasangList" />
-        <activity android:name="com.example.aksharSparsh.Activity.updatePrasang.UpdatePrasang" />
-        <activity android:name="com.example.aksharSparsh.Activity.prasangDetails.PrasangDetails"
-            android:parentActivityName="com.example.aksharSparsh.Activity.MainActivity" />
-        <activity android:name="com.example.aksharSparsh.Activity.MainActivity" />
-        <activity android:name="com.example.aksharSparsh.Activity.ProfileDetails" />
-        <activity android:name="com.example.aksharSparsh.Activity.CreateAccount" />
-        <activity android:name="com.example.aksharSparsh.Activity.savePrasang.SavePrasang" />
-        <activity android:name="com.example.aksharSparsh.Activity.ForgotPassword" />
+        <activity
+            android:name=".Activity.GridViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DynamicGridViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.HomeScreen"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activity.prasangList.PrasangList" />
+        <activity android:name=".Activity.updatePrasang.UpdatePrasang" />
+        <activity
+            android:name=".Activity.prasangDetails.PrasangDetails"
+            android:parentActivityName=".Activity.MainActivity" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.ProfileDetails" />
+        <activity android:name=".Activity.CreateAccount" />
+        <activity android:name=".Activity.savePrasang.SavePrasang" />
+        <activity android:name=".Activity.ForgotPassword" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDeFuuo_ueSXMlCCQQLUIFgFAs4Xo3ULNg" />
 
         <activity
-            android:name="com.example.aksharSparsh.Activity.SplashScreen"
+            android:name=".Activity.SplashScreen"
+            android:exported="true"
             android:grantUriPermissions="true"
-            android:theme="@style/AppTheme"
-            android:exported="true">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
